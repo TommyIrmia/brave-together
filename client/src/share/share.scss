@@ -1,0 +1,74 @@
+.screen {
+  position: fixed;
+  inset: 0;
+  top: 0;
+  height: 100vh;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.329);
+  transition: 0.3s;
+  &.hidden {
+    z-index: -10;
+    opacity: 0;
+  }
+}
+
+.share-options-container {
+  position: fixed;
+  z-index: 20;
+  background: #d3d3d3;
+  top: 0;
+  width: 100%;
+  height: 50vh;
+  // filter: grayscale(1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: transform 0.5s ease;
+  &.shown {
+    animation: enter 0.5s ease;
+    transform: translateY(0);
+  }
+  &.hidden {
+    animation: exit 0.5s ease;
+  }
+
+  transform: translateY(-100%);
+  .download-icon {
+    height: 55px;
+    filter: contrast(0.3);
+  }
+
+  .share-options {
+    display: flex;
+    flex-wrap: wrap;
+
+    .share-option-container {
+      flex-basis: 116px;
+      &:first-child {
+        margin-bottom: 42px;
+      }
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-grow: 1;
+    }
+  }
+}
+
+@keyframes enter {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes exit {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
