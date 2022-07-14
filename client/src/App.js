@@ -3,23 +3,23 @@ import './App.css';
 import './app.scss';
 import { Switch, Route, BrowserRouter, withRouter } from 'react-router-dom';
 //import { NativeRouter, BackButton } from 'react-router-native';
-import Template from './template/template';
-import StoryCheck from './storyCheck/storyCheck';
-import Testimony from './testimony/testimony';
-import TextEdit from './text/text';
-import StoryUpload from './storyUpload/StoryUpload';
-import { TemplateEdit } from './templateEdit/TemplateEdit';
-import { Share } from './share/share.jsx';
-import About from './about/about';
-import Footer from './footer/footer'
-import Homepage from './homepage/homepage';
+import Template from './cmps/template';
+import StoryCheck from './views/storyCheck';
+import Testimony from './views/testimony/testimony';
+import TextEdit from './views/text';
+import StoryUpload from './views/StoryUpload';
+import { TemplateEdit } from './views/templateEdit/TemplateEdit';
+import { Share } from './views/share/share.jsx';
+import About from './views/about';
+import Footer from './cmps/footer'
+import Homepage from './views/homepage/homepage';
 
 //import BackButton from './backButton/backButton';
-import ThankYouForComing from './thankYouForComing/thankYouForComing';
-import { Header } from './header/header';
+import ThankYouForComing from './views/thankYouForComing/thankYouForComing';
+import { Header } from './cmps/header';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Login from './auth/Login';
-import SignUp from './auth/SignUp';
+import Login from './views/auth/Login';
+import SignUp from './views/auth/SignUp';
 
 function App() {
   return (
