@@ -77,6 +77,7 @@ const frames = [
     'imgs/consts/frames/4.png',
 ]
 
+
 const options = [
     {
         type: 'text',
