@@ -1,0 +1,52 @@
+{
+  "user": {
+    "_id": "mongoDb",
+    "email": "users_email",
+    "password": "users_password",
+    "firstName": "first_name",
+    "lastName": "last_name",
+    "cellphone": "+972501234567",
+    "createdAt": "timestamp"
+  },
+
+  "miniUser": {
+    "fullName": "Full Name",
+    "_id": "mongoDb"
+  },
+
+  "story": {
+    "_id": "mongoId",
+    "title": "story title",
+    "heroName": "Hero Name",
+    "description": "the story",
+    "date": "2021-12-31",
+    "tags": ["tag_1", "tag_2", "tag_n"],
+    "country": "country",
+    "imgUrl": "src from AWS",
+    "quotes": ["a few selected quoted", "etc..."]
+  },
+
+  "quote": {
+    "_id": "mongoId",
+    "owner": "miniUser",
+    "story": {
+      "_id": "mongoId",
+      "title": "story title",
+      "heroName": "Hero Name"
+    },
+    "background": {"type": "color", "attr": "#ffffff"},
+    "imgs": [],
+    "frame": "",
+    "txt": {
+      "content": "blah blah",
+      "fontSize": 16,
+      "fontFamily": "Arial, Helvetica, sans-serif",
+      "fontColor": "#000000",
+      "pos": {"x": 50, "y": 150}
+    },
+
+    "collection": {}
+  }
+}
+
+//"images/111-02.svg",
