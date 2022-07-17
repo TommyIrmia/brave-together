@@ -1,6 +1,5 @@
 import React from 'react';
-import './App.css';
-import './app.scss';
+
 import { Switch, Route, BrowserRouter, withRouter } from 'react-router-dom';
 //import { NativeRouter, BackButton } from 'react-router-native';
 import Template from './cmps/template';
@@ -11,7 +10,7 @@ import StoryUpload from './views/story-upload';
 import { TemplateEdit } from './views/template-edit';
 import { Share } from './views/share/share.jsx';
 import About from './views/about';
-import Footer from './cmps/footer'
+import { Footer } from './cmps/footer'
 import Homepage from './views/homepage';
 
 //import BackButton from './backButton/backButton';

@@ -7,9 +7,8 @@ import { ReactComponent as LinkdinIcon } from '../assets/svgs/linkdin.svg';
 import { ReactComponent as GithubIcon } from '../assets/svgs/github.svg';
 
 
-// import './footer.scss';
 
-const Footer = () => (
+export const Footer = () => (
     <footer className="pv4 ph3 ph5-ns tc">
         <div className='social-icons-container'>
             <a href="https://www.facebook.com/BraveTogether2018" title="facebook">
@@ -36,4 +35,3 @@ const Footer = () => (
         </div>
     </footer>
 );
-export default Footer;
