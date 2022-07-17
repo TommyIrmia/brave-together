@@ -31,12 +31,11 @@ async function getById(storyId) {
 
 async function remove(storyId) {
     try {
-        const store = asyncLocalStorage.getStore()
-        const { loggedinUser } = store
+        // const store = asyncLocalStorage.getStore()
+        // const { loggedinUser } = store
         const collection = await dbService.getCollection('story')
         // remove only if user is owner/admin
         const criteria = { _id: ObjectId(storyId) }
-        if (!loggedinUser.isAdmin) criteria.byUserId = ObjectId(loggedinUser._id)
         const { deletedCount } = await collection.deleteOne(criteria)
         return deletedCount
     } catch (err) {
@@ -48,16 +47,24 @@ async function remove(storyId) {
 
 async function add(story) {
     try {
-        const storyToAdd = {
-            byUserId: ObjectId(story.byUserId),
-            aboutUserId: ObjectId(story.aboutUserId),
-            txt: story.txt
-        }
         const collection = await dbService.getCollection('story')
-        await collection.insertOne(storyToAdd)
-        return storyToAdd
+        await collection.insertOne(story)
+        return story
     } catch (err) {
         logger.error('cannot insert story', err)
+        throw err
+    }
+}
+
+async function update(story) {
+    try {
+        const storyCopy = { ...story }
+        delete storyCopy._id
+
+        const collection = await dbService.getCollection('story')
+        await collection.updateOne({ _id: ObjectId(story._id) }, { $set: storyCopy })
+    } catch (err) {
+        logger.error('cannot update story', err)
         throw err
     }
 }
@@ -72,7 +79,8 @@ module.exports = {
     query,
     getById,
     remove,
-    add
+    add,
+    update
 }
 
 

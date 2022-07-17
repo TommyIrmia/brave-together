@@ -2,7 +2,7 @@ const logger = require('../../services/logger.service')
 const userService = require('../user/user.service')
 const authService = require('../auth/auth.service')
 const socketService = require('../../services/socket.service')
-const storyService = require('./story.service')
+const storyService = require('./quote.service')
 
 async function getStories(req, res) {
     try {

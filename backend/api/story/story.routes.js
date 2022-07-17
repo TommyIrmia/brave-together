@@ -1,7 +1,7 @@
 const express = require('express')
 // const {requireAuth, requireAdmin} = require('../../middlewares/requireAuth.middleware') Will be neede later
 const { log } = require('../../middlewares/logger.middleware')
-const { addStory, getStories, deleteStory, getStory } = require('./story.controller')
+const { addStory, getStories, deleteStory, getStory, updateStory } = require('./story.controller')
 const router = express.Router()
 
 // middleware that is specific to this router
@@ -10,6 +10,7 @@ const router = express.Router()
 router.get('/', log, getStories)
 router.get('/:id', log, getStory)
 router.post('/', log, addStory)
+router.put('/', log, updateStory)
 router.delete('/:id', deleteStory)
 
 module.exports = router

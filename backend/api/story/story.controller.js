@@ -61,9 +61,30 @@ async function addStory(req, res) {
     }
 }
 
+async function updateStory(req, res) {
+
+    // Uncomment when users are implemented
+    // var loggedinUser = authService.validateToken(req.cookies.loginToken)
+    try {
+        const story = req.body
+        const updatedStory = await storyService.update(story)
+
+        // const loginToken = authService.getLoginToken(loggedinUser)
+        // res.cookie('loginToken', loginToken)
+
+        res.send(updatedStory)
+
+    } catch (err) {
+        console.log(err)
+        logger.error(`Failed to update story with id:${story._id}`, err)
+        res.status(500).send({ err: 'Failed to update story' })
+    }
+}
+
 module.exports = {
     getStories,
     getStory,
     deleteStory,
-    addStory
+    addStory,
+    updateStory
 }
