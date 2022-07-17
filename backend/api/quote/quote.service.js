@@ -6,58 +6,65 @@ const asyncLocalStorage = require('../../services/als.service')
 async function query(filterBy = {}) {
     try {
         const criteria = _buildCriteria(filterBy)
-        const collection = await dbService.getCollection('story')
-        const storys = await collection.find(criteria).toArray()
+        const collection = await dbService.getCollection('quote')
+        const quotes = await collection.find(criteria).toArray()
 
-        return storys
+        return quotes
     } catch (err) {
-        logger.error('cannot find storys', err)
+        logger.error('cannot find quotes', err)
         throw err
     }
 
 }
 
-async function getById(storyId) {
+async function getById(quoteId) {
     try {
-        const collection = await dbService.getCollection('story')
-        const story = await collection.findOne({ _id: ObjectId(storyId) })
-        return story
+        const collection = await dbService.getCollection('quote')
+        const quote = await collection.findOne({ _id: ObjectId(quoteId) })
+        return quote
     } catch (err) {
-        logger.error(`cannot find story with id: ${storyId}`, err)
+        logger.error(`cannot find quote with id: ${quoteId}`, err)
         throw err
     }
 
 }
 
-async function remove(storyId) {
+async function remove(quoteId) {
     try {
-        const store = asyncLocalStorage.getStore()
-        const { loggedinUser } = store
-        const collection = await dbService.getCollection('story')
+        // const store = asyncLocalStorage.getStore()
+        // const { loggedinUser } = store
+        const collection = await dbService.getCollection('quote')
         // remove only if user is owner/admin
-        const criteria = { _id: ObjectId(storyId) }
-        if (!loggedinUser.isAdmin) criteria.byUserId = ObjectId(loggedinUser._id)
+        const criteria = { _id: ObjectId(quoteId) }
         const { deletedCount } = await collection.deleteOne(criteria)
         return deletedCount
     } catch (err) {
-        logger.error(`cannot remove story ${storyId}`, err)
+        logger.error(`cannot remove quote ${quoteId}`, err)
         throw err
     }
 }
 
 
-async function add(story) {
+async function add(quote) {
     try {
-        const storyToAdd = {
-            byUserId: ObjectId(story.byUserId),
-            aboutUserId: ObjectId(story.aboutUserId),
-            txt: story.txt
-        }
-        const collection = await dbService.getCollection('story')
-        await collection.insertOne(storyToAdd)
-        return storyToAdd
+        const collection = await dbService.getCollection('quote')
+        await collection.insertOne(quote)
+        return quote
     } catch (err) {
-        logger.error('cannot insert story', err)
+        logger.error('cannot insert quote', err)
+        throw err
+    }
+}
+
+async function update(quote) {
+    try {
+        const quoteCopy = { ...quote }
+        delete quoteCopy._id
+
+        const collection = await dbService.getCollection('quote')
+        await collection.updateOne({ _id: ObjectId(quote._id) }, { $set: quoteCopy })
+    } catch (err) {
+        logger.error('cannot update quote', err)
         throw err
     }
 }
@@ -72,7 +79,8 @@ module.exports = {
     query,
     getById,
     remove,
-    add
+    add,
+    update
 }
 
 

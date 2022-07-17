@@ -2,68 +2,89 @@ const logger = require('../../services/logger.service')
 const userService = require('../user/user.service')
 const authService = require('../auth/auth.service')
 const socketService = require('../../services/socket.service')
-const storyService = require('./quote.service')
+const quoteService = require('./quote.service')
 
-async function getStories(req, res) {
+async function getQuotes(req, res) {
     try {
-        const storys = await storyService.query(req.query)
-        res.send(storys)
+        const quotes = await quoteService.query(req.query)
+        res.send(quotes)
     } catch (err) {
-        logger.error('Cannot get storys', err)
-        res.status(500).send({ err: 'Failed to get storys' })
+        logger.error('Cannot get quotes', err)
+        res.status(500).send({ err: 'Failed to get quotes' })
     }
 }
 
-async function getStory(req, res) {
+async function getQuote(req, res) {
     try {
-        const storyId = req.params.id
-        const story = await storyService.getById(storyId)
-        res.send(story)
+        const quoteId = req.params.id
+        const quote = await quoteService.getById(quoteId)
+        res.send(quote)
     } catch (err) {
-        logger.error(`Cannot get story with id: ${storyId}`, err)
-        res.status(500).send({ err: `Failed to get story. storyId: ${storyId}` })
+        logger.error(`Cannot get quote with id: ${quoteId}`, err)
+        res.status(500).send({ err: `Failed to get quote. quoteId: ${quoteId}` })
     }
 }
 
-async function deleteStory(req, res) {
+async function deleteQuote(req, res) {
     try {
-        const deletedCount = await storyService.remove(req.params.id)
+        const deletedCount = await quoteService.remove(req.params.id)
         if (deletedCount === 1) {
             res.send({ msg: 'Deleted successfully' })
         } else {
-            res.status(400).send({ err: 'Cannot remove story' })
+            res.status(400).send({ err: 'Cannot remove quote' })
         }
     } catch (err) {
-        logger.error('Failed to delete story', err)
-        res.status(500).send({ err: 'Failed to delete story' })
+        logger.error('Failed to delete quote', err)
+        res.status(500).send({ err: 'Failed to delete quote' })
     }
 }
 
 
-async function addStory(req, res) {
+async function addQuote(req, res) {
 
     // Uncomment when users are implemented
     // var loggedinUser = authService.validateToken(req.cookies.loginToken)
 
     try {
-        var story = req.body
-        story = await storyService.add(story)
+        var quote = req.body
+        quote = await quoteService.add(quote)
 
         // const loginToken = authService.getLoginToken(loggedinUser)
         // res.cookie('loginToken', loginToken)
 
-        res.send(story)
+        res.send(quote)
 
     } catch (err) {
         console.log(err)
-        logger.error('Failed to add story', err)
-        res.status(500).send({ err: 'Failed to add story' })
+        logger.error('Failed to add quote', err)
+        res.status(500).send({ err: 'Failed to add quote' })
+    }
+}
+
+async function updateQuote(req, res) {
+
+    // Uncomment when users are implemented
+    // var loggedinUser = authService.validateToken(req.cookies.loginToken)
+    try {
+        const quote = req.body
+        const updatedQuote = await quoteService.update(quote)
+
+        // const loginToken = authService.getLoginToken(loggedinUser)
+        // res.cookie('loginToken', loginToken)
+
+        res.send(updatedQuote)
+
+    } catch (err) {
+        console.log(err)
+        logger.error(`Failed to update quote with id:${quote._id}`, err)
+        res.status(500).send({ err: 'Failed to update quote' })
     }
 }
 
 module.exports = {
-    getStories,
-    getStory,
-    deleteStory,
-    addStory
+    getQuotes,
+    getQuote,
+    deleteQuote,
+    addQuote,
+    updateQuote
 }
