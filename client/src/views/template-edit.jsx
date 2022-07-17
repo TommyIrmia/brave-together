@@ -16,7 +16,7 @@ import { Share } from './share/share'
 import downloadImg from '../assets/images/templateEdit/utils/download.png'
 
 import { canvasService } from '../services/canvas.service'
-import { storageService } from '../services/storageService'
+import { storageService } from '../services/storage-service'
 
 
 export const TemplateEdit = () => {
