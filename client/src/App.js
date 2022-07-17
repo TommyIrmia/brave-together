@@ -1,21 +1,20 @@
 import React from 'react';
-import './App.css';
-import './app.scss';
+
 import { Switch, Route, BrowserRouter, withRouter } from 'react-router-dom';
 //import { NativeRouter, BackButton } from 'react-router-native';
 import Template from './cmps/template';
-import StoryCheck from './views/storyCheck';
+import StoryCheck from './views/story-check';
 import Testimony from './views/testimony/testimony';
 import TextEdit from './views/text';
-import StoryUpload from './views/StoryUpload';
-import { TemplateEdit } from './views/templateEdit/TemplateEdit';
+import StoryUpload from './views/story-upload';
+import { TemplateEdit } from './views/template-edit';
 import { Share } from './views/share/share.jsx';
 import About from './views/about';
-import Footer from './cmps/footer'
-import Homepage from './views/homepage/homepage';
+import { Footer } from './cmps/footer'
+import Homepage from './views/homepage';
 
 //import BackButton from './backButton/backButton';
-import ThankYouForComing from './views/thankYouForComing/thankYouForComing';
+import ThankYouForComing from './views/thank-you'
 import { Header } from './cmps/header';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './views/auth/Login';

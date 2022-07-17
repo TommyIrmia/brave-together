@@ -1,15 +1,14 @@
 import React from 'react';
 
-import { ReactComponent as FacebookIcon } from './facebook.svg';
-import { ReactComponent as InstagramIcon } from './instagram.svg';
-import { ReactComponent as YoutubeIcon } from './youtube.svg';
-import { ReactComponent as LinkdinIcon } from './linkdin.svg';
-import { ReactComponent as GithubIcon } from './github.svg';
+import { ReactComponent as FacebookIcon } from '../assets/svgs/facebook.svg';
+import { ReactComponent as InstagramIcon } from '../assets/svgs/instagram.svg';
+import { ReactComponent as YoutubeIcon } from '../assets/svgs/youtube.svg';
+import { ReactComponent as LinkdinIcon } from '../assets/svgs/linkdin.svg';
+import { ReactComponent as GithubIcon } from '../assets/svgs/github.svg';
 
 
-// import './footer.scss';
 
-const Footer = () => (
+export const Footer = () => (
     <footer className="pv4 ph3 ph5-ns tc">
         <div className='social-icons-container'>
             <a href="https://www.facebook.com/BraveTogether2018" title="facebook">
@@ -29,11 +28,10 @@ const Footer = () => (
             </a>
         </div>
         <div className="mt4 text-buttons-container">
-            <a href="#" class="f6 link dim gray dib mr3 mr4-ns">עזרה</a>
-            <a href="#" class="f6 link dim gray dib mr3 mr4-ns">צור קשר</a>
-            <a href="#" class="f6 link dim gray dib mr3 mr4-ns">אודות</a>
+            <a href="#" className="f6 link dim gray dib mr3 mr4-ns">עזרה</a>
+            <a href="#" className="f6 link dim gray dib mr3 mr4-ns">צור קשר</a>
+            <a href="#" className="f6 link dim gray dib mr3 mr4-ns">אודות</a>
             <a href="https://brave-together.com/" className="f6 link dim gray dib mr3 mr4-ns">אתר רשמי</a>
         </div>
     </footer>
 );
-export default Footer;

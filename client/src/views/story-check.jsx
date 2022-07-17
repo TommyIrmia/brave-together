@@ -1,7 +1,6 @@
 import React from 'react';
 
-import BackButton from '../../cmps/backButton';
-
+import BackButton from '../cmps/backButton'
 import axios from 'axios';
 
 const mock = [

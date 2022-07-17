@@ -1,7 +1,7 @@
 import React from 'react'
-import { ChosenSubOption } from './ChosenSubOption'
+import { ChosenSubOption } from './chosen-sub-option'
 
-import { photos, drawings, colors, patterns } from '../imgs/consts'
+import { photos, drawings, colors, patterns } from '../../consts/consts'
 
 
 export const BackgroundOptions = ({ setTemplate, template, options }) => {

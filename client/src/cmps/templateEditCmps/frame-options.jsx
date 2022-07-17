@@ -1,6 +1,6 @@
 import React from 'react'
-import { ChosenSubOption } from './ChosenSubOption'
-import { frames } from '../imgs/consts'
+import { ChosenSubOption } from './chosen-sub-option'
+import { frames } from '../../consts/consts'
 
 
 export const FrameOptions = ({ template, setTemplate }) => {

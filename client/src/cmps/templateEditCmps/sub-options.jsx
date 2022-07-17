@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
-import leftArrow from '../imgs/utils/left.png'
-import rightArrow from '../imgs/utils/right.png'
+import leftArrow from '../../assets/images/templateEdit/utils/left.png'
+import rightArrow from '../../assets/images/templateEdit/utils/right.png'
 
 export const SubOptions = ({ options, setOption, children }) => {
     const scrollContainerRef = useRef()
