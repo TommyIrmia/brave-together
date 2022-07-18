@@ -1,9 +1,8 @@
-const Cryptr = require('cryptr')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const userService = require('../user/user.service')
 const logger = require('../../services/logger.service')
-const cryptr = new Cryptr(process.env.SECRET1 || 'Secret-Puk-1234')
+const dbService = require('../../services/db.service')
 
 async function login(email, password) {
     logger.debug(`auth.service - login with email: ${email}`)
@@ -19,11 +18,6 @@ async function login(email, password) {
     return user
 }
 
-// (async ()=>{
-//     await signup('bubu', '123', 'Bubu Bi')
-//     await signup('mumu', '123', 'Mumu Maha')
-// })()
-
 
 async function signup({ email, password, firstName, lastName, cellphone }) {
     const saltRounds = 10
@@ -31,34 +25,67 @@ async function signup({ email, password, firstName, lastName, cellphone }) {
     logger.debug(`auth.service - signup with email: ${email}, fullname: ${firstName}  ${lastName}`)
     if (!email || !password) return Promise.reject('Missing required signup information')
 
-    // const userExist = await userService.getByUsername(username)
-    // if (userExist) return Promise.reject('Username already taken')
+    const userExist = await userService.getByUsername(username)
+    if (userExist) return Promise.reject('Username already taken')
 
     const hash = await bcrypt.hash(password, saltRounds)
     return userService.add({ email, password: hash, firstName, lastName, cellphone })
 }
 
 
-function getLoginToken(userId) {
-    // TODO: tranfer secret to .env
-    return jwt.sign({ _id: userId }, 'somesecret')
+function getJWT(payload, secret, expiresIn = '1y') {
+    return jwt.sign(payload, secret, { expiresIn })
 }
 
-function validateToken(loginToken) {
+function validateToken(token, secret) {
     try {
-        const verifiedUser = jwt.verify(loginToken, 'somesecret')
-        return verifiedUser
+        const decodec = jwt.verify(token, secret)
+        return { user: decodec, expired: false }
 
     } catch (err) {
-        console.log('Invalid login token')
+        return { user: null, expired: err.message.includes('jwt expired') }
     }
-    return null
+}
+
+async function addRefreshToken(token) {
+    try {
+        const collection = await dbService.getCollection('refresh-token')
+        await collection.insertOne({ token })
+    } catch (err) {
+        logger.error('Failed to add refresh token ' + err)
+        throw err
+    }
+}
+
+async function removeRefreshToken(token) {
+    try {
+        const collection = await dbService.getCollection('refresh-token')
+        const { deletedCount } = await collection.deleteOne({ token })
+        return deletedCount
+    } catch (err) {
+        logger.error('Failed to add refresh token ' + err)
+        throw err
+    }
+}
+
+async function isValidRefreshToken(token) {
+    try {
+        const collection = await dbService.getCollection('refresh-token')
+        const tokenInDb = await collection.findOne({ token })
+        return tokenInDb
+    } catch (err) {
+        logger.error('Token is not valid ' + err)
+        throw err
+    }
 }
 
 
 module.exports = {
     signup,
     login,
-    getLoginToken,
-    validateToken
+    getJWT,
+    validateToken,
+    addRefreshToken,
+    isValidRefreshToken,
+    removeRefreshToken
 }
