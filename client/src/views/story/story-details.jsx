@@ -8,16 +8,16 @@ import pen from '../../assets/images/pen.png'
 import calendar from '../../assets/images/calendar.png'
 import SelectedQuotes from '../../cmps/SelectedQuotes';
 import axios from 'axios'
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-const Testimony = ({ match }) => {
+export const StoryDetails = ({ match }) => {
 
     const [story, setStory] = useState(null)
     const [isTextChosen, setIsTextChosen] = useState(false)
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isErr, setIsErr] = useState(false)
     const selectedText = useRef(null)
-    const history = useHistory()
+    const navigate = useNavigate()
 
     useEffect(() => {
         const { storyId } = match.params;
@@ -49,7 +49,7 @@ const Testimony = ({ match }) => {
     const onQuoteText = () => {
         if (isTextChosen && selectedText.current) {
             const { storyId } = match.params;
-            history.push({
+            navigate({
                 pathname: '/templateEdit',
                 state: { txt: selectedText.current, storyId }
             })
@@ -123,11 +123,9 @@ const Testimony = ({ match }) => {
                 </div>
             </div>
 
-            {isModalOpen && <SelectedQuotes quotes={story.quotes} match={match} history={history}
+            {isModalOpen && <SelectedQuotes quotes={story.quotes} match={match} navigate={navigate}
                 onToggleModal={onToggleModal} onChooseText={onQuoteText} />}
 
         </section>
     )
 }
-
-export default Testimony

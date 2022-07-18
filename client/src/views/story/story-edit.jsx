@@ -2,7 +2,7 @@ import React from "react";
 import axios from 'axios';
 // import ReactDOM from "react-dom";
 
-class StoryUpload extends React.Component {
+export class StoryEdit extends React.Component {
   constructor(props) {
     super(props);
 
@@ -141,4 +141,3 @@ class StoryUpload extends React.Component {
   }
 }
 
-export default StoryUpload;

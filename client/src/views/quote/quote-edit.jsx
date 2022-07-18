@@ -1,25 +1,24 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useLocation } from 'react-router-dom'
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
+import { useLocation, useNavigate } from 'react-router-dom'
 
-import { Options } from '../cmps/templateEditCmps/options'
-import { options } from '../consts/consts'
-import { BackgroundOptions } from '../cmps/templateEditCmps/background-options'
-import { FrameOptions } from '../cmps/templateEditCmps/frame-options'
-import { ImgOptions } from '../cmps/templateEditCmps/img-options'
-import { TextOptions } from '../cmps/templateEditCmps/text-options'
-import { usePrevious } from '../hooks/usePrevious'
-import { SubOptions } from '../cmps/templateEditCmps/sub-options'
-import { Share } from './share/share'
+import { Options } from '../../cmps/templateEditCmps/Options'
+import { options } from '../../consts/consts'
+import { BackgroundOptions } from '../../cmps/templateEditCmps/background-options'
+import { FrameOptions } from '../../cmps/templateEditCmps/frame-options'
+import { ImgOptions } from '../../cmps/templateEditCmps/img-options'
+import { TextOptions } from '../../cmps/templateEditCmps/text-options'
+import { usePrevious } from '../../hooks/usePrevious'
+import { SubOptions } from '../../cmps/templateEditCmps/sub-options'
+import { Share } from '../../cmps/share/share'
 
 // import backImg from '../assets/images/back.png'
-import downloadImg from '../assets/images/templateEdit/utils/download.png'
+import downloadImg from '../../assets/images/templateEdit/utils/download.png'
 
-import { canvasService } from '../services/canvas.service'
-import { storageService } from '../services/storage-service'
+import { canvasService } from '../../services/canvas.service'
+import { storageService } from '../../services/storage-service'
 
 
-export const TemplateEdit = () => {
+export const QuoteEdit = () => {
 
     const [isShareModalOpen, setIsShareModal] = useState(false)
     const [option, setOption] = useState(options[0])
@@ -27,7 +26,7 @@ export const TemplateEdit = () => {
     const prevTemplate = usePrevious(template)
 
     const location = useLocation()
-    const history = useHistory()
+    const navigate = useNavigate()
 
     const canvasRef = useRef(null)
     const ctxRef = useRef(null)
@@ -38,7 +37,7 @@ export const TemplateEdit = () => {
     useEffect(() => {
         setCanvas()
         const txt = location.state?.txt
-        if (!txt) history.push('/')
+        if (!txt) navigate('/')
         setTemplate(canvasService.getTemplate(txt))
 
         return () => {
@@ -174,7 +173,7 @@ export const TemplateEdit = () => {
 
             <div className="canvas-container" ref={containerRef}>
                 <div className="btns-container">
-                    <button onClick={() => history.push(`/testimony/${location.state.storyId}`)}>
+                    <button onClick={() => navigate(`/testimony/${location.state.storyId}`)}>
                         <div className="img-container">
                             {/* <img src={backImg} alt="back" /> */}
                         </div>

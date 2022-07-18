@@ -3,7 +3,7 @@ import { Submit, Input, DivForm, Input2, Label2, Header, Label, LogoImg, Body } 
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import axios from 'axios'
 
-class Login extends Component {
+export class LoginSignup extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -69,5 +69,3 @@ class Login extends Component {
         );
     }
 }
-
-export default Login;

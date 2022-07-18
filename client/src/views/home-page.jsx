@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-class Homepage extends React.Component {
+export class HomePage extends React.Component {
 
     onStartButtonClick = () => {
         let token = localStorage.getItem('token');
@@ -50,5 +50,3 @@ class Homepage extends React.Component {
         );
     }
 };
-
-export default Homepage;

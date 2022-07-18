@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
-// import "./header.scss";
 
 
-export const Header = () => {
+export const AppHeader = () => {
   const [isNavOpen, setIsNavOpen] = useState(false)
 
   const onToggleModal = () => {

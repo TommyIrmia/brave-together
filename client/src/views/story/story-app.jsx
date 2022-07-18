@@ -1,7 +1,6 @@
 import React from 'react';
 
-import BackButton from '../cmps/backButton'
-import axios from 'axios';
+import BackButton from '../../cmps/backButton'
 
 const mock = [
     { id: 1, category: 2, title: 'סיפורה של משפחת וינרב ערב ליל הסדר', storyImg: 'https://s3-alpha-sig.figma.com/img/cece/efeb/edb4dfebfefa0ec110fde46a32f44700?Expires=1617580800&Signature=IbdGK2K5OpthyN9QpU2EWHj0Mf8H8JuWl4GpwH~GqJ7ZpCqLbdS4BnaSqC7QAFH2Y~8BGFGVjeiee~VRn7jVeybi5uMlmNtPuszDGmmPC~LwVDtJHs6pADP9U7HpxbHxC56EbmnvXqTAAOnkGQ4ylPRHdiV3nAafWySRECfE3Wd6K9xn0g7ZFQG6MAgJWunQ0TqCNabmoNLOFl5ajNOSwfX7w4~dFr9tgPP6FQ8kVYISI9R5db1PxWWG~UXdfq6M5u1lpHmfNSYLfmUzO0wsvJKky4IfWOJi5A9g9w37Ckh1I58Jx9exhMWJQN6pEo25RLfhvZUEJw3zK90Mb1wcRQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA' },
@@ -18,7 +17,7 @@ const categories = [
     { id: 2, name: 'והגדת לבנך - חג הפסח' },
 ]
 
-class StoryCheck extends React.Component {
+export class StoryApp extends React.Component {
     constructor(props) {
         super(props);
 
@@ -29,6 +28,7 @@ class StoryCheck extends React.Component {
     }
 
     componentDidMount() {
+        console.log('hello from storyapp');
         let token = localStorage.getItem('token');
 
         /*
@@ -110,5 +110,3 @@ class StoryCheck extends React.Component {
         )
     }
 }
-
-export default StoryCheck;

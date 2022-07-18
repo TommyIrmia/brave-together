@@ -1,45 +1,58 @@
 import React from 'react';
+import { Route, Routes } from 'react-router-dom'
 
-import { Switch, Route, BrowserRouter, withRouter } from 'react-router-dom';
-//import { NativeRouter, BackButton } from 'react-router-native';
-import Template from './cmps/template';
-import StoryCheck from './views/story-check';
-import Testimony from './views/testimony/testimony';
-import TextEdit from './views/text';
-import StoryUpload from './views/story-upload';
-import { TemplateEdit } from './views/template-edit';
-import { Share } from './views/share/share.jsx';
-import About from './views/about';
-import { Footer } from './cmps/footer'
-import Homepage from './views/homepage';
+// Cmps
+import { AppHeader } from './cmps/app-header'
+import { AppFooter } from './cmps/app-footer'
 
-//import BackButton from './backButton/backButton';
-import ThankYouForComing from './views/thank-you'
-import { Header } from './cmps/header';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Login from './views/auth/Login';
-import SignUp from './views/auth/SignUp';
+// Main Page + Auth
+import { HomePage } from './views/home-page';
+import { About } from './views/about';
+import { LoginSignup } from './views/auth/LoginSignup';
+
+// Story App
+import { StoryApp } from './views/story/story-app';
+import { StoryDetails } from './views/story/story-details';
+import { StoryEdit } from './views/story/story-edit';
+
+// QuoteApp
+import { QuoteApp } from './views/quote/quote-app.jsx'
+import { QuoteEdit } from './views/quote/quote-edit';
+
+// CollectionApp
+import { CollectionApp } from './views/collection/collection-app';
+
 
 function App() {
   return (
-    <BrowserRouter>
-      <Header></Header>
-      <Switch>
-        <Route exact path='/' component={Homepage} />
-        <Route exact path='/storyCheck' component={StoryCheck} />
-        <Route exact path='/testimony/:storyId' component={Testimony} />
-        <Route exact path='/textEdit' component={TextEdit} />
-        <Route exact path='/storyUpload' component={StoryUpload} />
-        <Route exact path='/templateEdit' component={TemplateEdit} />
-        <Route exact path='/share' component={Share} />
-        <Route exact path='/thankYouForComing' component={ThankYouForComing} />
-        <Route exact path='/About' component={About} />
-        <Route exact path='/login' component={Login} />
-        <Route exact path='/signup' component={SignUp} />
-        <Route path='*' component={() => '404 Not Found'} />
-      </Switch>
-      <Footer></Footer>
-    </BrowserRouter>
+    <main className="app-container">
+      <AppHeader />
+      <section className="content-container">
+        <Routes>
+          {/* Main Page + Auth*/}
+          <Route path="/story" element={<StoryApp />} />
+          <Route path="/" element={<HomePage />}>
+            <Route path="/login" element={<LoginSignup />} />
+            <Route path="/signup" element={<LoginSignup />} />
+          </Route>
+          <Route path="/about" element={<About />} />
+
+          {/* Story App */}
+          <Route path="/story/:storyId" element={<StoryDetails />} />
+          <Route path="/story/edit" element={<StoryEdit />} />
+          <Route path="/story/edit/:storyId" element={<StoryEdit />} />
+
+          {/* Quote App */}
+          <Route path="/quote" element={<QuoteApp />} />
+          <Route path="/quote/edit" element={<QuoteEdit />} />
+          <Route path="/quote/edit/:quoteId" element={<QuoteEdit />} />
+
+          {/* Collection App */}
+          <Route path="/collection" element={<CollectionApp />} />
+        </Routes>
+      </section>
+      <AppFooter />
+    </main>
   );
 }
 
