@@ -1,5 +1,5 @@
 const express = require('express')
-// const {requireAuth, requireAdmin} = require('../../middlewares/requireAuth.middleware') Will be neede later
+const { requireAuth, requireAdmin } = require('../../middlewares/requireAuth.middleware') // Will be neede later
 const { log } = require('../../middlewares/logger.middleware')
 const { addQuote, getQuotes, deleteQuote, getQuote, updateQuote } = require('./quote.controller')
 const router = express.Router()
@@ -9,7 +9,7 @@ const router = express.Router()
 
 router.get('/', log, getQuotes)
 router.get('/:id', log, getQuote)
-router.post('/', log, addQuote)
+router.post('/', log, requireAuth, addQuote)
 router.put('/', log, updateQuote)
 router.delete('/:id', deleteQuote)
 
