@@ -1,6 +1,6 @@
 import React from 'react'
 // import './selectedQuotes.scss'
-import ExitIcon from './exit-icon.png'
+import ExitIcon from '../assets/images/exit-icon.png'
 
 export default function SelectedQuotes({ quotes, onToggleModal, onChooseText, match, history }) {
     console.log('quotes', quotes);

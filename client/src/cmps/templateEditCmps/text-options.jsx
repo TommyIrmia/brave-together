@@ -1,7 +1,7 @@
 import React from 'react'
 import { canvasService } from '../../services/canvas.service'
-import { ChosenSubOption } from './ChosenSubOption'
-import { colors, fonts, txtSizes } from '../../views/templateEdit/imgs/consts'
+import { ChosenSubOption } from './chosen-sub-option'
+import { colors, fonts, txtSizes } from '../../consts/consts'
 
 export const TextOptions = ({ options, setTemplate, template }) => {
 

@@ -1,12 +1,12 @@
 import React from 'react'
 
-import { options } from '../imgs/consts'
-import bgcImg from '../imgs/utils/bgc.png'
-import bgc1Img from '../imgs/utils/bgc1.png'
-import imgImg from '../imgs/utils/img.png'
-import img1Img from '../imgs/utils/img1.png'
-import frameImg from '../imgs/utils/frame.png'
-import textImg from '../imgs/utils/text.png'
+import { options } from '../../consts/consts'
+import bgcImg from '../../assets/images/templateEdit/utils/bgc.png'
+import bgc1Img from '../../assets/images/templateEdit/utils/bgc1.png'
+import imgImg from '../../assets/images/templateEdit/utils/img.png'
+import img1Img from '../../assets/images/templateEdit/utils/img1.png'
+import frameImg from '../../assets/images/templateEdit/utils/frame.png'
+import textImg from '../../assets/images/templateEdit/utils/text.png'
 
 
 

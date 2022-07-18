@@ -1,7 +1,7 @@
 import React from 'react'
-import { canvasService } from '../../../services/canvas.service'
-import { ChosenSubOption } from './ChosenSubOption'
-import { stillImgs, natureImgs } from '../imgs/consts'
+import { canvasService } from '../../services/canvas.service'
+import { ChosenSubOption } from './chosen-sub-option'
+import { stillImgs, natureImgs } from '../../consts/consts'
 
 export const ImgOptions = ({ options, setTemplate, template }) => {
 
