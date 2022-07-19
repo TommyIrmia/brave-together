@@ -67,12 +67,13 @@ async function updateStory(req, res) {
     // var loggedinUser = authService.validateToken(req.cookies.loginToken)
     try {
         const story = req.body
-        const updatedStory = await storyService.update(story)
+        // console.log(story);
+        await storyService.update(story)
 
         // const loginToken = authService.getLoginToken(loggedinUser)
         // res.cookie('loginToken', loginToken)
 
-        res.send(updatedStory)
+        res.send({ msg: 'Updated successfully' })
 
     } catch (err) {
         console.log(err)
