@@ -23,14 +23,13 @@ import { QuoteEdit } from './views/quote/quote-edit';
 import { CollectionApp } from './views/collection/collection-app';
 
 
-function App() {
+export const App = () => {
   return (
     <main className="app-container">
       <AppHeader />
       <section className="content-container">
         <Routes>
           {/* Main Page + Auth*/}
-          <Route path="/story" element={<StoryApp />} />
           <Route path="/" element={<HomePage />}>
             <Route path="/login" element={<LoginSignup />} />
             <Route path="/signup" element={<LoginSignup />} />
@@ -38,6 +37,7 @@ function App() {
           <Route path="/about" element={<About />} />
 
           {/* Story App */}
+          <Route path="/story" element={<StoryApp />} />
           <Route path="/story/:storyId" element={<StoryDetails />} />
           <Route path="/story/edit" element={<StoryEdit />} />
           <Route path="/story/edit/:storyId" element={<StoryEdit />} />
@@ -56,4 +56,3 @@ function App() {
   );
 }
 
-export default App;
