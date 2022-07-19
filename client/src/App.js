@@ -21,9 +21,23 @@ import { QuoteEdit } from './views/quote/quote-edit';
 
 // CollectionApp
 import { CollectionApp } from './views/collection/collection-app';
+import { useEffect } from 'react';
+import { userService } from './services/api/user.service';
+import { storyService } from './services/api/story.service';
 
 
 export const App = () => {
+
+  useEffect(() => {
+    testFunc()
+  }, [])
+
+  const testFunc = async () => {
+    const stories = await storyService.getStories()
+    console.log(stories);
+    // console.log(users);
+  }
+
   return (
     <main className="app-container">
       <AppHeader />
