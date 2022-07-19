@@ -73,7 +73,7 @@ async function updateQuote(req, res) {
         // const loginToken = authService.getLoginToken(loggedinUser)
         // res.cookie('loginToken', loginToken)
 
-        res.send(updatedQuote)
+        res.send({ msg: 'Updated successfully' })
 
     } catch (err) {
         console.log(err)

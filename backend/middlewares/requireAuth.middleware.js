@@ -7,6 +7,7 @@ async function requireAuth(req, res, next) {
 
   const { user, expired } = authService.validateToken(accessToken, process.env.ACCESS_TOKEN_SECRET)
   if (user) {
+    console.log('here1', user);
     req.user = { _id: user._id }
     return next()
   }
@@ -23,7 +24,8 @@ async function requireAuth(req, res, next) {
     httpOnly: true
   })
 
-  req.user = { _id: refreshUser._id }
+  console.log('here2', refreshUser);
+  req.user = { _id: refreshUser.userId }
   next()
 }
 
