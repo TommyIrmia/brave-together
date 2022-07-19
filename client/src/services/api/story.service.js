@@ -19,20 +19,18 @@ async function getById(storyId) {
   return story
 }
 
-function remove(storyId) {
-  // NOT TESTED
-  return httpService.delete(`story/${storyId}`)
-}
-
 async function add(story) {
   story = await httpService.post(`story`, story)
   return story
 }
 
 async function update(story) {
-  // NOT TESTED
   story = await httpService.put(`story/${story._id}`, story)
   return story
+}
+
+function remove(storyId) {
+  return httpService.delete(`story/${storyId}`)
 }
 
 

@@ -33,7 +33,7 @@ export const App = () => {
   }, [])
 
   const testFunc = async () => {
-    const stories = await storyService.getStories()
+    const stories = await storyService.remove('62d6f9da76df613fe0ebc9f5')
     console.log(stories);
     // console.log(users);
   }
