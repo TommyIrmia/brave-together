@@ -50,7 +50,8 @@ async function signup(req, res) {
             httpOnly: true
         })
 
-        res.json(`logged in with: ${user}`)
+        logger.info('User login: ', user)
+        res.json({ user, accessToken, refreshToken })
     } catch (err) {
         logger.error('Failed to signup ' + err)
         res.status(500).send({ err: 'Failed to signup' })
