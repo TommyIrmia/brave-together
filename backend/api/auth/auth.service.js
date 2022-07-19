@@ -25,7 +25,7 @@ async function signup({ email, password, firstName, lastName, cellphone }) {
     logger.debug(`auth.service - signup with email: ${email}, fullname: ${firstName}  ${lastName}`)
     if (!email || !password) return Promise.reject('Missing required signup information')
 
-    const userExist = await userService.getByUsername(username)
+    const userExist = await userService.getByEmail(email)
     if (userExist) return Promise.reject('Username already taken')
 
     const hash = await bcrypt.hash(password, saltRounds)

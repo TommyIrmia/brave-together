@@ -47,6 +47,7 @@ async function addQuote(req, res) {
 
     try {
         var quote = req.body
+        quote.owner = req.user
         quote = await quoteService.add(quote)
 
         // const loginToken = authService.getLoginToken(loggedinUser)
