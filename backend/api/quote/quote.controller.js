@@ -56,7 +56,6 @@ async function addQuote(req, res) {
         res.send(quote)
 
     } catch (err) {
-        console.log(err)
         logger.error('Failed to add quote', err)
         res.status(500).send({ err: 'Failed to add quote' })
     }
@@ -76,7 +75,6 @@ async function updateQuote(req, res) {
         res.send({ msg: 'Updated successfully' })
 
     } catch (err) {
-        console.log(err)
         logger.error(`Failed to update quote with id:${quote._id}`, err)
         res.status(500).send({ err: 'Failed to update quote' })
     }
