@@ -21,27 +21,8 @@ import { QuoteEdit } from './views/quote/quote-edit';
 
 // CollectionApp
 import { CollectionApp } from './views/collection/collection-app';
-import { useEffect } from 'react';
-import { userService } from './services/api/user.service';
-import { storyService } from './services/api/story.service';
-import { quoteService } from './services/api/quote.service';
-
 
 export const App = () => {
-
-  useEffect(() => {
-    testFunc()
-  }, [])
-
-  const testFunc = async () => {
-    // const res = await userService.login({
-    //   email: 'user5678@gmail.com',
-    //   password: '5678'
-    // })
-    // console.log(res);
-    const res = await quoteService.remove('62d7007ee527621e606fe254')
-    console.log(res);
-  }
 
   return (
     <main className="app-container">
