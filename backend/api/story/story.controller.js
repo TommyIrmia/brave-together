@@ -2,13 +2,13 @@ const logger = require('../../services/logger.service')
 const storyService = require('./story.service')
 const errors = require('../../errorMessages/storyError')
 
-async function getStories(req, res) {
+async function getStories(req, res, next) {
     try {
         const stories = await storyService.query(req.query)
         res.send(stories)
     } catch (err) {
         logger.error('Cannot get storys', err)
-        res.status(500).send({ err: 'Failed to get storys' })
+        next(errors[err.message])
     }
 }
 
@@ -23,30 +23,29 @@ async function getStory(req, res, next) {
     }
 }
 
-async function deleteStory(req, res) {
+async function deleteStory(req, res, next) {
     try {
         const deletedCount = await storyService.remove(req.params.id)
         if (deletedCount === 1) {
             res.send({ msg: 'Deleted successfully' })
         } else {
-            res.status(400).send({ err: 'Cannot remove story' })
+            next(errors['noStoryWasDeleted'])
         }
     } catch (err) {
         logger.error('Failed to delete story', err)
-        res.status(500).send({ err: 'Failed to delete story' })
+        next(errors[err.message])
     }
 }
 
 
-async function addStory(req, res) {
+async function addStory(req, res, next) {
     try {
         var story = req.body
         story = await storyService.add(story)
         res.send(story)
     } catch (err) {
-        console.log(err)
         logger.error('Failed to add story', err)
-        res.status(500).send({ err: 'Failed to add story' })
+        next(errors[err.message])
     }
 }
 
@@ -56,9 +55,8 @@ async function updateStory(req, res) {
         const updatedStory = await storyService.update(story)
         res.send(updatedStory)
     } catch (err) {
-        console.log(err)
         logger.error(`Failed to update story with id:${story._id}`, err)
-        res.status(500).send({ err: 'Failed to update story' })
+        next(errors[err.message])
     }
 }
 
