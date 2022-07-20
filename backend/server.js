@@ -35,7 +35,7 @@ app.all('*', setupAsyncLocalStorage)
 app.use('/api/auth', authRoutes)
 app.use('/api/user', userRoutes)
 app.use('/api/story', storyRoutes)
-// app.use('/api/quote', quoteRoutes)
+app.use('/api/quote', quoteRoutes)
 setupSocketAPI(http)
 
 // error handling middleware

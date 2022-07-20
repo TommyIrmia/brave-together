@@ -22,9 +22,8 @@ async function getById(storyId) {
         const story = await collection.findOne({ _id: ObjectId(storyId) })
         return story
     } catch (err) {
-        console.log('found error in service');
-        // logger.error(`cannot find story with id: ${storyId}`, err)
-        throw err
+        logger.error(`cannot find story with id: ${storyId}`, err)
+        throw new Error('storyNotFound')
     }
 
 }

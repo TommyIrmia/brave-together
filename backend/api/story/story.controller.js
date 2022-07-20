@@ -1,13 +1,11 @@
 const logger = require('../../services/logger.service')
-const userService = require('../user/user.service')
-const authService = require('../auth/auth.service')
-const socketService = require('../../services/socket.service')
 const storyService = require('./story.service')
+const errors = require('../../errorMessages/storyError')
 
 async function getStories(req, res) {
     try {
-        const storys = await storyService.query(req.query)
-        res.send(storys)
+        const stories = await storyService.query(req.query)
+        res.send(stories)
     } catch (err) {
         logger.error('Cannot get storys', err)
         res.status(500).send({ err: 'Failed to get storys' })
@@ -15,15 +13,13 @@ async function getStories(req, res) {
 }
 
 async function getStory(req, res, next) {
+    const storyId = req.params.id
     try {
-        const storyId = req.params.id
         const story = await storyService.getById(storyId)
         res.send(story)
     } catch (err) {
-        console.log('found error in controller');
-        next()
-        // logger.error(`Cannot get story with id: ${storyId}`, err)
-        // res.status(500).send({ err: `Failed to get story. storyId: ${storyId}` })
+        logger.error(`Cannot get story with id: ${storyId}`, err)
+        next(errors[err.message])
     }
 }
 
@@ -43,19 +39,10 @@ async function deleteStory(req, res) {
 
 
 async function addStory(req, res) {
-
-    // Uncomment when users are implemented
-    // var loggedinUser = authService.validateToken(req.cookies.loginToken)
-
     try {
         var story = req.body
         story = await storyService.add(story)
-
-        // const loginToken = authService.getLoginToken(loggedinUser)
-        // res.cookie('loginToken', loginToken)
-
         res.send(story)
-
     } catch (err) {
         console.log(err)
         logger.error('Failed to add story', err)
@@ -64,18 +51,10 @@ async function addStory(req, res) {
 }
 
 async function updateStory(req, res) {
-
-    // Uncomment when users are implemented
-    // var loggedinUser = authService.validateToken(req.cookies.loginToken)
     try {
         const story = req.body
         const updatedStory = await storyService.update(story)
-
-        // const loginToken = authService.getLoginToken(loggedinUser)
-        // res.cookie('loginToken', loginToken)
-
         res.send(updatedStory)
-
     } catch (err) {
         console.log(err)
         logger.error(`Failed to update story with id:${story._id}`, err)
