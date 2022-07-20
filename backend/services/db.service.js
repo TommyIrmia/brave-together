@@ -7,7 +7,7 @@ module.exports = {
 }
 
 // Database Name
-const dbName = 'braveTogether_db'
+const dbName = 'brave_together'
 
 var dbConn = null
 

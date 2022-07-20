@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser')
 
 const app = express()
 const http = require('http').createServer(app)
+const { errorHandler } = require('./middlewares/errorHandler.middleware')
 
 // Express App Config
 app.use(cookieParser())
@@ -34,8 +35,11 @@ app.all('*', setupAsyncLocalStorage)
 app.use('/api/auth', authRoutes)
 app.use('/api/user', userRoutes)
 app.use('/api/story', storyRoutes)
-app.use('/api/quote', quoteRoutes)
+// app.use('/api/quote', quoteRoutes)
 setupSocketAPI(http)
+
+// error handling middleware
+app.use(errorHandler)
 
 // Make every server-side-route to match the index.html
 // so when requesting http://localhost:3030/index.html/car/123 it will still respond with

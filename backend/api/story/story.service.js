@@ -8,7 +8,6 @@ async function query(filterBy = {}) {
         const criteria = _buildCriteria(filterBy)
         const collection = await dbService.getCollection('story')
         const storys = await collection.find(criteria).toArray()
-
         return storys
     } catch (err) {
         logger.error('cannot find storys', err)
@@ -23,7 +22,8 @@ async function getById(storyId) {
         const story = await collection.findOne({ _id: ObjectId(storyId) })
         return story
     } catch (err) {
-        logger.error(`cannot find story with id: ${storyId}`, err)
+        console.log('found error in service');
+        // logger.error(`cannot find story with id: ${storyId}`, err)
         throw err
     }
 

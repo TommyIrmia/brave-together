@@ -14,14 +14,16 @@ async function getStories(req, res) {
     }
 }
 
-async function getStory(req, res) {
+async function getStory(req, res, next) {
     try {
         const storyId = req.params.id
         const story = await storyService.getById(storyId)
         res.send(story)
     } catch (err) {
-        logger.error(`Cannot get story with id: ${storyId}`, err)
-        res.status(500).send({ err: `Failed to get story. storyId: ${storyId}` })
+        console.log('found error in controller');
+        next()
+        // logger.error(`Cannot get story with id: ${storyId}`, err)
+        // res.status(500).send({ err: `Failed to get story. storyId: ${storyId}` })
     }
 }
 
