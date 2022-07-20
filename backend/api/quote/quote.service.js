@@ -8,7 +8,6 @@ async function query(filterBy = {}) {
         const criteria = _buildCriteria(filterBy)
         const collection = await dbService.getCollection('quote')
         const quotes = await collection.find(criteria).toArray()
-
         return quotes
     } catch (err) {
         logger.error('cannot find quotes', err)

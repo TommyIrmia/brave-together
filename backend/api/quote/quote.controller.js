@@ -44,7 +44,6 @@ async function addQuote(req, res, next) {
         quote = await quoteService.add(quote)
         res.send(quote)
     } catch (err) {
-        console.log(err)
         logger.error('Failed to add quote', err)
         next(errors[err.message])
     }
