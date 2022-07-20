@@ -8,9 +8,9 @@ async function login(email, password) {
     logger.debug(`auth.service - login with email: ${email}`)
 
     const user = await userService.getByEmail(email)
-    if (!user) return Promise.reject('Invalid username or password')
+    if (!user) throw new Error('emailDosntExist')
     const match = await bcrypt.compare(password, user.password)
-    if (!match) return Promise.reject('Invalid username or password')
+    if (!match) throw new Error('wrongCreds')
 
 
     delete user.password
@@ -23,10 +23,10 @@ async function signup({ email, password, firstName, lastName, cellphone }) {
     const saltRounds = 10
 
     logger.debug(`auth.service - signup with email: ${email}, fullname: ${firstName}  ${lastName}`)
-    if (!email || !password) return Promise.reject('Missing required signup information')
+    if (!email || !password) throw new Error('missingCreds')
 
-    const userExist = await userService.getByUsername(username)
-    if (userExist) return Promise.reject('Username already taken')
+    const userExist = await userService.getByEmail(email)
+    if (userExist) throw new Error('userExist')
 
     const hash = await bcrypt.hash(password, saltRounds)
     return userService.add({ email, password: hash, firstName, lastName, cellphone })
@@ -53,7 +53,7 @@ async function addRefreshToken(token) {
         await collection.insertOne({ token })
     } catch (err) {
         logger.error('Failed to add refresh token ' + err)
-        throw err
+        throw new Error('cantAddToken')
     }
 }
 
@@ -63,8 +63,8 @@ async function removeRefreshToken(token) {
         const { deletedCount } = await collection.deleteOne({ token })
         return deletedCount
     } catch (err) {
-        logger.error('Failed to add refresh token ' + err)
-        throw err
+        logger.error('Failed to remove refresh token ' + err)
+        throw new Error('cantRemoveToken')
     }
 }
 
@@ -75,7 +75,7 @@ async function isValidRefreshToken(token) {
         return tokenInDb
     } catch (err) {
         logger.error('Token is not valid ' + err)
-        throw err
+        throw new Error('invalidToken')
     }
 }
 

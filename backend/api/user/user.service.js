@@ -100,7 +100,7 @@ async function add(user) {
         return userToAdd
     } catch (err) {
         logger.error('cannot insert user', err)
-        throw err
+        throw new Error('cantAddUser')
     }
 }
 
