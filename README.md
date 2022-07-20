@@ -16,7 +16,7 @@ The app allows you to create custom hero posts. Users can choose:
 
 ## Group member:
 ### Development Team:
- - [Tommy Irmia](https://github.com/TommyIrmia), team leader
+ - [Tommy Irmia](https://github.com/TommyIrmia) - team leader
  - [Ori Ben Amram](https://github.com/OriBenAmram)
  - [Daniel Shaked](https://github.com/DanielShaked)
  - [Roi Yotvat](https://github.com/roiyot26)
