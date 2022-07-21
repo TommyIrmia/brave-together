@@ -6,7 +6,7 @@ import vectorTop2 from '../../assets/images/vectortop2.png'
 import vectorBottom from '../../assets/images/vectorbottom.png'
 import pen from '../../assets/images/pen.png'
 import calendar from '../../assets/images/calendar.png'
-import SelectedQuotes from '../../cmps/SelectedQuotes';
+import { SelectedQuotes } from '../../cmps/quote/selected-quotes';
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 

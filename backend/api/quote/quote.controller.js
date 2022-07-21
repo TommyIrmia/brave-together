@@ -41,6 +41,7 @@ async function deleteQuote(req, res, next) {
 async function addQuote(req, res, next) {
     try {
         var quote = req.body
+        quote.owner = req.user
         quote = await quoteService.add(quote)
         res.send(quote)
     } catch (err) {
@@ -53,7 +54,13 @@ async function updateQuote(req, res, next) {
     const quote = req.body
     try {
         const updatedQuote = await quoteService.update(quote)
-        res.send(updatedQuote)
+
+
+        // const loginToken = authService.getLoginToken(loggedinUser)
+        // res.cookie('loginToken', loginToken)
+
+        res.send({ msg: 'Updated successfully' })
+
 
     } catch (err) {
         logger.error(`Failed to update quote with id:${quote._id}`, err)

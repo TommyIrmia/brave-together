@@ -26,7 +26,8 @@ async function signup({ email, password, firstName, lastName, cellphone }) {
     if (!email || !password) throw new Error('missingCreds')
 
     const userExist = await userService.getByEmail(email)
-    if (userExist) throw new Error('userExist')
+
+    if (userExist) return Promise.reject('Username already taken')
 
     const hash = await bcrypt.hash(password, saltRounds)
     return userService.add({ email, password: hash, firstName, lastName, cellphone })

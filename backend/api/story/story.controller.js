@@ -52,8 +52,14 @@ async function addStory(req, res, next) {
 async function updateStory(req, res, next) {
     try {
         const story = req.body
-        const updatedStory = await storyService.update(story)
-        res.send(updatedStory)
+
+        await storyService.update(story)
+
+        // const loginToken = authService.getLoginToken(loggedinUser)
+        // res.cookie('loginToken', loginToken)
+
+        res.send({ msg: 'Updated successfully' })
+
     } catch (err) {
         logger.error(`Failed to update story with id:${story._id}`, err)
         next(errors[err.message])

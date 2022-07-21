@@ -22,8 +22,8 @@ import { QuoteEdit } from './views/quote/quote-edit';
 // CollectionApp
 import { CollectionApp } from './views/collection/collection-app';
 
-
 export const App = () => {
+
   return (
     <main className="app-container">
       <AppHeader />
