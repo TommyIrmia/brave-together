@@ -1,3 +1,3 @@
 module.exports = {
-  dbURL: 'mongodb://localhost:27017',
+  dbURL: 'mongodb+srv://admin:9WxI96T8baPlnBRW@cluster0.0qv9t.mongodb.net/brave_together?retryWrites=true&w=majority',
 }

@@ -10,7 +10,7 @@ const router = express.Router()
 router.get('/', log, getStories)
 router.get('/:id', log, getStory)
 router.post('/', log, addStory)
-router.put('/', log, updateStory)
+router.put('/:id', log, updateStory)
 router.delete('/:id', deleteStory)
 
 module.exports = router

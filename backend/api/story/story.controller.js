@@ -55,7 +55,6 @@ async function addStory(req, res) {
         res.send(story)
 
     } catch (err) {
-        console.log(err)
         logger.error('Failed to add story', err)
         res.status(500).send({ err: 'Failed to add story' })
     }
@@ -67,15 +66,14 @@ async function updateStory(req, res) {
     // var loggedinUser = authService.validateToken(req.cookies.loginToken)
     try {
         const story = req.body
-        const updatedStory = await storyService.update(story)
+        await storyService.update(story)
 
         // const loginToken = authService.getLoginToken(loggedinUser)
         // res.cookie('loginToken', loginToken)
 
-        res.send(updatedStory)
+        res.send({ msg: 'Updated successfully' })
 
     } catch (err) {
-        console.log(err)
         logger.error(`Failed to update story with id:${story._id}`, err)
         res.status(500).send({ err: 'Failed to update story' })
     }

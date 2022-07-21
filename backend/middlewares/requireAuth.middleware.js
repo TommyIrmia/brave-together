@@ -7,7 +7,7 @@ async function requireAuth(req, res, next) {
 
   const { user, expired } = authService.validateToken(accessToken, process.env.ACCESS_TOKEN_SECRET)
   if (user) {
-    req.user = user
+    req.user = { _id: user._id }
     return next()
   }
 
@@ -23,12 +23,11 @@ async function requireAuth(req, res, next) {
     httpOnly: true
   })
 
-  req.user = user
+  req.user = { _id: refreshUser.userId }
   next()
 }
 
 function requireAdmin(req, res, next) {
-  console.log(req.cookie);
   if (!accessToken) return res.status(401).send('Not Authenticated')
   const loggedinUser = authService.validateToken(accessToken)
   if (!loggedinUser.isAdmin) {

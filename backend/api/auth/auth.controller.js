@@ -34,11 +34,24 @@ async function signup(req, res) {
         const credentials = req.body
         const account = await authService.signup(credentials)
         logger.debug(`auth.route - new account created: ` + JSON.stringify(account))
-        const user = await authService.login(credentials.username, credentials.password)
+        const user = await authService.login(credentials.email, credentials.password)
         logger.info('User signup:', user)
-        const accessToken = authService.getJWT(user)
-        res.cookie('accessToken', accessToken)
-        res.json(`logged in with: ${user}`)
+
+        const accessToken = authService.getJWT({ userId: user._id }, process.env.ACCESS_TOKEN_SECRET, "5s")
+        const refreshToken = authService.getJWT({ userId: user._id }, process.env.REFRESH_TOKEN_SECRET, "1y")
+        await authService.addRefreshToken(refreshToken)
+
+        res.cookie('accessToken', accessToken, {
+            httpOnly: true
+        })
+
+        res.cookie('refreshToken', refreshToken, {
+            maxAge: 3.154e10,
+            httpOnly: true
+        })
+
+        logger.info('User login: ', user)
+        res.json({ user, accessToken, refreshToken })
     } catch (err) {
         logger.error('Failed to signup ' + err)
         res.status(500).send({ err: 'Failed to signup' })
