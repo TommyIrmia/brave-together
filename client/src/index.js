@@ -1,20 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router } from 'react-router-dom';
-
+import { RootCmp } from './root-cmp';
 import './assets/scss/styles.scss';
-import { App } from './App';
 // import reportWebVitals from './reportWebVitals';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-console.log('root', root)
 
 root.render(
   // <React.StrictMode>
   // <Provider store={store}>
   <Router>
-    <App />
+    <RootCmp />
   </Router>
   // {/* </Provider>, */ }
   // </React.StrictMode>
