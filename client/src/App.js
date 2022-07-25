@@ -26,7 +26,7 @@ export const App = () => {
 
   return (
     <main className="app-container">
-      <AppHeader />
+      {/* <AppHeader /> */}
       <section className="content-container">
         <Routes>
           {/* Main Page + Auth*/}
