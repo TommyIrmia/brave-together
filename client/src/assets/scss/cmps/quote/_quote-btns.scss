@@ -1,0 +1,20 @@
+.quote-btns-container {
+    display: flex;
+    gap: 10px;
+    direction: rtl;
+
+    button {
+        // width: 98px;
+        height: 32.5px;
+        background-color: #3F3F3F;
+        color: #fff;
+        font-family: Rubik;
+        font-size: 15px;
+        border: 0;
+        outline: 0;
+        border-radius: 6px;
+        padding: 0;
+        padding-inline: 10px;
+        cursor: pointer;
+    }
+}

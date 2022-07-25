@@ -3,8 +3,6 @@
 @import "./cmps/back-button";
 @import "./cmps/footer";
 @import "./cmps/header";
-@import "./cmps/selected-quotes";
-// @import "./cmps/template";
 
 //views
 
@@ -15,3 +13,8 @@
 @import "./views/template-edit2";
 @import "./views/testimony";
 @import "./views/story-upload";
+
+//QUOTE
+@import "./cmps/quote/quote-preview";
+@import "./cmps/quote/quote-list";
+@import "./cmps/quote/quote-btns";

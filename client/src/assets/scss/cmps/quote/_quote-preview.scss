@@ -1,0 +1,17 @@
+.quote-preview {
+    border-radius: 4px;
+    padding-inline: 30px;
+    padding-top: 40px;
+    height: 340px;
+    line-height: 27px;
+
+    .quote-content {
+        p {
+            text-align: center;
+        }
+    }
+
+    .hero-name {
+        font-weight: 700;
+    }
+}
