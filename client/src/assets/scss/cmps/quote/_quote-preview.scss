@@ -1,11 +1,14 @@
 .quote-preview {
     border-radius: 4px;
-    padding-inline: 30px;
-    padding-top: 40px;
     height: 340px;
     line-height: 27px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
     .quote-content {
+        padding-inline: 30px;
+        padding-top: 40px;
         p {
             text-align: center;
         }

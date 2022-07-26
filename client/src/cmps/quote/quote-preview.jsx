@@ -1,22 +1,26 @@
 import { QuoteBtns } from './quote-btns'
+import { QuoteToolBar } from './quote-toolbar'
 
 export const QuotePreview = ({ quote }) => {
   return (
     <div className="quote-preview" style={getQuoteStyle(quote.background)}>
       <div className="quote-content" style={getQuoteContentStyle(quote.txt)}>
-        <p className="quote-text">{quote.txt.content}</p>
+        <p className="quote-text">"{quote.txt.content}"</p>
         <p className="hero-name">-{quote.story.heroName}-</p>
       </div>
-      <QuoteBtns />
+      <section className="quote-footer">
+        <QuoteBtns />
+        <QuoteToolBar />
+      </section>
     </div>
   )
 }
 
 const getQuoteStyle = ({ attr }) => {
-  console.log(attr)
-  return {
+  const obj = {
     backgroundColor: attr || '#E05555',
   }
+  return obj
 }
 
 const getQuoteContentStyle = ({ fontColor, fontFamily, fontSize }) => {
