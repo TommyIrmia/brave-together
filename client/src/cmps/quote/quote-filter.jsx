@@ -15,7 +15,6 @@ export const QuoteFilter = ({ quotes, setFilteredQuotes }) => {
   }
 
   const filterQuotes = () => {
-    console.log('filtering...')
     const filteredQuotes = quotes.filter((quote) => {
       const { story, txt } = quote
       if (story.title.includes(filterBy) || story.heroName.includes(filterBy) || txt.content.includes(filterBy)) {
@@ -29,7 +28,7 @@ export const QuoteFilter = ({ quotes, setFilteredQuotes }) => {
   return (
     <section className="quote-filter">
       <form onSubmit={filterQuotes}>
-        <input type="text" value={filterBy} onChange={handleChange} />
+        <input type="text" placeholder="חיפוש לפי שם סיפור, גיבור/ה, מדינה" value={filterBy} onChange={handleChange} />
       </form>
     </section>
   )
