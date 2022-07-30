@@ -1,4 +1,4 @@
-.quote-btns-container {
+.quote-tags-container {
     display: flex;
     gap: 10px;
     direction: rtl;
@@ -6,7 +6,7 @@
     padding-inline-start: 8px;
 
     button {
-        // width: 98px;
+        width: 70px;
         height: 32.5px;
         background-color: #3F3F3F;
         color: #fff;
