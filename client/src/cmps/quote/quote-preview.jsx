@@ -17,10 +17,9 @@ export const QuotePreview = ({ quote }) => {
 }
 
 const getQuoteStyle = ({ attr }) => {
-  const obj = {
+  return {
     backgroundColor: attr || '#E05555',
   }
-  return obj
 }
 
 const getQuoteContentStyle = ({ fontColor, fontFamily, fontSize }) => {
