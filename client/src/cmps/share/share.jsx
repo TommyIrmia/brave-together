@@ -12,7 +12,7 @@ import {
     WhatsappIcon,
     TwitterIcon,
 } from 'react-share';
-import HeaderMetaData from './HeaderMetaData/HeaderMetaData';
+// import HeaderMetaData from './HeaderMetaData/HeaderMetaData';
 
 import { getUploadManager } from '../../services/aws.service';
 
@@ -50,7 +50,8 @@ export const Share = ({ canvas, isOpen, onClose }) => {
     return (
         <>
             <section className={'share-options-container ' + (isOpen ? `shown` : 'hidden')}>
-                <HeaderMetaData title="Title" description='Description' imgUrl={imgUrl} />
+                {/* <HeaderMetaData title="Title" description='Description' imgUrl={imgUrl} /> */}
+
 
                 {isFetching && <div>מכין את התמונה שלך, כמה רגעים...</div>}
 
