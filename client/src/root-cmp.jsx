@@ -21,11 +21,12 @@ import { QuoteEdit } from './views/quote/quote-edit';
 
 // CollectionApp
 import { CollectionApp } from './views/collection/collection-app';
+import { useEffect } from 'react';
 
-export const App = () => {
+export const RootCmp = () => {
 
   return (
-    <main className="app-container">
+    <main className="root-cmp">
       <AppHeader />
       <section className="content-container">
         <Routes>

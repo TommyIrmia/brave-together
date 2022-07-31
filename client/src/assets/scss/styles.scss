@@ -1,5 +1,15 @@
-//CMPS
+// setup
+@import "setup/variables.scss";
+@import "setup/functions.scss";
+@import "setup/mixins.scss";
+@import "setup/layout.scss";
 
+// basics
+@import "basics/helpers.scss";
+@import "basics/base.scss";
+@import "basics/buttons.scss";
+
+// cmps
 @import "./cmps/back-button";
 @import "./cmps/footer";
 @import "./cmps/header";
