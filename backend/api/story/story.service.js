@@ -1,18 +1,16 @@
 const dbService = require('../../services/db.service')
 const logger = require('../../services/logger.service')
 const ObjectId = require('mongodb').ObjectId
-const asyncLocalStorage = require('../../services/als.service')
 
 async function query(filterBy = {}) {
     try {
         const criteria = _buildCriteria(filterBy)
         const collection = await dbService.getCollection('story')
-        const storys = await collection.find(criteria).toArray()
-
-        return storys
+        const stories = await collection.find(criteria).toArray()
+        return stories
     } catch (err) {
-        logger.error('cannot find storys', err)
-        throw err
+        logger.error('cannot find stories', err)
+        throw new Error('storiesNotFound')
     }
 
 }
@@ -24,23 +22,20 @@ async function getById(storyId) {
         return story
     } catch (err) {
         logger.error(`cannot find story with id: ${storyId}`, err)
-        throw err
+        throw new Error('storyNotFound')
     }
 
 }
 
 async function remove(storyId) {
     try {
-        // const store = asyncLocalStorage.getStore()
-        // const { loggedinUser } = store
         const collection = await dbService.getCollection('story')
-        // remove only if user is owner/admin
         const criteria = { _id: ObjectId(storyId) }
         const { deletedCount } = await collection.deleteOne(criteria)
         return deletedCount
     } catch (err) {
         logger.error(`cannot remove story ${storyId}`, err)
-        throw err
+        throw new Error('cantRemoveFromDb')
     }
 }
 
@@ -52,7 +47,7 @@ async function add(story) {
         return story
     } catch (err) {
         logger.error('cannot insert story', err)
-        throw err
+        throw new Error('cantAddStory')
     }
 }
 
@@ -65,7 +60,7 @@ async function update(story) {
         await collection.updateOne({ _id: ObjectId(story._id) }, { $set: storyCopy })
     } catch (err) {
         logger.error('cannot update story', err)
-        throw err
+        throw new Error('cantUpdateStory')
     }
 }
 

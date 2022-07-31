@@ -16,11 +16,8 @@ The app allows you to create custom hero posts. Users can choose:
 
 ## Group member:
 ### Development Team:
- - [Gal Libedinsky](https://www.linkedin.com/in/gal-libedinsky)
- - [Regev Aloni](https://github.com/AloniRegev)
- - [Eyal Turtz](https://www.linkedin.com/in/eyal-turtz-7231ab152)
- - [Maya Stein](https://www.linkedin.com/in/maya-stein-7618021b8)
-
-### UI Team:
- - [Aviv Braunstein](https://www.linkedin.com/in/aviv-braunstein-533607161)
- - [Lior Shahar](https://www.linkedin.com/in/lior-shahar-547244194)
+ - [Tommy Irmia](https://github.com/TommyIrmia) - team leader
+ - [Ori Ben Amram](https://github.com/OriBenAmram)
+ - [Daniel Shaked](https://github.com/DanielShaked)
+ - [Roi Yotvat](https://github.com/roiyot26)
+ - [Avi Isakov](https://github.com/avi9022)

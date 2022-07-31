@@ -1,83 +1,70 @@
 const logger = require('../../services/logger.service')
-const userService = require('../user/user.service')
-const authService = require('../auth/auth.service')
-const socketService = require('../../services/socket.service')
 const quoteService = require('./quote.service')
+const errors = require('../../errorMessages/quoteError')
 
-async function getQuotes(req, res) {
+async function getQuotes(req, res, next) {
     try {
         const quotes = await quoteService.query(req.query)
         res.send(quotes)
     } catch (err) {
         logger.error('Cannot get quotes', err)
-        res.status(500).send({ err: 'Failed to get quotes' })
+        next(errors[err.message])
     }
 }
 
-async function getQuote(req, res) {
+async function getQuote(req, res, next) {
+    const quoteId = req.params.id
     try {
-        const quoteId = req.params.id
         const quote = await quoteService.getById(quoteId)
         res.send(quote)
     } catch (err) {
         logger.error(`Cannot get quote with id: ${quoteId}`, err)
-        res.status(500).send({ err: `Failed to get quote. quoteId: ${quoteId}` })
+        next(errors[err.message])
     }
 }
 
-async function deleteQuote(req, res) {
+async function deleteQuote(req, res, next) {
     try {
         const deletedCount = await quoteService.remove(req.params.id)
         if (deletedCount === 1) {
             res.send({ msg: 'Deleted successfully' })
         } else {
-            res.status(400).send({ err: 'Cannot remove quote' })
+            next(errors['noQuoteWasDeleted'])
         }
     } catch (err) {
         logger.error('Failed to delete quote', err)
-        res.status(500).send({ err: 'Failed to delete quote' })
+        next(errors[err.message])
     }
 }
 
 
-async function addQuote(req, res) {
-
-    // Uncomment when users are implemented
-    // var loggedinUser = authService.validateToken(req.cookies.loginToken)
-
+async function addQuote(req, res, next) {
     try {
         var quote = req.body
+        quote.owner = req.user
         quote = await quoteService.add(quote)
-
-        // const loginToken = authService.getLoginToken(loggedinUser)
-        // res.cookie('loginToken', loginToken)
-
         res.send(quote)
-
     } catch (err) {
-        console.log(err)
         logger.error('Failed to add quote', err)
-        res.status(500).send({ err: 'Failed to add quote' })
+        next(errors[err.message])
     }
 }
 
-async function updateQuote(req, res) {
-
-    // Uncomment when users are implemented
-    // var loggedinUser = authService.validateToken(req.cookies.loginToken)
+async function updateQuote(req, res, next) {
+    const quote = req.body
     try {
-        const quote = req.body
         const updatedQuote = await quoteService.update(quote)
+
 
         // const loginToken = authService.getLoginToken(loggedinUser)
         // res.cookie('loginToken', loginToken)
 
-        res.send(updatedQuote)
+        res.send({ msg: 'Updated successfully' })
+
 
     } catch (err) {
-        console.log(err)
         logger.error(`Failed to update quote with id:${quote._id}`, err)
-        res.status(500).send({ err: 'Failed to update quote' })
+        next(errors[err.message])
     }
 }
 

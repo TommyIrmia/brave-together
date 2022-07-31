@@ -8,11 +8,10 @@ async function query(filterBy = {}) {
         const criteria = _buildCriteria(filterBy)
         const collection = await dbService.getCollection('quote')
         const quotes = await collection.find(criteria).toArray()
-
         return quotes
     } catch (err) {
         logger.error('cannot find quotes', err)
-        throw err
+        throw new Error('quotesNotFound')
     }
 
 }
@@ -24,23 +23,20 @@ async function getById(quoteId) {
         return quote
     } catch (err) {
         logger.error(`cannot find quote with id: ${quoteId}`, err)
-        throw err
+        throw new Error('quoteNotFound')
     }
 
 }
 
 async function remove(quoteId) {
     try {
-        // const store = asyncLocalStorage.getStore()
-        // const { loggedinUser } = store
         const collection = await dbService.getCollection('quote')
-        // remove only if user is owner/admin
         const criteria = { _id: ObjectId(quoteId) }
         const { deletedCount } = await collection.deleteOne(criteria)
         return deletedCount
     } catch (err) {
         logger.error(`cannot remove quote ${quoteId}`, err)
-        throw err
+        throw new Error('cantRemoveFromDb')
     }
 }
 
@@ -52,7 +48,7 @@ async function add(quote) {
         return quote
     } catch (err) {
         logger.error('cannot insert quote', err)
-        throw err
+        throw new Error('cantAddQuote')
     }
 }
 
@@ -60,12 +56,11 @@ async function update(quote) {
     try {
         const quoteCopy = { ...quote }
         delete quoteCopy._id
-
         const collection = await dbService.getCollection('quote')
         await collection.updateOne({ _id: ObjectId(quote._id) }, { $set: quoteCopy })
     } catch (err) {
         logger.error('cannot update quote', err)
-        throw err
+        throw new Error('cantUpdateQuote')
     }
 }
 
