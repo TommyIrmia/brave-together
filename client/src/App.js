@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom'
 
 // Cmps
@@ -21,9 +21,13 @@ import { QuoteEdit } from './views/quote/quote-edit';
 
 // CollectionApp
 import { CollectionApp } from './views/collection/collection-app';
+import { userService } from './services/api/user.service';
 
 export const App = () => {
-
+  useEffect(() => {
+    // userService.login({ email: 'user5678@gmail.com', password: '5678' })
+    // userService.logout()
+  }, [])
   return (
     <main className="app-container">
       {/* <AppHeader /> */}

@@ -1,0 +1,31 @@
+.paging-container {
+    display: flex;
+    width: 100%;
+    align-items: center;
+
+    button {
+        background-color: transparent;
+        border: 1px solid rgb(206, 206, 206);
+        color: rgb(59, 59, 59);
+        border-radius: 4px;
+        padding: 0;
+        height: 30px;
+        width: 100px;
+        cursor: pointer;
+        transition: all 0.3s;
+
+        &:hover {
+            background-color: #f8a886;
+            color: #fff;
+        }
+
+        &.btn-number {
+            width: 40px;
+
+            &.current-page {
+                background-color: #CD531F;
+                color: #fff;
+            }
+        }
+    }
+}
