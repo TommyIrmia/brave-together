@@ -8,6 +8,7 @@ import { store } from './store/store'
 import './assets/scss/styles.scss';
 // import reportWebVitals from './reportWebVitals';
 
+import { RootCmp as App} from './root-cmp'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
