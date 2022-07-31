@@ -4,9 +4,6 @@ const { log } = require('../../middlewares/logger.middleware')
 const { addQuote, getQuotes, deleteQuote, getQuote, updateQuote } = require('./quote.controller')
 const router = express.Router()
 
-// middleware that is specific to this router
-// router.use(requireAuth)
-
 router.get('/', log, getQuotes)
 router.get('/:id', log, getQuote)
 router.post('/', log, requireAuth, addQuote)
