@@ -23,14 +23,16 @@ import { QuoteEdit } from './views/quote/quote-edit';
 import { CollectionApp } from './views/collection/collection-app';
 import { userService } from './services/api/user.service';
 
-export const App = () => {
+
+
+export const RootCmp = () => {
   useEffect(() => {
     // userService.login({ email: 'user5678@gmail.com', password: '5678' })
     // userService.logout()
   }, [])
   return (
-    <main className="app-container">
-      {/* <AppHeader /> */}
+    <main className="root-cmp">
+      <AppHeader />
       <section className="content-container">
         <Routes>
           {/* Main Page + Auth*/}

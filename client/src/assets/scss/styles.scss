@@ -1,8 +1,19 @@
-//CMPS
+// setup
+@import "./setup/variables";
+@import "./setup/functions";
+@import "./setup/mixins";
+@import "./setup/layout";
 
+// basics
+@import "./basics/helpers";
+@import "./basics/base";
+@import "./basics/buttons";
+
+// cmps
 @import "./cmps/back-button";
 @import "./cmps/footer";
 @import "./cmps/header";
+@import "./cmps/selected-quotes";
 
 //views
 

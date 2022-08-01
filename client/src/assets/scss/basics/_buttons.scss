@@ -1,0 +1,18 @@
+button {
+    cursor: pointer;
+}
+
+.primary-btn {
+    padding: 16px;
+    background-color: $clr1;
+    color: white;
+    border-radius: 4px;
+    border: none;
+    font-weight: bold;
+    font-size: rem(14px);
+
+    &:hover {
+        background-color: $clr1;
+        color: white;
+    }
+}

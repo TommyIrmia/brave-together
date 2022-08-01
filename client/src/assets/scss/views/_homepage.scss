@@ -1,25 +1,121 @@
-.homepage-container {
+.home-page {
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    text-align: center;
+    flex-direction: column;
+    background-image: url("../../images/homepage-background-rotate.jpg");
+    // background-color: green;
+    // transform: rotate(270deg);
+    // width: 100%;
+    flex: 1;
+    background-size: cover;
 
-    margin: 2rem;
-
-    .opening-text {
-        text-align: center;
-        font-size: 1.5rem;
+    .dark-fade-div {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        flex: 1;
+        background: linear-gradient(90.14deg, rgba(40, 40, 40, 0.5) 44.72%, rgba(63, 63, 63, 0) 80.05%);
     }
 
-    button {
-        margin-top: 1rem;
-        padding: 1rem;
-        text-align: center;
-        background-color: #3692d4;
-        border-radius: 5px;
-        margin-left: 10px;
-        margin-right: 10px;
-        margin-bottom: 15px;
-        color: white;
+    .light-fade-div {
+        width: 100%;
+        flex: 1;
+        background: linear-gradient(90.14deg, rgba(255, 255, 255, 0.5) 50.01%, rgba(255, 255, 255, 0) 74.94%);
+    }
+
+    .home-header-content {
+        margin-bottom: 30px;
+        h1 {
+            font-size: rem(30px);
+            margin-bottom: 3px;
+
+            @include for-normal-layout {
+                font-size: rem(34px);
+            }
+
+            @include for-wide-layout {
+                font-size: rem(42px);
+            }
+        }
+
+        p {
+            font-size: rem(16px);
+            margin: 0;
+
+            @include for-normal-layout {
+                font-size: rem(20px);
+            }
+
+            @include for-wide-layout {
+                font-size: rem(24px);
+            }
+        }
+    }
+
+    .headers-container {
+        margin-bottom: 24px;
+    }
+
+    .call-to-action-section {
+        p {
+            margin: 0;
+            font-weight: 500;
+            font-size: rem(16px);
+
+            @include for-normal-layout {
+                font-size: rem(20px);
+            }
+
+            @include for-wide-layout {
+                font-size: rem(24px);
+            }
+        }
+
+        .primary-btn {
+            width: 350px;
+            margin: 20px 0px;
+            @include for-normal-layout {
+                width: 400px;
+            }
+
+            @include for-wide-layout {
+                width: 450px;
+            }
+        }
+    }
+}
+
+.home-layout {
+    height: 100%;
+    margin: 50px auto 0;
+    width: 90%;
+    
+    text-align: start;
+    
+    @include for-normal-layout {
+        width: 80%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    @include for-wide-layout {
+        width: 70%;
+    }
+
+    .home-header-content {
+        
+        grid-column: 1;
+        text-align: start;
+        @include for-normal-layout {
+            align-items: start;
+        }
+    }
+    
+    .call-to-action-section {
+        
+        text-align: start;
+        @include for-normal-layout {
+            grid-column: 2;
+            grid-row: 2;
+        }
     }
 }
