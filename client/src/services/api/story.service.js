@@ -10,8 +10,8 @@ export const storyService = {
   remove,
 }
 
-function getStories() {
-  return httpService.get(`story`)
+async function getStories() {
+  return await httpService.get(`story`)
 }
 
 async function getById(storyId) {
@@ -29,8 +29,8 @@ async function update(story) {
   return story
 }
 
-function remove(storyId) {
-  return httpService.delete(`story/${storyId}`)
+async function remove(storyId) {
+  return await httpService.delete(`story/${storyId}`)
 }
 
 
