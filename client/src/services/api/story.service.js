@@ -15,18 +15,15 @@ async function getStories() {
 }
 
 async function getById(storyId) {
-  const story = await httpService.get(`story/${storyId}`)
-  return story
+  return await httpService.get(`story/${storyId}`)
 }
 
 async function add(story) {
-  story = await httpService.post(`story`, story)
-  return story
+  return await httpService.post(`story`, story)
 }
 
 async function update(story) {
-  story = await httpService.put(`story/${story._id}`, story)
-  return story
+  return await httpService.put(`story/${story._id}`, story)
 }
 
 async function remove(storyId) {

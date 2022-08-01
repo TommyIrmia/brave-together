@@ -12,24 +12,23 @@ export const userService = {
   update,
 }
 
-function getUsers() {
-  return httpService.get(`user`)
+async function getUsers() {
+  return await httpService.get(`user`)
 }
 
 async function getById(userId) {
-  const user = await httpService.get(`user/${userId}`)
-  return user
+  return await httpService.get(`user/${userId}`)
+
 }
 
-function remove(userId) {
+async function remove(userId) {
   // NOT TESTED
-  return httpService.delete(`user/${userId}`)
+  return await httpService.delete(`user/${userId}`)
 }
 
 async function update(user) {
   // NOT TESTED
-  user = await httpService.put(`user/${user._id}`, user)
-  return user
+  return await httpService.put(`user/${user._id}`, user)
 }
 
 async function login(userCred) {
@@ -44,8 +43,7 @@ async function login(userCred) {
 }
 
 async function signup(userCred) {
-  const user = await httpService.post('auth/signup', userCred)
-  return user
+  return await httpService.post('auth/signup', userCred)
 }
 async function logout() {
   return await httpService.post('auth/logout')

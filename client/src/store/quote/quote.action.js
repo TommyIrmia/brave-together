@@ -1,6 +1,6 @@
 import { quoteService } from '../../services/api/quote.service'
 import { storageService } from '../../services/async-local-storage.service'
-
+import { storageService } from '../../services/async-local-storage.service'
 
 export function selectQuote(quoteId) {
     return async (dispatch) => {
