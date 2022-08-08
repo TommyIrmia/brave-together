@@ -1,19 +1,23 @@
-@import "../setup/variables.scss";
-@import "../setup/mixins.scss";
-
+@import "../setup/mixins";
+@import "../setup/variables";
 
 .app-header {
     // app-header - change to side bar when 760px, normal-layout.
     background-color: $clr2;
     color: black;
-    padding: 10px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    padding: 10px 0px;
     direction: rtl;
 
     @include for-normal-layout {
-        padding: 15px 30px;
+        padding: 15px 0px;
+    }
+
+    .app-content-container {
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 90%;
     }
 
     // nav-container
@@ -78,12 +82,12 @@
 
         a.active {
             background-color: #eb5a12c5;
-            
-            li { 
+
+            li {
                 &:hover {
                     background-color: #eb5a12c5;
-                    
-                    @include for-normal-layout { 
+
+                    @include for-normal-layout {
                         background-color: inherit;
                     }
                 }
