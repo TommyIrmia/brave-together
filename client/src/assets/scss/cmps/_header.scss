@@ -1,3 +1,7 @@
+@import "../setup/variables.scss";
+@import "../setup/mixins.scss";
+
+
 .app-header {
     // app-header - change to side bar when 760px, normal-layout.
     background-color: $clr2;

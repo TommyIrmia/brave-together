@@ -1,4 +1,7 @@
 // flex helpers
+@import "../setup/mixins.scss";
+
+
 .flex {
     display: flex;
     > *.full {

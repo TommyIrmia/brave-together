@@ -37,8 +37,9 @@ export const QuoteEdit = () => {
     useEffect(() => {
         setCanvas()
         const txt = location.state?.txt
-        if (!txt) navigate('/')
-        setTemplate(canvasService.getTemplate(txt))
+        console.log('location', location);
+        // if (!txt) navigate('/')
+        // setTemplate(canvasService.getTemplate(txt))
 
         return () => {
             canvasRef.current = null

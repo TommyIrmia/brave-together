@@ -7,10 +7,10 @@ import vectorBottom from '../../assets/images/vectorbottom.png'
 import pen from '../../assets/images/pen.png'
 import calendar from '../../assets/images/calendar.png'
 import { SelectedQuotes } from '../../cmps/quote/selected-quotes';
-import axios from 'axios'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { storyService } from '../../services/api/story.service'
 
-export const StoryDetails = ({ match }) => {
+export const StoryDetails = () => {
 
     const [story, setStory] = useState(null)
     const [isTextChosen, setIsTextChosen] = useState(false)
@@ -18,28 +18,21 @@ export const StoryDetails = ({ match }) => {
     const [isErr, setIsErr] = useState(false)
     const selectedText = useRef(null)
     const navigate = useNavigate()
+    const { storyId } = useParams()
 
     useEffect(() => {
-        const { storyId } = match.params;
         if (!storyId) setIsErr(true)
         else loadStoryById(storyId)
 
         return () => {
             selectedText.current = null
         }
-    }, [match.params.storyId])
+    }, [storyId])
 
     const loadStoryById = async (storyId) => {
-        const axiosConfig = {
-            headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-            }
-        };
         try {
-            const route = 'http://127.0.0.1:5000/api/story_body'
-            const { data } = await axios.get(route, { params: { id: storyId } }, axiosConfig)
-            setStory(data.story)
+            const story = await storyService.getById(storyId)
+            setStory(story)
         } catch (err) {
             console.log(err)
             setIsErr(true)
@@ -48,10 +41,8 @@ export const StoryDetails = ({ match }) => {
 
     const onQuoteText = () => {
         if (isTextChosen && selectedText.current) {
-            const { storyId } = match.params;
             navigate({
-                pathname: '/templateEdit',
-                state: { txt: selectedText.current, storyId }
+                pathname: '/templateEdit'
             })
         }
     }
@@ -69,6 +60,7 @@ export const StoryDetails = ({ match }) => {
 
     if (isErr) return <div className="testimony-container">לא נמצא סיפור מתאים</div>
     if (!story) return <div>Loading..</div>
+    console.log('story', story);
     return (
         <section className="testimony-container" onClick={chooseText}>
 
@@ -110,7 +102,7 @@ export const StoryDetails = ({ match }) => {
                 </div>
 
                 <div className="testimony-details" onClick={chooseText} onTouchEnd={chooseText}>
-                    {story.text}
+                    {story.description}
                 </div>
             </div>
 
@@ -123,7 +115,7 @@ export const StoryDetails = ({ match }) => {
                 </div>
             </div>
 
-            {isModalOpen && <SelectedQuotes quotes={story.quotes} match={match} navigate={navigate}
+            {isModalOpen && <SelectedQuotes quotes={story.quotes} storyId={storyId} navigate={navigate}
                 onToggleModal={onToggleModal} onChooseText={onQuoteText} />}
 
         </section>
