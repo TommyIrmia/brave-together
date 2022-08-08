@@ -16,7 +16,7 @@ import { loadStoryById } from '../../store/story/story.action'
 export const StoryDetails = () => {
     const { story } = useSelector((globalState) => globalState.storyModule)
 
-    const [selectedTxt, setselectedTxt] = useState('')
+    const [selectedTxt, setSelectedTxt] = useState('')
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isErr, setIsErr] = useState(false)
 
@@ -31,13 +31,13 @@ export const StoryDetails = () => {
 
     const onQuoteText = () => {
         if (!selectedTxt) return
-        navigate('/templateEdit')
+        navigate('/quote/edit', { state: { txt: selectedTxt } })
     }
 
     const chooseText = (ev) => {
         ev.stopPropagation()
         const txt = window.getSelection().toString()
-        setselectedTxt(txt)
+        setSelectedTxt(txt)
     }
 
     const onToggleModal = () => {
@@ -47,8 +47,9 @@ export const StoryDetails = () => {
     if (isErr) return <div className="testimony-container">לא נמצא סיפור מתאים</div>
     if (!story) return <div>Loading..</div>
     console.log('story', story);
+    console.log('selectedTxt', selectedTxt);
     return (
-        <section className="testimony-container" onClick={chooseText}>
+        <section className="story-details-container" onClick={chooseText}>
             {/* Turn into subheader - cmp! */}
             <div className="btns-container">
                 <button className="prev-quotes-btn chosen">קריאת סיפור</button>
@@ -57,7 +58,7 @@ export const StoryDetails = () => {
             </div>
 
             {/* Turn into a cmp that dynamiclly creates the route */}
-            <div className="testimony-content">
+            <div className="story-content">
                 <div className="desktop-only">
                     <div className="storyline">
                         <a>ראשי</a><span>{'>>'}</span>
@@ -68,7 +69,7 @@ export const StoryDetails = () => {
                 </div>
 
 
-                <div className="testimony-hero-container">
+                <div className="hero-details-container">
                     <div className="hero-details">
                         <h2 className="hero-name">{story.heroName}</h2>
                         <div className="sub-details">
@@ -87,14 +88,14 @@ export const StoryDetails = () => {
                     <div className="vector bottom-vector"><img src={vectorBottom} /></div>
                 </div>
 
-                <div className="testimony-details" onClick={chooseText} onTouchEnd={chooseText}>
+                <div className="story-details" onClick={chooseText} onTouchEnd={chooseText}>
                     {story.description}
                 </div>
             </div>
 
-            <div className="testimony-quotes" >
+            <div className="story-actions" >
                 <div className="chosen-quotes" onClick={onToggleModal}>ציטוטים נבחרים</div>
-                <div className={selectedTxt ? 'choose-text chosen' : 'choose-text'}
+                <div className={'choose text' + (selectedTxt ? ' chosen' : '')}
                     onClick={onQuoteText}>
                     {!selectedTxt && <p>בחר טקסט מעצים על מנת לשתף ציטוט</p>}
                     {selectedTxt && <p>צטט</p>}
