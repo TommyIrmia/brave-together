@@ -5,7 +5,6 @@ export function query() {
     return async (dispatch) => {
         const stories = await storyService.getStories()
         // const stories = await storageService.query('story')
-        // console.log('stories', stories)
         dispatch({
             type: 'SET_STORIES',
             stories: stories
@@ -17,8 +16,6 @@ export function selectStory(storyId) {
     return async (dispatch) => {
         const story = await storyService.getById(storyId)
         // const story = await storageService.get('story',storyId)
-
-        // console.log('story', story)
         dispatch({
             type: 'SET_STORY',
             story: story
@@ -30,7 +27,6 @@ export function addStory(storyToAdd) {
     return async (dispatch) => {
         const story = await storyService.add(storyToAdd)
         // const story = await storageService.post('story',storyToAdd)
-        // console.log('story', story)
         dispatch({
             type: 'ADD_STORY',
             story

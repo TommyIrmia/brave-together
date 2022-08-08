@@ -14,12 +14,12 @@ export function storyReducer(state = initialState, action) {
         case 'ADD_STORY':
             newState = { ...state, stories: [...state.stories, action.story] }
             break;
-        // case 'UPDATE_STORY':
-        // newState = { ...state, stories: }
-        //     break;
-        // case 'REMOVE_STORY':
-        // newState = { ...state, stories: }
-        //     break;
+        case 'UPDATE_STORY':
+            newState = { ...state, stories: state.stories.map(story => story._id === action.story._id) }
+            break;
+        case 'REMOVE_STORY':
+            newState = { ...state, stories: state.stories.filter(story => story._id !== action.storyId) }
+            break;
         default:
     }
 
