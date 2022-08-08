@@ -10,27 +10,24 @@ export const storyService = {
   remove,
 }
 
-function getStories() {
-  return httpService.get(`story`)
+async function getStories() {
+  return await httpService.get(`story`)
 }
 
 async function getById(storyId) {
-  const story = await httpService.get(`story/${storyId}`)
-  return story
+  return await httpService.get(`story/${storyId}`)
 }
 
 async function add(story) {
-  story = await httpService.post(`story`, story)
-  return story
+  return await httpService.post(`story`, story)
 }
 
 async function update(story) {
-  story = await httpService.put(`story/${story._id}`, story)
-  return story
+  return await httpService.put(`story/${story._id}`, story)
 }
 
-function remove(storyId) {
-  return httpService.delete(`story/${storyId}`)
+async function remove(storyId) {
+  return await httpService.delete(`story/${storyId}`)
 }
 
 
