@@ -1,3 +1,7 @@
+@import '../setup/mixins';
+@import '../setup/variables';
+
+
 // flex helpers
 .flex {
     display: flex;
@@ -55,6 +59,7 @@
 .align-start {
     text-align: start;
 }
+
 .mobile-display {
     display: inline;
 
