@@ -10,18 +10,25 @@
 @import "basics/base.scss";
 @import "basics/buttons.scss";
 
+
+//VIEWS
+// general
+@import "./views/about";
+@import "./views/homepage";
+@import "./views/share";
+
+// story
+@import "./views/story-check";
+@import "./views/story/story-details";
+@import "./views/story-upload";
+
+// quote
+@import "./views/template-edit2";
+
 // cmps
 @import "./cmps/back-button";
 @import "./cmps/footer";
 @import "./cmps/header";
 @import "./cmps/selected-quotes";
 
-//views
 
-@import "./views/about";
-@import "./views/homepage";
-@import "./views/share";
-@import "./views/story-check";
-@import "./views/template-edit2";
-@import "./views/testimony";
-@import "./views/story-upload";
