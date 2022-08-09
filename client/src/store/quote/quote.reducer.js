@@ -14,12 +14,12 @@ export function quoteReducer(state = initialState, action) {
         case 'ADD_QUOTE':
             newState = { ...state, quotes: [...state.quotes, action.quote] }
             break;
-        // case 'UPDATE_QUOTE':
-        //     newState = { ...state, quotes: action.quotes }
-        //     break;
-        // case 'REMOVE_QUOTE':
-        //     newState = { ...state, quotes: action.quotes }
-        //     break;
+        case 'UPDATE_QUOTE':
+            newState = { ...state, quotes: state.quotes.map(quote => quote._id === action.quote.id ? action.quote : quote) }
+            break;
+        case 'REMOVE_QUOTE':
+            newState = { ...state, quotes: state.quotes.filter(quote => quote._id !== action.quoteId) }
+            break;
         default:
     }
 

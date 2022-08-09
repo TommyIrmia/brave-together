@@ -1,18 +1,26 @@
+@import "../setup/mixins";
 @import "../setup/variables";
-@import "../setup/_mixins.scss"; // flex helpers
 
 .app-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
     // app-header - change to side bar when 760px, normal-layout.
     background-color: $clr2;
     color: black;
-    padding: 10px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    padding: 10px 0px;
     direction: rtl;
 
     @include for-normal-layout {
-        padding: 15px 30px;
+        padding: 15px 0px;
+    }
+
+    .app-content-container {
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 90%;
     }
 
     // nav-container

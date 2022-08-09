@@ -3,11 +3,26 @@
 @import "setup/functions.scss";
 @import "setup/mixins.scss";
 @import "setup/layout.scss";
+@import "setup/typography.scss";
 
 // basics
 @import "basics/helpers.scss";
 @import "basics/base.scss";
 @import "basics/buttons.scss";
+
+//VIEWS
+// general
+@import "./views/about";
+@import "./views/homepage";
+@import "./views/share";
+
+// story
+@import "./views/story-check";
+@import "./views/story/story-details";
+@import "./views/story-upload";
+
+// quote
+@import "./views/template-edit2";
 
 // cmps
 @import "./cmps/back-button";
@@ -18,13 +33,10 @@
 @import "./cmps/story/story-preview";
 @import "./cmps/story/story-filter";
 
-//views
-
 @import "./views/about";
 @import "./views/homepage";
 @import "./views/share";
 @import "./views/story-check";
 @import "./views/template-edit2";
-@import "./views/testimony";
 @import "./views/story-upload";
 @import "./views//story/story-app";

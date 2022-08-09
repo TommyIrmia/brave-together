@@ -50,7 +50,7 @@ export function updateQuote(quote) {
         const updatedQuote = await quoteService.update(quote)
         // const updatedQuote = await storageService.put('quote',quote)
         dispatch({
-            type: 'ADD_QUOTE',
+            type: 'UPDATE_QUOTE',
             quote: updatedQuote
         })
     }

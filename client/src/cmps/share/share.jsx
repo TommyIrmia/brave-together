@@ -28,7 +28,7 @@ export const Share = ({ canvas, isOpen, onClose }) => {
     const image = canvas?.toDataURL("image/png")
 
 
-    useEffect(async () => {
+    useEffect(() => {
         if (!isOpen || !image) return;
         uploadImg()
     }, [image])

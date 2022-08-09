@@ -1,4 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom';
+
+import { loadStoryById } from '../../store/story/story.action'
 
 import defaultImg from '../../assets/images/default.png'
 import vectorTop1 from '../../assets/images/vectortop1.png'
@@ -6,80 +10,55 @@ import vectorTop2 from '../../assets/images/vectortop2.png'
 import vectorBottom from '../../assets/images/vectorbottom.png'
 import pen from '../../assets/images/pen.png'
 import calendar from '../../assets/images/calendar.png'
+
 import { SelectedQuotes } from '../../cmps/quote/selected-quotes';
-import axios from 'axios'
-import { useNavigate } from 'react-router-dom';
 
-export const StoryDetails = ({ match }) => {
+export const StoryDetails = () => {
+    const { story, isLoading } = useSelector((globalState) => globalState.storyModule)
 
-    const [story, setStory] = useState(null)
-    const [isTextChosen, setIsTextChosen] = useState(false)
+    const [selectedTxt, setSelectedTxt] = useState('')
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isErr, setIsErr] = useState(false)
-    const selectedText = useRef(null)
+
+    const dispatch = useDispatch()
     const navigate = useNavigate()
+    const { storyId } = useParams()
 
     useEffect(() => {
-        const { storyId } = match.params;
         if (!storyId) setIsErr(true)
-        else loadStoryById(storyId)
+        else dispatch(loadStoryById(storyId))
+    }, [storyId])
 
-        return () => {
-            selectedText.current = null
-        }
-    }, [match.params.storyId])
-
-    const loadStoryById = async (storyId) => {
-        const axiosConfig = {
-            headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-            }
-        };
-        try {
-            const route = 'http://127.0.0.1:5000/api/story_body'
-            const { data } = await axios.get(route, { params: { id: storyId } }, axiosConfig)
-            setStory(data.story)
-        } catch (err) {
-            console.log(err)
-            setIsErr(true)
-        }
-    }
-
-    const onQuoteText = () => {
-        if (isTextChosen && selectedText.current) {
-            const { storyId } = match.params;
-            navigate({
-                pathname: '/templateEdit',
-                state: { txt: selectedText.current, storyId }
-            })
-        }
+    const onQuoteTxt = () => {
+        if (!selectedTxt) return
+        navigate('/quote/edit', { state: { txt: selectedTxt } })
     }
 
     const chooseText = (ev) => {
         ev.stopPropagation()
         const txt = window.getSelection().toString()
-        selectedText.current = txt || null
-        setIsTextChosen(!!txt)
+        setSelectedTxt(txt)
     }
 
     const onToggleModal = () => {
         setIsModalOpen(!isModalOpen)
     }
-
+    console.log('isLoading', isLoading);
     if (isErr) return <div className="testimony-container">לא נמצא סיפור מתאים</div>
-    if (!story) return <div>Loading..</div>
+    if (isLoading || !story) return <div>Loading..</div>
+    console.log('story', story);
+    console.log('selectedTxt', selectedTxt);
     return (
-        <section className="testimony-container" onClick={chooseText}>
-
+        <section className="story-details-container" onClick={chooseText}>
+            {/* Turn into subheader - cmp! */}
             <div className="btns-container">
                 <button className="prev-quotes-btn chosen">קריאת סיפור</button>
                 <button className="prev-quotes-btn">ציטוטים</button>
                 <button className="prev-quotes-btn ">מאגר סיפורים</button>
             </div>
 
-
-            <div className="testimony-content">
+            {/* Turn into a cmp that dynamiclly creates the route */}
+            <div className="story-content">
                 <div className="desktop-only">
                     <div className="storyline">
                         <a>ראשי</a><span>{'>>'}</span>
@@ -90,7 +69,7 @@ export const StoryDetails = ({ match }) => {
                 </div>
 
 
-                <div className="testimony-hero-container">
+                <div className="hero-details-container">
                     <div className="hero-details">
                         <h2 className="hero-name">{story.heroName}</h2>
                         <div className="sub-details">
@@ -101,30 +80,30 @@ export const StoryDetails = ({ match }) => {
 
                     <div className="hero-img">
                         <img src={story.imgUrl ? story.imgUrl : defaultImg} alt="Hero Image"
-                            className={story.imgUrl ? '' : 'default'} />
+                            className={'avatar' + story.imgUrl ? '' : ' default'} />
+
+                        <div className="vector top1-vector"><img src={vectorTop1} /></div>
+                        <div className="vector top2-vector"><img src={vectorTop2} /></div>
+                        <div className="vector bottom-vector"><img src={vectorBottom} /></div>
                     </div>
-
-                    <div className="vector top1-vector"><img src={vectorTop1} /></div>
-                    <div className="vector top2-vector"><img src={vectorTop2} /></div>
-                    <div className="vector bottom-vector"><img src={vectorBottom} /></div>
                 </div>
 
-                <div className="testimony-details" onClick={chooseText} onTouchEnd={chooseText}>
-                    {story.text}
+                <div className="story-details" onClick={chooseText} onTouchEnd={chooseText}>
+                    {story.description}
                 </div>
             </div>
 
-            <div className="testimony-quotes" >
+            <div className="story-actions" >
                 <div className="chosen-quotes" onClick={onToggleModal}>ציטוטים נבחרים</div>
-                <div className={isTextChosen ? 'choose-text chosen' : 'choose-text'}
-                    onClick={onQuoteText}>
-                    {!isTextChosen && <p>בחר טקסט מעצים על מנת לשתף ציטוט</p>}
-                    {isTextChosen && <p>צטט</p>}
+                <div className={'choose-text' + (selectedTxt ? ' chosen' : '')}
+                    onClick={onQuoteTxt}>
+                    {!selectedTxt && <p>בחר טקסט מעצים על מנת לשתף ציטוט</p>}
+                    {selectedTxt && <p>צטט</p>}
                 </div>
             </div>
 
-            {isModalOpen && <SelectedQuotes quotes={story.quotes} match={match} navigate={navigate}
-                onToggleModal={onToggleModal} onChooseText={onQuoteText} />}
+            {isModalOpen && <SelectedQuotes quotes={story.quotes} storyId={storyId} navigate={navigate}
+                onToggleModal={onToggleModal} onChooseText={onQuoteTxt} />}
 
         </section>
     )

@@ -1,5 +1,6 @@
-@import "../setup/_mixins.scss"; // flex helpers
-@import "../setup/_variables.scss"; // flex helpers
+@import "../setup/mixins";
+@import "../setup/variables";
+
 .flex {
     display: flex;
     > *.full {
@@ -56,6 +57,7 @@
 .align-start {
     text-align: start;
 }
+
 .mobile-display {
     display: inline;
 
