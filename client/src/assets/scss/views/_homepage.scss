@@ -1,3 +1,4 @@
+@import "../setup/_mixins.scss";
 .home-page {
     display: flex;
     flex-direction: column;
@@ -88,9 +89,9 @@
     height: 100%;
     margin: 50px auto 0;
     width: 90%;
-    
+
     text-align: start;
-    
+
     @include for-normal-layout {
         width: 80%;
         display: grid;
@@ -102,16 +103,14 @@
     }
 
     .home-header-content {
-        
         grid-column: 1;
         text-align: start;
         @include for-normal-layout {
             align-items: start;
         }
     }
-    
+
     .call-to-action-section {
-        
         text-align: start;
         @include for-normal-layout {
             grid-column: 2;

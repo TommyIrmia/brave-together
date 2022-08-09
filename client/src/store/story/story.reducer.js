@@ -1,6 +1,7 @@
 const initialState = {
     story: null,
-    stories: []
+    stories: [],
+    filterBy: { txt: null, tags: [] },
 }
 export function storyReducer(state = initialState, action) {
     var newState = state;
@@ -13,6 +14,12 @@ export function storyReducer(state = initialState, action) {
             break;
         case 'ADD_STORY':
             newState = { ...state, stories: [...state.stories, action.story] }
+            break;
+        case 'SET_FILTERBYTXT':
+            newState = { ...state, filterBy: { ...state.filterBy, txt: action.txt } }
+            break;
+        case 'SET_FILTERBYTAGS':
+            newState = { ...state, filterBy: { ...state.filterBy, tags: action.tags } }
             break;
         // case 'UPDATE_STORY':
         // newState = { ...state, stories: }

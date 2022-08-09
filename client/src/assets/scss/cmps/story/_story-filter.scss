@@ -1,0 +1,51 @@
+.story-filter {
+    .input-container {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        background-color: yellow;
+
+        input {
+            position: absolute;
+            border-radius: 5px;
+            height: 40px;
+            width: 300px;
+            padding: 5px;
+            background-color: #e2e1df;
+            min-width: 225px;
+        }
+        .icon {
+            position: absolute;
+            left: calc(50% - 140px);
+            top: 13px;
+        }
+    }
+
+    .tag-filter {
+        margin-top: 80px;
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+
+        .tag-list {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .tag {
+            p {
+                cursor: pointer;
+                padding: 4px 7px;
+                border-radius: 5px;
+                background-color: #c4c4c4;
+            }
+
+            &.selected {
+                p {
+                    background-color: #3f3f3f;
+                    color: #fff;
+                }
+            }
+        }
+    }
+}

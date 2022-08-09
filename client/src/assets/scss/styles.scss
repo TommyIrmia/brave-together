@@ -14,6 +14,9 @@
 @import "./cmps/footer";
 @import "./cmps/header";
 @import "./cmps/selected-quotes";
+@import "./cmps/story/story-list";
+@import "./cmps/story/story-preview";
+@import "./cmps/story/story-filter";
 
 //views
 
@@ -24,3 +27,4 @@
 @import "./views/template-edit2";
 @import "./views/testimony";
 @import "./views/story-upload";
+@import "./views//story/story-app";

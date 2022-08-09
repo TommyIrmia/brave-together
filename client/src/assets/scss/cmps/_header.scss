@@ -1,3 +1,6 @@
+@import "../setup/variables";
+@import "../setup/_mixins.scss"; // flex helpers
+
 .app-header {
     // app-header - change to side bar when 760px, normal-layout.
     background-color: $clr2;
@@ -74,12 +77,12 @@
 
         a.active {
             background-color: #eb5a12c5;
-            
-            li { 
+
+            li {
                 &:hover {
                     background-color: #eb5a12c5;
-                    
-                    @include for-normal-layout { 
+
+                    @include for-normal-layout {
                         background-color: inherit;
                     }
                 }

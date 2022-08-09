@@ -1,14 +1,31 @@
 import { storyService } from '../../services/api/story.service'
 import { storageService } from '../../services/async-local-storage.service'
 
-export function query() {
+export function query(filterBy) {
     return async (dispatch) => {
-        const stories = await storyService.getStories()
+        const stories = await storyService.getStories(filterBy)
         // const stories = await storageService.query('story')
         // console.log('stories', stories)
         dispatch({
             type: 'SET_STORIES',
             stories: stories
+        })
+    }
+}
+
+export function setFilterByTxt(txt) {
+    return async (dispatch) => {
+        dispatch({
+            type: 'SET_FILTERBYTXT',
+            txt: txt
+        })
+    }
+}
+export function setFilterByTags(selectedTags) {
+    return async (dispatch) => {
+        dispatch({
+            type: 'SET_FILTERBYTAGS',
+            tags: selectedTags
         })
     }
 }

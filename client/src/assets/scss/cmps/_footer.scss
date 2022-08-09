@@ -1,3 +1,5 @@
+@import "../setup/_variables.scss";
+
 footer {
   height: 60px;
   background-color: $clr3;
@@ -14,7 +16,7 @@ footer {
       margin-block-end: 20px;
     }
 
-    a { 
+    a {
       margin: 0;
       line-height: 20px;
     }
