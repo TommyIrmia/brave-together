@@ -12,10 +12,7 @@ export function SelectedQuotes({ quotes, onToggleModal, onChooseText, storyId, n
 
     const onChooseQuote = (txt) => {
         if (!txt) return;
-        navigate({
-            pathname: `/quote/edit`,
-            state: { txt, storyId }
-        })
+        navigate(`/quote/edit`, { state: { txt } })
     }
 
     return (
