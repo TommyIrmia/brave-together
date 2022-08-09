@@ -12,7 +12,6 @@ function getActionLoading(isLoading) {
 export function query() {
     return async (dispatch) => {
         const stories = await storyService.getStories()
-        // const stories = await storageService.query('story')
         dispatch({
             type: SET_STORIES,
             stories: stories
