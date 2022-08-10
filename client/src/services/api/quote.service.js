@@ -10,27 +10,26 @@ export const quoteService = {
   remove,
 }
 
-function getQuotes() {
-  return httpService.get(`quote`)
+async function getQuotes() {
+  return await httpService.get(`quote`)
 }
 
 async function getById(quoteId) {
-  const quote = await httpService.get(`quote/${quoteId}`)
-  return quote
+  return await httpService.get(`quote/${quoteId}`)
 }
 
 async function add(quote) {
-  quote = await httpService.post(`quote`, quote)
-  return quote
+  return await httpService.post(`quote`, quote)
+
 }
 
 async function update(quote) {
-  quote = await httpService.put(`quote/${quote._id}`, quote)
-  return quote
+  return await httpService.put(`quote/${quote._id}`, quote)
+
 }
 
-function remove(quoteId) {
-  return httpService.delete(`quote/${quoteId}`)
+async function remove(quoteId) {
+  return await httpService.delete(`quote/${quoteId}`)
 }
 
 

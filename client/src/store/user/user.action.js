@@ -3,7 +3,7 @@ import { userService } from '../../services/api/user.service'
 
 export function login(credentials) {
     return async (dispatch) => {
-        console.log(credentials);
+        // console.log(credentials);
         const user = await userService.login(credentials)
         dispatch({
             type: 'SET_USER',

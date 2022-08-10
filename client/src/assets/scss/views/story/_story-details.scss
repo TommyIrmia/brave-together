@@ -1,0 +1,306 @@
+@import "../../setup/mixins.scss";
+
+.story-details-container {
+  // direction: rtl;
+  background-color: #ffffff;
+  padding: 0 20px 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  @include for-normal-layout {
+    flex-direction: row;
+    padding: 15px 40px;
+  }
+
+  .btns-container {
+    display: flex;
+    justify-content: space-between;
+    position: sticky;
+    top: 71px;
+    z-index: 100;
+    background-color: white;
+    padding: 10px 0;
+
+    @include for-normal-layout {
+      display: none;
+    }
+
+    .prev-quotes-btn {
+      padding: 10px 15px;
+      font-weight: 500;
+      background: transparent;
+      &.chosen {
+        background: #ff9466;
+      }
+      color: #000000;
+      border: 0;
+      border-radius: 4px;
+      align-self: flex-end;
+    }
+  }
+
+  .story-content {
+    .desktop-only {
+      display: none;
+
+      @include for-normal-layout {
+        display: block;
+        font-weight: 500;
+        position: sticky;
+        top: 78px;
+        background: #fff;
+        z-index: 100;
+        width: 150%;
+      }
+    }
+    .storyline {
+      @include for-normal-layout {
+        display: flex;
+        gap: 0.65rem;
+        margin-bottom: 2rem;
+        padding-top: 15px;
+        span {
+          letter-spacing: -4px;
+        }
+        a:last-of-type {
+          color: #105e7d;
+        }
+        a:not(:last-child) {
+          &:hover {
+            color: #105e7d;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+    .choose-text {
+      margin-bottom: 2.5rem;
+      padding-bottom: 20px;
+      font-family: Rubik-Bold;
+    }
+  }
+
+  .hero-details-container {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin-bottom: 35px;
+
+    @include for-normal-layout {
+      align-items: center;
+    }
+
+    .hero-img {
+      width: 150px;
+      height: 150px;
+      background-color: #c4c4c4;
+      border-radius: 50%;
+      margin-inline-start: 14px;
+      display: grid;
+      place-items: center;
+      z-index: 10;
+      position: relative;
+
+      @include for-normal-layout {
+        width: 170px;
+        height: 170px;
+        margin-inline-end: 80px;
+      }
+
+      .avatar {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        &.default {
+          width: 36.66%;
+          height: 40px;
+          border-radius: 0;
+        }
+      }
+      .vector {
+        position: absolute;
+
+        &.top1-vector {
+          // left: 160px;
+          top: 0;
+          right: -85px;
+
+          @include for-normal-layout {
+            top: 10px;
+          }
+        }
+        &.top2-vector {
+          // left: 150px;
+          top: 0;
+          right: -85px;
+          @include for-normal-layout {
+            top: 10px;
+          }
+        }
+        &.bottom-vector {
+          bottom: -50px;
+          left: -25px;
+
+          @include for-normal-layout {
+            bottom: -45px;
+            left: -50px;
+          }
+        }
+      }
+    }
+
+    .hero-details {
+      padding: 30px 8px;
+
+      @include for-normal-layout {
+        padding: 0;
+      }
+
+      .hero-name {
+        font-size: 1.25rem;
+        font-weight: bold;
+        margin-bottom: 18px;
+      }
+
+      .sub-details {
+        @include for-normal-layout {
+          display: flex;
+          gap: 2.8rem;
+          align-items: flex-start;
+
+          .date,
+          .hero-author {
+            .sm-img {
+              position: relative;
+              bottom: 4px;
+            }
+          }
+        }
+
+        .hero-author {
+          font-size: 0.875rem;
+          margin-bottom: 8px;
+          display: flex;
+          align-items: center;
+          gap: 5px;
+        }
+        .date {
+          font-size: 0.75rem;
+          display: flex;
+          align-items: center;
+          gap: 4px;
+        }
+        .sm-img {
+          height: 1.25rem;
+          width: fit-content;
+          margin: 0;
+        }
+        @include for-normal-layout {
+          .date,
+          .hero-author {
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+  }
+
+  .story-details {
+    padding: 0 6px;
+    line-height: 1.75rem;
+    min-height: calc(100vh - 300px);
+    @include for-normal-layout {
+      padding: 0;
+      line-height: 2.5rem;
+    }
+  }
+
+  .story-actions {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    cursor: pointer;
+    background: #cccfe3;
+    min-height: 75px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    @include for-normal-layout {
+      position: relative;
+      min-width: 25%;
+      background: transparent;
+      cursor: default;
+      //   flex-basis: 25%;
+    }
+    .chosen-quotes {
+      width: 90%;
+      background: #525252;
+      color: #ffffff;
+      line-height: 28px;
+      font-weight: 500;
+      text-align: center;
+      border-radius: 2px;
+      padding: 6px;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      @include for-normal-layout {
+        position: fixed;
+        top: unset;
+        bottom: 140px;
+        left: 0;
+        width: 20%;
+        transform: unset;
+        padding: 13px;
+        font-size: 1.125rem;
+        cursor: pointer;
+      }
+    }
+    .choose-text {
+      width: 90%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      bottom: 9px;
+      @include for-normal-layout {
+        display: none;
+      }
+      p {
+        margin: 0;
+        font-weight: 500;
+        font-size: 1rem;
+        margin-inline-end: 10px;
+        line-height: 40px;
+      }
+
+      @include for-normal-layout {
+        position: fixed;
+        top: unset;
+        bottom: 210px;
+        left: 0;
+        width: 20%;
+        transform: unset;
+        padding: 7px;
+        p {
+          font-size: 1.25rem;
+        }
+      }
+
+      &.chosen {
+        border-radius: 2px;
+        background-color: #cd531f;
+        margin-inline-end: 0;
+        color: #ffffff;
+        @include for-normal-layout {
+          display: flex;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

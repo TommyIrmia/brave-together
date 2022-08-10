@@ -4,8 +4,6 @@ import { LoginSignup } from "./auth/LoginSignup"
 export function HomePage() {
     const location = useLocation()
     const navigate = useNavigate()
-    
-
     return <div className="home-page ">
         <div className="dark-fade-div">
             <div className="light-fade-div">
