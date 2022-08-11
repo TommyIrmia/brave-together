@@ -1,4 +1,5 @@
 /* Media queries Breakpoint mixins */
+@import "../setup/variables.scss";
 
 // Max width
 @mixin for-mobile-layout {

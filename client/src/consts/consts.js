@@ -1,3 +1,35 @@
+// app-header
+const navLinks = [
+    {
+        path: '/',
+        txt: 'ראשי'
+    },
+    {
+        path: '/about',
+        txt: 'אודות'
+    },
+    {
+        path: '/story',
+        txt: 'שמורים'
+    },
+    {
+        path: '/quote',
+        txt: 'פרוייקטים נוספים'
+    },
+    {
+        path: '/collection',
+        txt: 'פעילויות העמותה'
+    },
+    {
+        path: '/ori',
+        txt: 'לתרומות'
+    },
+    {
+        path: '/login',
+        txt: 'הירשם'
+    },
+]
+
 const colors = [
     '#C2DDC8',
     '#99BFB3',
@@ -121,5 +153,6 @@ export {
     natureImgs,
     txtSizes,
     frames,
-    options
+    options,
+    navLinks
 }

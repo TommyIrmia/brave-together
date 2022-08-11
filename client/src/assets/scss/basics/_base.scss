@@ -7,12 +7,13 @@ html {
 }
 
 ::selection {
-    // background-color: lighten(#{var(--primary-dominant)}, 20%);
+    // background-color: lighten(#{var(--cta-dominant)}, 20%);
     // color: var(--main-font-clr);
 }
 
 body {
     margin: 0;
+    font-family: Rubik;
 }
 
 .root-cmp {
@@ -54,4 +55,8 @@ p {
 a {
     text-decoration: none;
     color: inherit;
+}
+
+input { 
+    font-family: Rubik;
 }

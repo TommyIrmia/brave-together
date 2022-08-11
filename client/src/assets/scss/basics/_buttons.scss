@@ -1,14 +1,13 @@
-// @import "../setup/variables";
-// $clr1: #CD531F;
-// $clr2: #a7c6d3;
-// $clr3: #3F3F3F;
+@import "../setup/variables.scss";
+@import "../setup/variables";
 
 button {
     cursor: pointer;
+    font-family: Rubik;
 }
 
-.primary-btn {
-    padding: 16px;
+.cta-btn {
+    padding: 13px;
     background-color: $clr1;
     color: white;
     border-radius: 4px;

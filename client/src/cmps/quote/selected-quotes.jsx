@@ -1,22 +1,18 @@
 import React from 'react'
 import ExitIcon from '../../assets/images/exit-icon.png'
 
-export function SelectedQuotes({ quotes, onToggleModal, onChooseText, match, navigate }) {
+export function SelectedQuotes({ quotes, onToggleModal, onChooseText, storyId, navigate }) {
     console.log('quotes', quotes);
 
 
-    const handleClick = (e) => {
+    const handleClick = () => {
         onToggleModal();
         onChooseText();
     }
 
     const onChooseQuote = (txt) => {
         if (!txt) return;
-        const { storyId } = match.params;
-        navigate({
-            pathname: '/templateEdit',
-            state: { txt, storyId }
-        })
+        navigate(`/quote/edit`, { state: { txt } })
     }
 
     return (
@@ -28,8 +24,8 @@ export function SelectedQuotes({ quotes, onToggleModal, onChooseText, match, nav
                 <h1>ציטוטים נבחרים</h1>
                 <div className='quotes-container'>
                     {quotes &&
-                        quotes.map(currQuote => {
-                            return <Quote onChooseQuote={onChooseQuote} quote={currQuote}></Quote>
+                        quotes.map(quote => {
+                            return <Quote onChooseQuote={onChooseQuote} quote={quote} key={quote} />
                         })
                     }
                 </div>
@@ -42,9 +38,10 @@ export function SelectedQuotes({ quotes, onToggleModal, onChooseText, match, nav
 
 
 function Quote({ quote, onChooseQuote }) {
+    console.log(quote);
     return (
-        <div onClick={() => onChooseQuote(quote.txt)} className='quote'>
-            <p>{quote.txt}</p>
+        <div onClick={() => onChooseQuote(quote)} className='quote'>
+            <p>{quote}</p>
         </div>
     )
 }

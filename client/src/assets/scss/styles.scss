@@ -1,13 +1,29 @@
 // setup
-@import "./setup/variables";
-@import "./setup/functions";
-@import "./setup/mixins";
-@import "./setup/layout";
+@import "setup/variables.scss";
+@import "setup/functions.scss";
+@import "setup/mixins.scss";
+@import "setup/layout.scss";
+@import "setup/typography.scss";
 
 // basics
 @import "./basics/helpers";
 @import "./basics/base";
 @import "./basics/buttons";
+
+
+//VIEWS
+// general
+@import "./views/about";
+@import "./views/homepage";
+@import "./views/share";
+
+// story
+@import "./views/story-check";
+@import "./views/story/story-details";
+@import "./views/story-upload";
+
+// quote
+@import "./views/template-edit2";
 
 // cmps
 @import "./cmps/back-button";
@@ -15,7 +31,6 @@
 @import "./cmps/header";
 @import "./cmps/selected-quotes";
 
-//views
 
 @import "./views/about";
 @import "./views/homepage";
