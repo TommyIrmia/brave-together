@@ -18,7 +18,7 @@
     "react-share": "^4.4.0",
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.1",
-    "sass": "^1.54.0",
+    "sass-resources-loader": "^2.2.5",
     "styled-components": "^5.3.5",
     "web-vitals": "^2.1.4"
   },
@@ -51,6 +51,7 @@
   },
   "devDependencies": {
     "install": "^0.13.0",
-    "npm": "^8.3.0"
+    "npm": "^8.3.0",
+    "sass": "^1.52.1"
   }
 }

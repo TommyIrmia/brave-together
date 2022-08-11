@@ -18,11 +18,15 @@ export const QuoteApp = () => {
     setQuotesToDisplay(quotesFromDb)
   }
 
+  const moveToPage = (diff) => {
+    setPage((prevState) => prevState + diff)
+  }
+
   return (
     <div>
       <QuoteFilter quotes={quotes} setFilteredQuotes={setQuotesToDisplay} />
       <QuoteList quotes={quotesToDisplay} />
-      {quotes && <QuotePaging numOfQuotes={quotes.length} currentPage={page} />}
+      {quotes && <QuotePaging moveToPage={moveToPage} numOfQuotes={quotes.length} currentPage={page} />}
     </div>
   )
 }

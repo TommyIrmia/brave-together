@@ -10,18 +10,18 @@ export const QuotePaging = ({ numOfQuotes, currentPage }) => {
 
   return (
     <div className="paging-container">
-      <button>{`< Previous`}</button>
-      {Array.apply(null, Array(5)).map((page, idx) => (
+      <button>{`< הקודם`}</button>
+      {Array.apply(null, Array(numOfPages)).map((page, idx) => (
         <button className={`btn-number ${currentPage === idx + 1 && 'current-page'}`}>{idx + 1}</button>
       ))}
-      <button>{`Next >`}</button>
+      <button disabled={currentPage === numOfPages}>{`הבא >`}</button>
       <div className="total-pages-container">
-        <p>Total of {numOfPages} pages</p>
+        <p>סך הכל {numOfPages} עמודים</p>
       </div>
       <div className="move-to-container">
-        <p>Go to Page</p>
+        <p>לך לעמוד:</p>
         <input type="text" />
-        <button>Go</button>
+        <button disabled={currentPage === 1}>שנה</button>
       </div>
     </div>
   )

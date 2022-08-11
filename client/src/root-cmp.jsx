@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 
 // Cmps
@@ -6,24 +6,22 @@ import { AppHeader } from './cmps/app-header'
 import { AppFooter } from './cmps/app-footer'
 
 // Main Page + Auth
-import { HomePage } from './views/home-page';
-import { About } from './views/about';
-import { LoginSignup } from './views/auth/LoginSignup';
+import { HomePage } from './views/home-page'
+import { About } from './views/about'
+import { LoginSignup } from './views/auth/LoginSignup'
 
 // Story App
-import { StoryApp } from './views/story/story-app';
-import { StoryDetails } from './views/story/story-details';
-import { StoryEdit } from './views/story/story-edit';
+import { StoryApp } from './views/story/story-app'
+import { StoryDetails } from './views/story/story-details'
+import { StoryEdit } from './views/story/story-edit'
 
 // QuoteApp
 import { QuoteApp } from './views/quote/quote-app.jsx'
-import { QuoteEdit } from './views/quote/quote-edit';
+import { QuoteEdit } from './views/quote/quote-edit'
 
 // CollectionApp
-import { CollectionApp } from './views/collection/collection-app';
-import { userService } from './services/api/user.service';
-
-
+import { CollectionApp } from './views/collection/collection-app'
+import { userService } from './services/api/user.service'
 
 export const RootCmp = () => {
   useEffect(() => {
@@ -59,6 +57,5 @@ export const RootCmp = () => {
       </section>
       <AppFooter />
     </main>
-  );
+  )
 }
-
