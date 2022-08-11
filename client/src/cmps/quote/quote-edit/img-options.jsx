@@ -1,15 +1,15 @@
 import React from 'react'
-import { canvasService } from '../../services/canvas.service'
-import { ChosenSubOption } from './chosen-sub-option'
-import { stillImgs, natureImgs } from '../../consts/imgs.consts'
+
+import { canvasService } from '../../../services/canvas.service'
+import { stillImgs, natureImgs } from '../../../consts/imgs.consts'
+
+import { OptionPreview } from './option-preview'
 
 export const ImgOptions = ({ options, setTemplate, template }) => {
 
-    const toggleImg = (src) => {
-        const img = template.imgs.find(img => img.src === src)
-        if (img) removeImg(src)
+    const onToggleImg = (src) => {
+        if (isImgChosen(src)) removeImg(src)
         else addImg(src)
-
     }
 
     const addImg = (src) => {
@@ -22,7 +22,6 @@ export const ImgOptions = ({ options, setTemplate, template }) => {
     }
 
     const removeImg = (imgSrc) => {
-        console.log(imgSrc);
         const imgs = template.imgs.filter(i => i.src !== imgSrc)
         setTemplate((prevTemplate) => ({ ...prevTemplate, imgs }))
     }
@@ -32,21 +31,25 @@ export const ImgOptions = ({ options, setTemplate, template }) => {
     }
 
     // const DynamicCmp = () => {
-    const option = options.find((option) => option.isChosen)
-    switch (option.type) {
+    const chosenOption = options.find((option) => option.isChosen)
+    switch (chosenOption.type) {
         case 'nature':
             return natureImgs.map(img => (
-                <div key={img} onClick={() => toggleImg(img)}>
-                    <img src={img} />
-                    <ChosenSubOption isChosen={isImgChosen(img)} />
-                </div>
+                <OptionPreview
+                    key={img}
+                    onSetOption={() => onToggleImg(img)}
+                    imgSrc={img}
+                    isChosen={isImgChosen(img)}
+                />
             ))
         case 'still':
             return stillImgs.map((img, idx) => (
-                <div key={idx} onClick={() => toggleImg(img)}>
-                    <img src={img} />
-                    <ChosenSubOption isChosen={isImgChosen(img)} />
-                </div>
+                <OptionPreview
+                    key={img}
+                    onSetOption={() => onToggleImg(img)}
+                    imgSrc={img}
+                    isChosen={isImgChosen(img)}
+                />
             ))
         case 'symbol':
             return stillImgs.map(img => (
@@ -57,7 +60,3 @@ export const ImgOptions = ({ options, setTemplate, template }) => {
 }
 
 
-//     return (
-//         <DynamicCmp />
-//     )
-// }

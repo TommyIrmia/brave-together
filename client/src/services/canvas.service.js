@@ -5,7 +5,7 @@ export const canvasService = {
     drawBgcColor,
     drawBgcImg,
     getEvPos,
-    isElClicked,
+    getClickedEl,
     setElPos,
     getTxtPos,
     addMouseListeners,
@@ -14,7 +14,8 @@ export const canvasService = {
     removeTouchListeners,
     drawImgs,
     getImg,
-    drawFrame
+    drawFrame,
+    shouldRecomputeTxtWidth
 }
 
 // GLOBALS
@@ -28,24 +29,9 @@ const QUOTE = "\""
 
 function getTemplate(txt) {
     let template = storageService.getTempFromStorage();
-    if (!template || template?.txt?.content !== txt) template = getEmptyTemplate(txt)
+    if (!template || template.txt?.content !== txt) template = _getEmptyTemplate(txt)
     storageService.saveTempToStorage(template)
     return template
-}
-
-function getEmptyTemplate(content) {
-    return {
-        background: { type: 'color', attr: '#ffffff' },//'images/111-02.svg',
-        imgs: [],
-        frame: '',
-        txt: {
-            content,
-            fontSize: 16,
-            fontFamily: 'Arial, Helvetica, sans-serif',
-            fontColor: '#000000',
-            pos: { x: 50, y: 150 }
-        }
-    }
 }
 
 function getEvPos(ev) {
@@ -66,8 +52,8 @@ function getEvPos(ev) {
 
 function getTxtPos() {
     return {
-        x: gLines[0].x,
-        y: gLines[0].y
+        x: gLines[0].pos.x,
+        y: gLines[0].pos.y
     }
 }
 
@@ -81,7 +67,7 @@ function getImg(src) {
     }
 }
 
-function isElClicked(clickedPos) {
+function getClickedEl(clickedPos) {
     let elClicked = null;
     if (gLines.length) {
         const line = _getLineClicked(gLines, clickedPos)
@@ -96,45 +82,28 @@ function isElClicked(clickedPos) {
     return elClicked
 }
 
-function _getLineClicked(lines, clickedPos) {
-    return lines.find((line) => {
-        const lineArea = {
-            x: line.x - line.width,
-            y: line.y + line.size
-        };
-        return (clickedPos.x <= line.x + 10 && clickedPos.x >= lineArea.x - 10 &&
-            clickedPos.y - 50 >= line.y && clickedPos.y - 50 <= lineArea.y + 5);
-    })
-}
-
-function _getImgClicked(imgs, clickedPos) {
-    const imgsCopy = imgs.slice().reverse()
-    return imgsCopy.find((img) => {
-        const { pos, size } = img
-        const lineArea = {
-            x: pos.x + size,
-            y: pos.y + size + 50
-        };
-        return (clickedPos.x >= pos.x - 10 && clickedPos.x <= lineArea.x + 10
-            && clickedPos.y >= pos.y && clickedPos.y <= lineArea.y + 5);
-    })
+function shouldRecomputeTxtWidth(isDrag, template, prevTemplate) {
+    if (isDrag) return false
+    if (!prevTemplate) return true
+    if (template.txt.fontColor !== prevTemplate.txt.fontColor) return false
+    return JSON.stringify(template.txt) !== JSON.stringify(prevTemplate.txt)
 }
 
 // DRAW FUNCS
 
-function drawText(canvas, ctx, isRecomputeTxtWidth, { content, fontSize, fontFamily, fontColor, pos }) {
+function drawText(canvas, ctx, shouldRecompute, { content, fontSize, fontFamily, fontColor, pos }) {
     ctx.lineWidth = 2;
     ctx.font = `${fontSize}px ${fontFamily}`;
     ctx.strokeStyle = fontColor;
     ctx.fillStyle = fontColor;
-    if (!gLines.length || isRecomputeTxtWidth) {
-        _drawContentAndGetWidth(content, pos, ctx, canvas)
+    if (!gLines.length || shouldRecompute) {
+        _computeAndDrawLines(content, pos, ctx, canvas)
     } else {
-        _reDrawContent(ctx)
+        _drawLines(ctx)
     }
 }
 
-function _drawContentAndGetWidth(txt, { x, y }, ctx, canvas, lineHeight = 25) {
+function _computeAndDrawLines(txt, { x, y }, ctx, canvas, lineHeight = 25) {
     const words = txt.split(' ')
     const maxWidth = canvas.width - 100
     gLines = []
@@ -145,25 +114,33 @@ function _drawContentAndGetWidth(txt, { x, y }, ctx, canvas, lineHeight = 25) {
         const testLine = line + word + ' ';
         const { width } = ctx.measureText(testLine)
         if (width > maxWidth && idx > 0) {
-            _drawLine(line, ctx, canvas, y, lineHeight)
+            _addLine(line, ctx, canvas, y, lineHeight)
             line = word + ' ';
             y += +lineHeight;
         } else line = testLine;
     })
+
     if (line.charAt(line.length - 1) !== QUOTE) line += QUOTE
-    _drawLine(line, ctx, canvas, y, lineHeight)
+    _addLine(line, ctx, canvas, y, lineHeight)
+
     storageService.saveLinesToStorage(gLines)
 }
 
-function _drawLine(line, ctx, canvas, posY, lineHeight) {
-    const posX = _getPosCenter(line, ctx, canvas)
-    gLines.push({ x: posX, y: posY, width: ctx.measureText(line).width, size: lineHeight, txt: line })
+function _addLine(line, ctx, canvas, posY, lineHeight) {
+    const posX = _getPosCenter(line, ctx, canvas);
     ctx.fillText(line, posX, posY);
+
+    gLines.push({
+        pos: { x: posX, y: posY },
+        width: ctx.measureText(line).width,
+        size: lineHeight,
+        txt: line
+    })
 }
 
-function _reDrawContent(ctx) {
+function _drawLines(ctx) {
     gLines.forEach(line => {
-        ctx.fillText(line.txt, line.x, line.y);
+        ctx.fillText(line.txt, line.pos.x, line.pos.y);
     })
     storageService.saveLinesToStorage(gLines)
 }
@@ -223,11 +200,16 @@ function setElPos(ev, el, startPos) {
 
     if (el.type === 'txt') {
         gLines = gLines.map(line => {
-            const newLine = { ...line, x: line.x += dx, y: line.y += dy }
+            const newLine = {
+                ...line,
+                pos: {
+                    x: line.pos.x += dx,
+                    y: line.pos.y += dy
+                }
+            }
             return newLine
         })
-    }
-    if (el.type === 'img') {
+    } else if (el.type === 'img') {
         const newImg = { ...el, pos: { x: el.pos.x += dx, y: el.pos.y += dy } }
         gImgs = gImgs.map(img => newImg.src === img.src ? newImg : img)
     }
@@ -244,6 +226,7 @@ function addMouseListeners(canvas, { onDown, onMove, onUp }) {
 }
 
 function addTouchListeners(canvas, { onDown, onMove, onUp }) {
+    console.log('adding listerners toooo', canvas);
     canvas.addEventListener('touchstart', onDown)
     canvas.addEventListener('touchmove', onMove)
     canvas.addEventListener('touchend', onUp)
@@ -268,6 +251,45 @@ function _getPosCenter(line, ctx, canvas) {
     const diff = canvas.width - lineWidth
 
     return (canvas.width - (diff / 2))
+}
+
+function _getLineClicked(lines, clickedPos) {
+    return lines.find((line) => {
+        const lineArea = {
+            x: line.pos.x - line.width,
+            y: line.pos.y + line.size
+        };
+        return (clickedPos.x <= line.pos.x + 10 && clickedPos.x >= lineArea.x - 10 &&
+            clickedPos.y - 50 >= line.pos.y && clickedPos.y - 50 <= lineArea.y + 5);
+    })
+}
+
+function _getImgClicked(imgs, clickedPos) {
+    const imgsCopy = imgs.slice().reverse()
+    return imgsCopy.find((img) => {
+        const { pos, size } = img
+        const lineArea = {
+            x: pos.x + size,
+            y: pos.y + size + 50
+        };
+        return (clickedPos.x >= pos.x - 10 && clickedPos.x <= lineArea.x + 10
+            && clickedPos.y >= pos.y && clickedPos.y <= lineArea.y + 5);
+    })
+}
+
+function _getEmptyTemplate(content) {
+    return {
+        background: { type: 'color', attr: '#ffffff' },//'images/111-02.svg',
+        imgs: [],
+        frame: '',
+        txt: {
+            content,
+            fontSize: 16,
+            fontFamily: 'Arial, Helvetica, sans-serif',
+            fontColor: '#000000',
+            pos: { x: 50, y: 150 }
+        }
+    }
 }
 
 
