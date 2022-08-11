@@ -1,8 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react'
-import leftArrow from '../../assets/images/templateEdit/utils/left.png'
-import rightArrow from '../../assets/images/templateEdit/utils/right.png'
+import React, { useRef, useEffect } from 'react'
+import leftArrow from '../../../assets/images/templateEdit/utils/left.png'
+import rightArrow from '../../../assets/images/templateEdit/utils/right.png'
 
-export const SubOptions = ({ options, setOption, children }) => {
+export const OptionsContainer = ({ options, setOption, children }) => {
     const scrollContainerRef = useRef()
 
     useEffect(() => {
@@ -29,11 +29,6 @@ export const SubOptions = ({ options, setOption, children }) => {
         );
     }
 
-    const getClassName = () => {
-        let className = 'sub-options-container'
-        return options.length ? className : className + ' frames-container'
-    }
-
     return (
         <div className="tool-options-container">
 
@@ -43,7 +38,7 @@ export const SubOptions = ({ options, setOption, children }) => {
                     onClick={() => onChooseOption(opt)}>{opt.name}</p>)}
             </div>}
 
-            <div className={getClassName()}>
+            <div className={'sub-options-container' + (options.length ? '' : ' frames-container')}>
                 <div className="arrow" onClick={() => onHandleScroll(200)}>
                     <img alt="right-arrow" src={rightArrow} />
                 </div>

@@ -41,33 +41,6 @@ const colors = [
     '#2E5559'
 ];
 
-const drawings = [
-    'imgs/consts/drawings/1.png',
-    'imgs/consts/drawings/2.png',
-    'imgs/consts/drawings/3.png',
-    'imgs/consts/drawings/4.png',
-    'imgs/consts/drawings/5.png',
-    'imgs/consts/drawings/6.png',
-    'imgs/consts/drawings/7.png',
-    'imgs/consts/drawings/8.png',
-    'imgs/consts/drawings/9.png',
-    'imgs/consts/drawings/10.png',
-];
-
-const patterns = [
-    'imgs/consts/patterns/1.png',
-    'imgs/consts/patterns/2.png',
-    'imgs/consts/patterns/3.png',
-    'imgs/consts/patterns/4.png',
-    'imgs/consts/patterns/5.png',
-]
-const photos = [
-    'imgs/consts/photos/1.png',
-    'imgs/consts/photos/2.png',
-    'imgs/consts/photos/3.png',
-    'imgs/consts/photos/4.png',
-    'imgs/consts/photos/5.png',
-]
 
 const fonts = [
     'Arial, Helvetica, sans-serif',
@@ -77,37 +50,11 @@ const fonts = [
     'Impact, Haettenschweiler, Arial Narrow Bold, sans-serif',
 ];
 
-const stillImgs = [
-    'imgs/consts/stillimgs/1.png',
-    'imgs/consts/stillimgs/2.png',
-    'imgs/consts/stillimgs/1.png',
-    'imgs/consts/stillimgs/2.png',
-];
-
-const natureImgs = [
-    'imgs/consts/natureimgs/1.png',
-    'imgs/consts/natureimgs/2.png',
-    'imgs/consts/natureimgs/3.png',
-    'imgs/consts/natureimgs/4.png',
-    'imgs/consts/natureimgs/5.png',
-    'imgs/consts/natureimgs/6.png',
-    'imgs/consts/natureimgs/7.png',
-    'imgs/consts/natureimgs/8.png',
-    'imgs/consts/natureimgs/9.png',
-    'imgs/consts/natureimgs/10.png',
-
-]
 
 const txtSizes = [
     10, 12, 14, 16, 18, 20
 ];
 
-const frames = [
-    'imgs/consts/frames/1.png',
-    'imgs/consts/frames/2.png',
-    'imgs/consts/frames/3.png',
-    'imgs/consts/frames/4.png',
-]
 
 
 const options = [
@@ -145,14 +92,8 @@ const options = [
 
 export {
     colors,
-    drawings,
-    photos,
-    patterns,
     fonts,
-    stillImgs,
-    natureImgs,
     txtSizes,
-    frames,
     options,
     navLinks
 }

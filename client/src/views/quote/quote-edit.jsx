@@ -1,27 +1,25 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-import { Options } from '../../cmps/templateEditCmps/Options'
-import { options } from '../../consts/consts'
-import { BackgroundOptions } from '../../cmps/templateEditCmps/background-options'
-import { FrameOptions } from '../../cmps/templateEditCmps/frame-options'
-import { ImgOptions } from '../../cmps/templateEditCmps/img-options'
-import { TextOptions } from '../../cmps/templateEditCmps/text-options'
+import { ToolBarOptions } from '../../cmps/quote/quote-edit/tool-bar-options'
+import { DynamicOptions } from '../../cmps/quote/quote-edit/dynamic-options'
 import { usePrevious } from '../../hooks/usePrevious'
-import { SubOptions } from '../../cmps/templateEditCmps/sub-options'
+import { OptionsContainer } from '../../cmps/quote/quote-edit/options-container'
 import { Share } from '../../cmps/share/share'
 
-// import backImg from '../assets/images/back.png'
+import backImg from '../../assets/images/templateEdit/utils/back.png'
 import downloadImg from '../../assets/images/templateEdit/utils/download.png'
+import { options } from '../../consts/consts'
 
 import { canvasService } from '../../services/canvas.service'
 import { storageService } from '../../services/storage.service'
+import { useEffectUpdate } from '../../hooks/useEffectUpdate'
 
 
 export const QuoteEdit = () => {
 
     const [isShareModalOpen, setIsShareModal] = useState(false)
-    const [option, setOption] = useState(options[0])
+    const [selectedOption, setSelectedOption] = useState(options[0])
     const [template, setTemplate] = useState(null)
     const prevTemplate = usePrevious(template)
 
@@ -46,7 +44,7 @@ export const QuoteEdit = () => {
         }
     }, [])
 
-    useEffect(() => {
+    useEffectUpdate(() => {
         if (!template || !canvasRef.current) return
         removeListeners(canvasRef.current)
         addListeners(canvasRef.current)
@@ -60,16 +58,12 @@ export const QuoteEdit = () => {
 
     const setCanvas = () => {
         const canvas = canvasRef.current
-        if (!canvas) return
+        if (!canvas) return //Go to unsupported page
         ctxRef.current = canvas.getContext('2d');
         canvas.width = containerRef.current.offsetWidth
         canvas.height = containerRef.current.offsetHeight
     }
 
-    const resizeCanvas = () => {
-        setCanvas()
-        drawTemplate()
-    }
 
     const drawTemplate = async () => {
 
@@ -84,42 +78,36 @@ export const QuoteEdit = () => {
         (background.type === 'img') && await canvasService.drawBgcImg(canvas, ctx, background.attr);
         (frame) && await canvasService.drawFrame(canvas, ctx, frame);
         (imgs.length) && await canvasService.drawImgs(ctx, imgs);
-        (txt) && canvasService.drawText(canvas, ctx, shouldRecomputeTxtWidth(), txt);
+        const shouldCompute = canvasService.shouldRecomputeTxtWidth(dragRef.current.isDrag, template, prevTemplate);
+        (txt) && canvasService.drawText(canvas, ctx, shouldCompute, txt);
     }
 
     const onToggleShareModal = () => {
         setIsShareModal(!isShareModalOpen)
     }
 
-    const shouldRecomputeTxtWidth = () => {
-        if (dragRef.current.isDrag) return false
-        if (!prevTemplate) return true
-        if (template.txt.fontColor !== prevTemplate.txt.fontColor) return false
-        return JSON.stringify(template.txt) !== JSON.stringify(prevTemplate.txt)
-    }
-
-    const addListeners = (canvas) => {
-        if (!canvas) return
+    const addListeners = (elCanvas) => {
+        if (!elCanvas) return
         const funcs = { onDown, onMove, onUp }
-        canvasService.addMouseListeners(canvas, funcs);
-        canvasService.addTouchListeners(canvas, funcs);
+        canvasService.addMouseListeners(elCanvas, funcs);
+        canvasService.addTouchListeners(elCanvas, funcs);
         window.addEventListener('resize', resizeCanvas);
         document.querySelector('body').style.overflow = 'hidden';
     }
 
-    const removeListeners = (canvas) => {
+    const removeListeners = (elCanvas) => {
         window.removeEventListener('resize', resizeCanvas)
         document.querySelector('body').style.overflow = 'scroll'
-        if (!canvas) return
+        if (!elCanvas) return
         const funcs = { onDown, onMove, onUp }
-        canvasService.removeMouseListeners(canvas, funcs)
-        canvasService.removeTouchListeners(canvas, funcs)
+        canvasService.removeMouseListeners(elCanvas, funcs)
+        canvasService.removeTouchListeners(elCanvas, funcs)
 
     }
 
     const onDown = (ev) => {
         const pos = canvasService.getEvPos(ev);
-        const elClicked = canvasService.isElClicked(pos, template)
+        const elClicked = canvasService.getClickedEl(pos, template)
         if (!elClicked) return;
         dragRef.current = { isDrag: true, startPos: pos, elClicked };
         canvasRef.current.style.cursor = 'grabbing';
@@ -146,25 +134,11 @@ export const QuoteEdit = () => {
         downloadRef.current.href = image;
     }
 
-    const DynamicOptions = () => {
-        const props = {
-            options: option.subTypes || null,
-            template,
-            setTemplate
-        }
-        switch (option.type) {
-            case 'background':
-                return <BackgroundOptions {...props} />
-            case 'frame':
-                return <FrameOptions {...props} />
-            case 'img':
-                return <ImgOptions {...props} />
-            case 'text':
-                return <TextOptions {...props} />
-            default:
-                return <></>
-        }
+    const resizeCanvas = () => {
+        setCanvas()
+        drawTemplate()
     }
+
 
     return (
         <section className="template-edit-container">
@@ -175,7 +149,7 @@ export const QuoteEdit = () => {
                 <div className="btns-container">
                     <button onClick={() => navigate(`/testimony/${location.state.storyId}`)}>
                         <div className="img-container">
-                            {/* <img src={backImg} alt="back" /> */}
+                            <img src={backImg} alt="back" />
                         </div>
                         חזרה לסיפור
                     </button>
@@ -190,7 +164,6 @@ export const QuoteEdit = () => {
                     </a>
                 </div>
 
-
                 <canvas ref={canvasRef}></canvas>
 
                 <div className="btns-container-2">
@@ -199,14 +172,18 @@ export const QuoteEdit = () => {
                 </div>
             </div>
 
-            <div className="tool-bar-container">
+            <section className="tool-bar-container">
+                <OptionsContainer options={selectedOption.subTypes} setOption={setSelectedOption}>
+                    <DynamicOptions
+                        selectedOption={selectedOption}
+                        options={selectedOption.subTypes || null}
+                        template={template}
+                        setTemplate={setTemplate}
+                    />
+                </OptionsContainer>
 
-                <SubOptions options={option.subTypes} setOption={setOption}>
-                    <DynamicOptions />
-                </SubOptions>
-
-                <Options setOption={setOption} chosenOption={option} />
-            </div>
+                <ToolBarOptions setOption={setSelectedOption} chosenOption={selectedOption} />
+            </section>
         </section>
     )
 }

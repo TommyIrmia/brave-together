@@ -43,11 +43,8 @@ export const StoryDetails = () => {
     const onToggleModal = () => {
         setIsModalOpen(!isModalOpen)
     }
-    console.log('isLoading', isLoading);
     if (isErr) return <div className="testimony-container">לא נמצא סיפור מתאים</div>
     if (isLoading || !story) return <div>Loading..</div>
-    console.log('story', story);
-    console.log('selectedTxt', selectedTxt);
     return (
         <section className="story-details-container" onClick={chooseText}>
             {/* Turn into subheader - cmp! */}
