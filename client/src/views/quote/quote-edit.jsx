@@ -11,7 +11,7 @@ import { usePrevious } from '../../hooks/usePrevious'
 import { SubOptions } from '../../cmps/templateEditCmps/sub-options'
 import { Share } from '../../cmps/share/share'
 
-// import backImg from '../assets/images/back.png'
+import backImg from '../../assets/images/templateEdit/utils/back.png'
 import downloadImg from '../../assets/images/templateEdit/utils/download.png'
 
 import { canvasService } from '../../services/canvas.service'
@@ -120,6 +120,7 @@ export const QuoteEdit = () => {
     const onDown = (ev) => {
         const pos = canvasService.getEvPos(ev);
         const elClicked = canvasService.isElClicked(pos, template)
+        console.log('pos', pos);
         if (!elClicked) return;
         dragRef.current = { isDrag: true, startPos: pos, elClicked };
         canvasRef.current.style.cursor = 'grabbing';
@@ -175,7 +176,7 @@ export const QuoteEdit = () => {
                 <div className="btns-container">
                     <button onClick={() => navigate(`/testimony/${location.state.storyId}`)}>
                         <div className="img-container">
-                            {/* <img src={backImg} alt="back" /> */}
+                            <img src={backImg} alt="back" />
                         </div>
                         חזרה לסיפור
                     </button>

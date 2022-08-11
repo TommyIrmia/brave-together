@@ -9,16 +9,6 @@ function getActionLoading(isLoading) {
     }
 }
 
-export function query() {
-    return async (dispatch) => {
-        const stories = await storyService.getStories()
-        dispatch({
-            type: SET_STORIES,
-            stories: stories
-        })
-    }
-}
-
 export function loadStoryById(storyId) {
     return async (dispatch) => {
         try {
@@ -34,6 +24,18 @@ export function loadStoryById(storyId) {
         }
     }
 }
+
+export function query() {
+    return async (dispatch) => {
+        const stories = await storyService.getStories()
+        dispatch({
+            type: SET_STORIES,
+            stories: stories
+        })
+    }
+}
+
+
 
 export function addStory(storyToAdd) {
     return async (dispatch) => {

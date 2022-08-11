@@ -1,7 +1,8 @@
 import React from 'react'
 import { ChosenSubOption } from './chosen-sub-option'
 
-import { photos, drawings, colors, patterns } from '../../consts/consts'
+import { photos, drawings, patterns } from '../../consts/imgs.consts'
+import {colors} from '../../consts/consts'
 
 
 export const BackgroundOptions = ({ setTemplate, template, options }) => {
@@ -30,7 +31,7 @@ export const BackgroundOptions = ({ setTemplate, template, options }) => {
                 return patterns.map(pattern =>
                 (<div key={pattern}
                     name="img" onClick={() => setBgc('img', pattern)}>
-                    <img src={require('../' + pattern).default} />
+                    <img src={pattern} />
                     <ChosenSubOption isChosen={template?.background.attr === pattern} />
                 </div>
                 ))
@@ -39,7 +40,7 @@ export const BackgroundOptions = ({ setTemplate, template, options }) => {
                 return drawings.map(drawing => (
                     <div key={drawing}
                         name="img" onClick={() => setBgc('img', drawing)}>
-                        <img src={require('../' + drawing).default} />
+                        <img src={drawing} />
                         <ChosenSubOption isChosen={template?.background.attr === drawing} />
                     </div>
                 ))
@@ -48,7 +49,7 @@ export const BackgroundOptions = ({ setTemplate, template, options }) => {
                 return photos.map(photo => (
                     <div key={photo}
                         name="img" onClick={() => setBgc('img', photo)} >
-                        <img src={require('../' + photo).default} />
+                        <img src={photo} />
                         <ChosenSubOption isChosen={template?.background.attr === photo} />
                     </div>
                 ))

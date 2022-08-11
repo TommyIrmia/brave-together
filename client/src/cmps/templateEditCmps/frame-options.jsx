@@ -1,7 +1,6 @@
 import React from 'react'
 import { ChosenSubOption } from './chosen-sub-option'
-import { frames } from '../../consts/consts'
-
+import { frames } from '../../consts/imgs.consts'
 
 export const FrameOptions = ({ template, setTemplate }) => {
 
@@ -11,6 +10,7 @@ export const FrameOptions = ({ template, setTemplate }) => {
             frame
         }))
     }
+
     return (
         <>
             <div className="no-frame-option" onClick={() => setFrame()}>
@@ -18,10 +18,10 @@ export const FrameOptions = ({ template, setTemplate }) => {
                 {!template.frame && <ChosenSubOption isChosen={true} />}
             </div>
             {
-                frames.map(frame => (
+                frames.map((frame, idx) => (
                     <div key={frame} className="frame-option"
                         onClick={() => setFrame(frame)}>
-                        <img alt="frame option" src={require('../' + frame).default} />
+                        <img alt="frame option" src={frame} />
                         <ChosenSubOption isChosen={template.frame === frame} />
                     </div>
                 ))

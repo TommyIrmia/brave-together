@@ -180,7 +180,7 @@ function drawBgcColor(canvas, ctx, color) {
 async function drawBgcImg(canvas, ctx, src) {
     return new Promise(res => {
         const imgToDraw = new Image()
-        imgToDraw.src = require('../' + src).default;
+        imgToDraw.src = src
         // imgToDraw.onload = () => {
         ctx.drawImage(imgToDraw, 0, 0, canvas.width, canvas.height)
         res()
@@ -193,7 +193,7 @@ async function drawImgs(ctx, imgs) {
         imgs.forEach((img, idx) => {
             const { src, pos, size } = img
             const imgToDraw = new Image()
-            imgToDraw.src = require('../' + src).default;
+            imgToDraw.src = src
             // imgToDraw.onload = () => {
             ctx.drawImage(imgToDraw, pos.x, pos.y, size, size)
             if (idx === imgs.length - 1) res()
@@ -204,10 +204,10 @@ async function drawImgs(ctx, imgs) {
 }
 
 async function drawFrame(canvas, ctx, src) {
+    console.log(src);
     return new Promise(res => {
         const imgToDraw = new Image()
-        imgToDraw.src = require('../' + src).default;
-        // imgToDraw.onload = () => {
+        imgToDraw.src = src
         ctx.drawImage(imgToDraw, -5, 0, canvas.width + 5, canvas.height)
         res()
         // }
