@@ -1,5 +1,6 @@
 import { quoteService } from '../../services/api/quote.service'
-import { storageService } from '../../services/async-local-storage.service'
+import { quoteActions } from '../../consts/store.consts'
+const { SET_QUOTES, SET_QUOTES_PAGE } = quoteActions
 
 export function selectQuote(quoteId) {
     return async (dispatch) => {
@@ -12,14 +13,17 @@ export function selectQuote(quoteId) {
     }
 }
 
-export function getQuotes() {
+export function getQuotes(filter) {
     return async (dispatch) => {
-        const quotes = await quoteService.getQuotes()
-        // const quotes = await geService.get('quote')
-        dispatch({
-            type: 'SET_QUOTES',
-            quotes
-        })
+        try {
+            const quotes = await quoteService.getQuotes(filter)
+            dispatch({
+                type: SET_QUOTES,
+                quotes
+            })
+        } catch (err) {
+            console.log('Error loading quotes from db', err);
+        }
     }
 }
 
@@ -52,6 +56,15 @@ export function updateQuote(quote) {
         dispatch({
             type: 'UPDATE_QUOTE',
             quote: updatedQuote
+        })
+    }
+}
+
+export function setFilterPage(page) {
+    return async (dispatch) => {
+        dispatch({
+            type: SET_QUOTES_PAGE,
+            page
         })
     }
 }

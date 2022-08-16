@@ -3,30 +3,28 @@ import { quoteService } from '../../services/api/quote.service'
 import { QuoteList } from '../../cmps/quote/quote-list'
 import { QuoteFilter } from '../../cmps/quote/quote-filter'
 import { QuotePaging } from '../../cmps/quote/quote-paging'
+import { Share } from '../../cmps/share/share'
+import { getQuotes, setFilterPage } from '../../store/quote/quote.action'
+import { useDispatch, useSelector } from 'react-redux'
 
 export const QuoteApp = () => {
-  const [quotes, setQuotes] = useState()
-  const [page, setPage] = useState(1)
-  const [quotesToDisplay, setQuotesToDisplay] = useState()
+  const dispatch = useDispatch()
+  const { quotes, filterBy } = useSelector((storeState) => storeState.quoteModule)
   useEffect(() => {
-    getQuotes()
-  }, [])
+    dispatch(getQuotes(filterBy))
+  }, [filterBy])
 
-  const getQuotes = async () => {
-    const quotesFromDb = await quoteService.getQuotes()
-    setQuotes(quotesFromDb)
-    setQuotesToDisplay(quotesFromDb)
-  }
-
-  const moveToPage = (diff) => {
-    setPage((prevState) => prevState + diff)
+  const setPage = (page) => {
+    // console.log(page)
+    dispatch(setFilterPage(page))
   }
 
   return (
     <div>
-      <QuoteFilter quotes={quotes} setFilteredQuotes={setQuotesToDisplay} />
-      <QuoteList quotes={quotesToDisplay} />
-      {quotes && <QuotePaging moveToPage={moveToPage} numOfQuotes={quotes.length} currentPage={page} />}
+      {/* <QuoteFilter quotes={quotes} /> */}
+      <QuoteList quotes={quotes} />
+      {/* <Share /> */}
+      {quotes && <QuotePaging numOfItems={quotes.length} setPage={setPage} currentPage={filterBy.page} />}
     </div>
   )
 }
