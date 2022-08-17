@@ -126,7 +126,7 @@ export const CanvasContainer = ({ canvasRef, ctxRef, onUpdateQuote, onToggleShar
                     </div>
                     שמור
                 </button>
-                <span></span>
+                <span>asdasd</span>
             </a>
         </div>
 
