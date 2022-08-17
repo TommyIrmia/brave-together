@@ -10,7 +10,6 @@
 @import "basics/base.scss";
 @import "basics/buttons.scss";
 
-
 //VIEWS
 // general
 @import "./views/about";
@@ -23,12 +22,10 @@
 @import "./views/story-upload";
 
 // quote
-@import "./views/template-edit2";
+@import "./views/quote/quote-edit";
 
 // cmps
 @import "./cmps/back-button";
 @import "./cmps/footer";
 @import "./cmps/header";
 @import "./cmps/selected-quotes";
-
-

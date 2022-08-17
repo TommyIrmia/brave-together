@@ -1,6 +1,6 @@
 import { storageService } from './storage.service'
 export const canvasService = {
-    getTemplate,
+    // getTemplate,
     drawText,
     drawBgcColor,
     drawBgcImg,
@@ -27,12 +27,12 @@ const QUOTE = "\""
 
 //GETTERS
 
-function getTemplate(txt) {
-    let template = storageService.getTempFromStorage();
-    if (!template || template.txt?.content !== txt) template = _getEmptyTemplate(txt)
-    storageService.saveTempToStorage(template)
-    return template
-}
+// function getTemplate(txt) {
+//     let template = storageService.getTempFromStorage();
+//     if (!template || template.txt?.content !== txt) template = _getEmptyTemplate(txt)
+//     storageService.saveTempToStorage(template)
+//     return template
+// }
 
 function getEvPos(ev) {
     let pos = {
@@ -277,19 +277,5 @@ function _getImgClicked(imgs, clickedPos) {
     })
 }
 
-function _getEmptyTemplate(content) {
-    return {
-        background: { type: 'color', attr: '#ffffff' },//'images/111-02.svg',
-        imgs: [],
-        frame: '',
-        txt: {
-            content,
-            fontSize: 16,
-            fontFamily: 'Arial, Helvetica, sans-serif',
-            fontColor: '#000000',
-            pos: { x: 50, y: 150 }
-        }
-    }
-}
 
 

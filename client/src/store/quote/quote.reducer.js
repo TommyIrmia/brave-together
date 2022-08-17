@@ -1,28 +1,29 @@
+import { storageService } from "../../services/storage.service"
+
+console.log('storageService.getQuoteFromStorage()', storageService.getQuoteFromStorage())
+
 const initialState = {
-    quote: null,
+    quote: storageService.getQuoteFromStorage() || null,
     quotes: []
 }
 export function quoteReducer(state = initialState, action) {
-    var newState = state;
+    var quotes
     switch (action.type) {
         case 'SET_QUOTE':
-            newState = { ...state, quote: action.quote }
-            break;
+            return { ...state, quote: action.quote }
         case 'SET_QUOTES':
-            newState = { ...state, quotes: action.quotes }
-            break;
+            return { ...state, quotes: action.quotes }
         case 'ADD_QUOTE':
-            newState = { ...state, quotes: [...state.quotes, action.quote] }
-            break;
+            return { ...state, quotes: [...state.quotes, action.quote] }
         case 'UPDATE_QUOTE':
-            newState = { ...state, quotes: state.quotes.map(quote => quote._id === action.quote.id ? action.quote : quote) }
-            break;
+            quotes = state.quotes.map(quote => quote._id === action.quote.id ? action.quote : quote)
+            return { ...state, quotes }
         case 'REMOVE_QUOTE':
-            newState = { ...state, quotes: state.quotes.filter(quote => quote._id !== action.quoteId) }
-            break;
+            quotes = state.quotes.filter(quote => quote._id !== action.quoteId)
+            return { ...state, quotes }
         default:
+            return state
     }
 
-    return newState;
 
 }

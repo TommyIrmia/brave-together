@@ -1,10 +1,25 @@
 import { quoteService } from '../../services/api/quote.service'
-import { storageService } from '../../services/async-local-storage.service'
+import { storageService } from '../../services/storage.service'
 
-export function selectQuote(quoteId) {
+export function selectQuoteToEdit({ quoteId, txt }) {
     return async (dispatch) => {
-        const quote = await quoteService.getById(quoteId)
-        // const quote = await storageService.get('quote',quoteId)
+        try {
+            const quote = quoteId ? await quoteService.getById(quoteId) : quoteService.getEmptyQuote(txt)
+            console.log('quote', quote)
+            storageService.saveQuoteToStorage(quote)
+            dispatch({
+                type: 'SET_QUOTE',
+                quote
+            })
+        } catch (err) {
+            console.log('err from select quote', err)
+        }
+    }
+}
+
+export function updateQuoteToEdit(quote) {
+    return (dispatch) => {
+        storageService.saveQuoteToStorage(quote)
         dispatch({
             type: 'SET_QUOTE',
             quote

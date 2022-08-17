@@ -5,8 +5,8 @@ import { ImgOptions } from './img-options'
 import { TextOptions } from './text-options'
 
 
-export const DynamicOptions = (props) => {
-    switch (props.selectedOption.type) {
+export const DynamicOptions = ({ selectedOption, ...props }) => {
+    switch (selectedOption.type) {
         case 'background':
             return <BackgroundOptions {...props} />
         case 'frame':
