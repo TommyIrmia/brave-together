@@ -16,10 +16,10 @@ export function selectQuote(quoteId) {
 export function getQuotes(filter) {
     return async (dispatch) => {
         try {
-            const quotes = await quoteService.getQuotes(filter)
+            const quotesInfo = await quoteService.getQuotes(filter)
             dispatch({
                 type: SET_QUOTES,
-                quotes
+                quotesInfo
             })
         } catch (err) {
             console.log('Error loading quotes from db', err);

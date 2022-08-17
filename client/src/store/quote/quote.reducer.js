@@ -1,9 +1,11 @@
 const initialState = {
     quote: null,
     quotes: [],
+    totalQuotesCount: null,
     filterBy: {
         text: '',
-        page: 1
+        page: 1,
+        quotesPerPage: 3
     }
 }
 export function quoteReducer(state = initialState, action) {
@@ -13,7 +15,7 @@ export function quoteReducer(state = initialState, action) {
             newState = { ...state, quote: action.quote }
             break;
         case 'SET_QUOTES':
-            newState = { ...state, quotes: action.quotes }
+            newState = { ...state, quotes: action.quotesInfo.quotesToDisplay, totalQuotesCount: action.quotesInfo.totalQuotesCount }
             break;
         case 'SET_QUOTES_PAGE':
             newState = { ...state, filterBy: { ...state.filterBy, page: action.page } }
