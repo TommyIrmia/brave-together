@@ -126,26 +126,14 @@ export const CanvasContainer = ({ canvasRef, ctxRef, onUpdateQuote, onToggleShar
                     </div>
                     שמור
                 </button>
-            </a >
-        </div >
-
+            </a>
+        </div>
+        
         <span>
-            Everything here is your local code!
-            The code I worked on and commited the changes to git
+            Everything here is the merged code -
+            the code that came from the remote repository -
+            which we pulled into our own code
         </span>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         <canvas ref={canvasRef}></canvas>
 
@@ -153,5 +141,5 @@ export const CanvasContainer = ({ canvasRef, ctxRef, onUpdateQuote, onToggleShar
             <button className="more-btn">לעיצובים נוספים</button>
             <button className="share-btn" onClick={onToggleShareModal}>שתף</button>
         </div>
-    </div >
+    </div>
 }
