@@ -52,6 +52,7 @@
   },
   "devDependencies": {
     "install": "^0.13.0",
-    "npm": "^8.3.0"
+    "npm": "^8.3.0",
+    "sass": "^1.52.1"
   }
 }

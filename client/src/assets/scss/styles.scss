@@ -6,9 +6,9 @@
 @import "setup/typography.scss";
 
 // basics
-@import "basics/helpers.scss";
-@import "basics/base.scss";
-@import "basics/buttons.scss";
+@import "./basics/helpers";
+@import "./basics/base";
+@import "./basics/buttons";
 
 //VIEWS
 // general
@@ -29,3 +29,20 @@
 @import "./cmps/footer";
 @import "./cmps/header";
 @import "./cmps/selected-quotes";
+
+
+
+@import "./views/about";
+@import "./views/homepage";
+@import "./views/share";
+@import "./views/story-check";
+@import "./views/story-upload";
+
+//QUOTE
+@import "./cmps/quote/quote-preview";
+@import "./cmps/quote/quote-list";
+@import "./cmps/quote/quote-tags";
+@import "./cmps/quote/quote-toolbar";
+@import "./cmps/quote/quote-filter";
+@import "./cmps/quote/paging/paging";
+

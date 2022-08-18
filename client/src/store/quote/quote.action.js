@@ -1,5 +1,10 @@
 import { quoteService } from '../../services/api/quote.service'
+
 import { storageService } from '../../services/storage.service'
+
+import { quoteActions } from '../../consts/store.consts'
+const { SET_QUOTES, SET_QUOTES_PAGE, TOGGLE_SHARING } = quoteActions
+
 
 export function selectQuoteToEdit({ quoteId, txt }) {
     return async (dispatch) => {
@@ -27,13 +32,24 @@ export function updateQuoteToEdit(quote) {
     }
 }
 
-export function getQuotes() {
+export function getQuotes(filter) {
     return async (dispatch) => {
-        const quotes = await quoteService.getQuotes()
-        // const quotes = await geService.get('quote')
+        try {
+            const quotesInfo = await quoteService.getQuotes(filter)
+            dispatch({
+                type: SET_QUOTES,
+                quotesInfo
+            })
+        } catch (err) {
+            console.log('Error loading quotes from db', err);
+        }
+    }
+}
+
+export function toggleSharing() {
+    return (dispatch) => {
         dispatch({
-            type: 'SET_QUOTES',
-            quotes
+            type: TOGGLE_SHARING,
         })
     }
 }
@@ -67,6 +83,15 @@ export function updateQuote(quote) {
         dispatch({
             type: 'UPDATE_QUOTE',
             quote: updatedQuote
+        })
+    }
+}
+
+export function setFilterPage(page) {
+    return async (dispatch) => {
+        dispatch({
+            type: SET_QUOTES_PAGE,
+            page
         })
     }
 }
