@@ -9,6 +9,7 @@ function getActionLoading(isLoading) {
     }
 }
 
+
 export function query(filterBy) {
     return async (dispatch) => {
         const stories = await storyService.getStories(filterBy)
@@ -32,6 +33,7 @@ export function setFilterBy(key, value) {
 }
 
 
+
 export function loadStoryById(storyId) {
     return async (dispatch) => {
         try {
@@ -47,6 +49,7 @@ export function loadStoryById(storyId) {
         }
     }
 }
+
 
 export function addStory(storyToAdd) {
     return async (dispatch) => {

@@ -4,7 +4,6 @@
 .template-edit-container {
   direction: rtl;
   height: 100vh;
-  padding-top: 56px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -20,7 +19,7 @@
 
   .canvas-container {
     width: 100%;
-    height: calc(100vh - 216px);
+    height: calc(100vh - 226px);
     background: gray;
     cursor: grab;
     position: relative;

@@ -11,4 +11,5 @@ export const useEffectUpdate = (cb, dependencies) => {
         }
         cb()
     }, dependencies)
+
 }
