@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 export const QuoteApp = () => {
   const dispatch = useDispatch()
-  const { quotes, filterBy, totalQuotesCount } = useSelector((storeState) => storeState.quoteModule)
+  const { quotes, filterBy, totalQuotesCount, isSharing } = useSelector((storeState) => storeState.quoteModule)
   useEffect(() => {
     dispatch(getQuotes(filterBy))
   }, [filterBy])
@@ -23,7 +23,7 @@ export const QuoteApp = () => {
     <div>
       {/* <QuoteFilter quotes={quotes} /> */}
       <QuoteList quotes={quotes} />
-      {/* <Share /> */}
+      <Share isOpen={isSharing} />
       {quotes && <Pagination numOfItems={totalQuotesCount} itemsPerPage={filterBy.quotesPerPage} setPage={setPage} currentPage={filterBy.page} />}
     </div>
   )

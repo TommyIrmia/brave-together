@@ -1,11 +1,18 @@
-import { useState } from 'react'
 import bookmark from '../../assets/images/quote-toolbar/bookmark-ico.svg'
 import edit from '../../assets/images/quote-toolbar/edit-ico.svg'
 import share from '../../assets/images/quote-toolbar/share-ico.svg'
-import { Share } from '../share/share'
+
+import { toggleSharing } from '../../store/quote/quote.action'
+
+import { useDispatch } from 'react-redux'
 
 export const QuoteToolBar = () => {
-  const [isSharing, setIsSharing] = useState(false)
+  const dispatch = useDispatch()
+
+  const onToggleSharing = () => {
+    dispatch(toggleSharing())
+  }
+
   return (
     <section className="quote-toolbar">
       <div className="icons-container">
@@ -14,10 +21,9 @@ export const QuoteToolBar = () => {
           <img src={edit} alt="" />
         </div>
         <div className="right-side">
-          <img src={share} alt="" onClick={() => setIsSharing(!isSharing)} />
+          <img onClick={() => onToggleSharing()} src={share} alt="" />
         </div>
       </div>
-      {/* {isSharing && <Share />} */}
     </section>
   )
 }

@@ -2,6 +2,7 @@ const initialState = {
     quote: null,
     quotes: [],
     totalQuotesCount: null,
+    isSharing: false,
     filterBy: {
         text: '',
         page: 1,
@@ -19,6 +20,9 @@ export function quoteReducer(state = initialState, action) {
             break;
         case 'SET_QUOTES_PAGE':
             newState = { ...state, filterBy: { ...state.filterBy, page: action.page } }
+            break;
+        case 'TOGGLE_SHARING':
+            newState = { ...state, isSharing: !state.isSharing }
             break;
         case 'ADD_QUOTE':
             newState = { ...state, quotes: [...state.quotes, action.quote] }

@@ -1,6 +1,6 @@
 import { quoteService } from '../../services/api/quote.service'
 import { quoteActions } from '../../consts/store.consts'
-const { SET_QUOTES, SET_QUOTES_PAGE } = quoteActions
+const { SET_QUOTES, SET_QUOTES_PAGE, TOGGLE_SHARING } = quoteActions
 
 export function selectQuote(quoteId) {
     return async (dispatch) => {
@@ -24,6 +24,14 @@ export function getQuotes(filter) {
         } catch (err) {
             console.log('Error loading quotes from db', err);
         }
+    }
+}
+
+export function toggleSharing() {
+    return (dispatch) => {
+        dispatch({
+            type: TOGGLE_SHARING,
+        })
     }
 }
 

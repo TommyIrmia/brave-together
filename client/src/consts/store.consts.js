@@ -11,4 +11,5 @@ export const storyActions = {
 export const quoteActions = {
     SET_QUOTES: 'SET_QUOTES',
     SET_QUOTES_PAGE: 'SET_QUOTES_PAGE',
+    TOGGLE_SHARING: 'TOGGLE_SHARING'
 }
