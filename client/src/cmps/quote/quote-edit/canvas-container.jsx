@@ -128,11 +128,6 @@ export const CanvasContainer = ({ canvasRef, ctxRef, onUpdateQuote, onToggleShar
                 </button>
             </a>
         </div>
-        
-        <span>
-            Everything here is the local code,
-            changes I made! and commited to git
-        </span>
 
 
         <canvas ref={canvasRef}></canvas>
