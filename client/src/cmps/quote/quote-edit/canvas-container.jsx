@@ -126,21 +126,13 @@ export const CanvasContainer = ({ canvasRef, ctxRef, onUpdateQuote, onToggleShar
                     </div>
                     שמור
                 </button>
-
-
-
-
-
-
-
-
             </a >
         </div >
+
         <span>
             Everything here is your local code!
             The code I worked on and commited the changes to git
         </span>
-
 
 
 
