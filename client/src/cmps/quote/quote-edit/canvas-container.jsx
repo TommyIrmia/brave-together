@@ -130,9 +130,11 @@ export const CanvasContainer = ({ canvasRef, ctxRef, onUpdateQuote, onToggleShar
         </div>
         
         <span>
+
             Everything here is the merged code -
             the code that came from the remote repository -
             which we pulled into our own code
+            
         </span>
 
 
