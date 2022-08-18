@@ -20,7 +20,7 @@ export const CanvasContainer = ({ canvasRef, ctxRef, onUpdateQuote, onToggleShar
     const containerRef = useRef(null)
     const dragRef = useRef({ isDrag: false, startPos: null, elClicked: null })
     const downloadRef = useRef(null)
-    
+
 
     useEffect(() => {
         if (!quote || !canvasRef.current) return
@@ -126,7 +126,9 @@ export const CanvasContainer = ({ canvasRef, ctxRef, onUpdateQuote, onToggleShar
                     </div>
                     שמור
                 </button>
-                <span>asdasd</span>
+                <span>Everything here is the merged code -
+                    the code that came from the remote repository -
+                    which we pulled into our own code</span>
             </a>
         </div>
 
