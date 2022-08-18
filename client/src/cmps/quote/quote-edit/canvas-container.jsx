@@ -135,6 +135,7 @@ export const CanvasContainer = ({ canvasRef, ctxRef, onUpdateQuote, onToggleShar
             which we pulled into our own code
         </span>
 
+
         <canvas ref={canvasRef}></canvas>
 
         <div className="btns-container-2">
