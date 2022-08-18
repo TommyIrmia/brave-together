@@ -1,6 +1,35 @@
-import React from 'react'
+import { useEffect } from 'react'
+import { useState } from 'react'
 
+export const QuoteFilter = ({ quotes, setFilteredQuotes }) => {
+  const [filterBy, setFilterBy] = useState('')
 
-export const QuoteFilter = () => {
-    return <div> quote filter</div>
+  useEffect(() => {
+    if (!quotes) return
+    filterQuotes()
+  }, [filterBy])
+
+  const handleChange = (ev) => {
+    const value = ev.target.value
+    setFilterBy(value)
+  }
+
+  const filterQuotes = () => {
+    const filteredQuotes = quotes.filter((quote) => {
+      const { story, txt } = quote
+      if (story.title.includes(filterBy) || story.heroName.includes(filterBy) || txt.content.includes(filterBy)) {
+        return quote
+      }
+    })
+
+    setFilteredQuotes(filteredQuotes)
+  }
+
+  return (
+    <section className="quote-filter">
+      <form onSubmit={filterQuotes}>
+        <input type="text" placeholder="חיפוש לפי שם סיפור, גיבור/ה, מדינה" value={filterBy} onChange={handleChange} />
+      </form>
+    </section>
+  )
 }

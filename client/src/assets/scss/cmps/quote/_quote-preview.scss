@@ -1,0 +1,21 @@
+.quote-preview {
+    border-radius: 4px;
+    height: 340px;
+    line-height: 27px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 1px 1px 5px 1px #d9d9d9;
+    
+    .quote-content {
+        padding-inline: 30px;
+        padding-top: 40px;
+        p {
+            text-align: center;
+        }
+    }
+
+    .hero-name {
+        font-weight: 700;
+    }
+}

@@ -10,8 +10,8 @@ export const quoteService = {
   remove,
 }
 
-async function getQuotes() {
-  return await httpService.get(`quote`)
+async function getQuotes(filter) {
+  return await httpService.get(`quote`, filter)
 }
 
 async function getById(quoteId) {
