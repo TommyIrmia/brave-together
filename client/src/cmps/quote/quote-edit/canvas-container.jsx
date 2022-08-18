@@ -20,7 +20,7 @@ export const CanvasContainer = ({ canvasRef, ctxRef, onUpdateQuote, onToggleShar
     const containerRef = useRef(null)
     const dragRef = useRef({ isDrag: false, startPos: null, elClicked: null })
     const downloadRef = useRef(null)
-    
+
 
     useEffect(() => {
         if (!quote || !canvasRef.current) return
@@ -126,9 +126,9 @@ export const CanvasContainer = ({ canvasRef, ctxRef, onUpdateQuote, onToggleShar
                     </div>
                     שמור
                 </button>
-                <span>1111</span>
-            </a>
-        </div>
+            </a >
+        </div >
+        <span>aaaa</span>
 
         <canvas ref={canvasRef}></canvas>
 
@@ -136,5 +136,5 @@ export const CanvasContainer = ({ canvasRef, ctxRef, onUpdateQuote, onToggleShar
             <button className="more-btn">לעיצובים נוספים</button>
             <button className="share-btn" onClick={onToggleShareModal}>שתף</button>
         </div>
-    </div>
+    </div >
 }
