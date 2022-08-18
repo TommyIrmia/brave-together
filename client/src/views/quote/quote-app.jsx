@@ -1,17 +1,30 @@
-import React from 'react'
-import { useDispatch } from 'react-redux'
-import { useEffect } from 'react'
-// import { login } from '../../store/user/user.action'
-// import { query } from '../../store/story/story.action'
+import { useEffect, useState } from 'react'
+import { quoteService } from '../../services/api/quote.service'
+import { QuoteList } from '../../cmps/quote/quote-list'
+import { QuoteFilter } from '../../cmps/quote/quote-filter'
+import { Pagination } from '../../cmps/quote/pagination'
+import { Share } from '../../cmps/share/share'
+import { getQuotes, setFilterPage } from '../../store/quote/quote.action'
+import { useDispatch, useSelector } from 'react-redux'
 
 export const QuoteApp = () => {
-    const dispatch = useDispatch()
-    useEffect(() => {
-        // dispatch(login({ hello: 'world' }))
-        // dispatch(query())
+  const dispatch = useDispatch()
+  const { quotes, filterBy, totalQuotesCount, isSharing } = useSelector((storeState) => storeState.quoteModule)
+  useEffect(() => {
+    dispatch(getQuotes(filterBy))
+  }, [filterBy])
 
-    })
-    return (
-        <div>QuoteApp</div>
-    )
+  const setPage = (page) => {
+    // console.log(page)
+    dispatch(setFilterPage(page))
+  }
+
+  return (
+    <div>
+      {/* <QuoteFilter quotes={quotes} /> */}
+      <QuoteList quotes={quotes} />
+      <Share isOpen={isSharing} />
+      {quotes && <Pagination numOfItems={totalQuotesCount} itemsPerPage={filterBy.quotesPerPage} setPage={setPage} currentPage={filterBy.page} />}
+    </div>
+  )
 }

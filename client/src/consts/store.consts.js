@@ -8,3 +8,8 @@ export const storyActions = {
     SET_IS_LOADING: 'SET_IS_LOADING',
     REMOVE_STORY: 'REMOVE_STORY'
 }
+export const quoteActions = {
+    SET_QUOTES: 'SET_QUOTES',
+    SET_QUOTES_PAGE: 'SET_QUOTES_PAGE',
+    TOGGLE_SHARING: 'TOGGLE_SHARING'
+}

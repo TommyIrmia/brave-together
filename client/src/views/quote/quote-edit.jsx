@@ -10,7 +10,6 @@ import { defaultToolbarOptions } from '../../consts/consts'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateQuoteToEdit } from '../../store/quote/quote.action'
 
-
 export const QuoteEdit = () => {
 
     const { quote } = useSelector(globalState => globalState.quoteModule)
@@ -61,4 +60,5 @@ export const QuoteEdit = () => {
             </section>
         </section>
     )
+
 }
