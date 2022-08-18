@@ -1,22 +1,26 @@
 import { useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { StoryList } from '../../cmps/story/story-list'
 import { StoryFilter } from '../../cmps/story/story-filter'
 import { query } from '../../store/story/story.action'
+import { queryParamsService } from '../../services/query-params.service'
 
 export const StoryApp = () => {
     const dispatch = useDispatch()
+    const [searchParams, setSearchParams] = useSearchParams()
     const { stories } = useSelector(state => state.storyModule)
-    const { filterBy } = useSelector(state => state.storyModule)
+
     useEffect(() => {
+        //TODO: transfer to service
+
+        const filterBy = queryParamsService.getQueryParams(searchParams)
+        //
         dispatch(query(filterBy))
-    }, [filterBy])
+    }, [searchParams])
 
-
-
-    console.log(stories);
     return <div className="story-app main-layout">
-        <StoryFilter />
+        <StoryFilter setSearchParams={setSearchParams} />
         <StoryList stories={stories} />
     </div>
 }

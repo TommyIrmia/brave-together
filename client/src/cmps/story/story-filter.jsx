@@ -1,22 +1,36 @@
-import React from 'react'
+import { useParams, useSearchParams } from 'react-router-dom';
+import { useEffectUpdate } from '../../hooks/useEffectUpdate'
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BsSearch } from "react-icons/bs";
 import { storyConsts } from '../../consts/story-consts';
-import { setFilterByTxt } from '../../store/story/story.action';
-import { setFilterByTags } from '../../store/story/story.action';
+import { setFilterBy } from '../../store/story/story.action';
+import { queryParamsService } from '../../services/query-params.service';
 
 
-export const StoryFilter = () => {
+export const StoryFilter = ({ setSearchParams }) => {
     const dispatch = useDispatch()
     const { tags } = useSelector(state => state.storyModule.filterBy)
-    const handleChange = (event) => {
-        dispatch(setFilterByTxt(event.target.value))
+    const { filterBy } = useSelector(state => state.storyModule)
+
+
+    useEffect(() => {
+        //TODO: transfer to service
+        let filterToQuery = { ...filterBy }
+        filterToQuery.tags = filterToQuery.tags.join(',')
+        const queryParams = queryParamsService.getQueryParamsToFilter(filterToQuery)
+        setSearchParams(queryParams)
+    }, [filterBy])
+
+    const handleChange = ({ target: { value } }) => {
+        // dispatch(setFilterByTxt(event.target.value))
+        dispatch(setFilterBy('txt', value))
     }
     const isTagSelected = (tag) => {
         return tags.includes(tag)
     }
-
     const onToggleSelectTag = (tag) => {
+
         let selectedTags
         if (isTagSelected(tag)) {
             selectedTags = tags.filter(currTag => currTag !== tag)
@@ -24,9 +38,12 @@ export const StoryFilter = () => {
             selectedTags = [...tags, tag]
         }
 
-        dispatch(setFilterByTags(selectedTags))
+        dispatch(setFilterBy('tags', selectedTags))
+
+
+
+
     }
-    console.log(tags);
     return <div className="story-filter main-layout">
 
         <div className="input-container">
@@ -38,7 +55,7 @@ export const StoryFilter = () => {
             <div className="tag-list">
 
                 {storyConsts.tags.map(tag => {
-                    return <div className={'tag ' + (isTagSelected(tag) ? 'selected' : '')} key={tag} >
+                    return <div className={'tag' + (isTagSelected(tag) ? ' selected' : '')} key={tag} >
                         <p onClick={() => onToggleSelectTag(tag)}>
                             {tag}
                         </p>

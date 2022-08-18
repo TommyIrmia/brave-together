@@ -89,7 +89,6 @@ function _buildCriteria(filterBy) {
     }
 
     if (filterBy.byUserId) criteria.byUserId = filterBy.byUserId
-    console.log("🔥 ~ _buildCriteria ~ criteria", criteria)
     return criteria
 }
 
