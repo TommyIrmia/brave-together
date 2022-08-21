@@ -23,7 +23,7 @@ export const QuotePreview = ({ quote }) => {
       </div>
       <section className="quote-footer">
         <QuoteTags tags={tags} />
-        <QuoteToolBar />
+        <QuoteToolBar quoteId={quote._id} />
       </section>
     </div>
   )
