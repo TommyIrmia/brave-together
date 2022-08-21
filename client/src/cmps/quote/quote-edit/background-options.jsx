@@ -2,17 +2,19 @@ import React from 'react'
 
 import { photos, drawings, patterns } from '../../../consts/imgs.consts'
 import { colors } from '../../../consts/consts'
+
 import { OptionPreview } from './option-preview'
 
 
-export const BackgroundOptions = ({ setTemplate, template, options }) => {
+export const BackgroundOptions = ({ onUpdateQuote, quote, options }) => {
 
     const setBgc = (type, attr) => {
-        setTemplate((prevTemplate) =>
-        ({
-            ...prevTemplate,
+        const quoteToUpdate = {
+            ...quote,
             background: { type, attr }
-        }))
+        }
+        console.log(quoteToUpdate);
+        onUpdateQuote(quoteToUpdate)
     }
 
     const chosenOption = options.find((option) => option.isChosen)
@@ -24,7 +26,7 @@ export const BackgroundOptions = ({ setTemplate, template, options }) => {
                     key={color}
                     style={{ backgroundColor: color }}
                     onSetOption={() => setBgc('color', color)}
-                    isChosen={template?.background.attr === color}
+                    isChosen={quote?.background.attr === color}
                 />
             ))
 
@@ -34,7 +36,7 @@ export const BackgroundOptions = ({ setTemplate, template, options }) => {
                     key={pattern}
                     imgSrc={pattern}
                     onSetOption={() => setBgc('img', pattern)}
-                    isChosen={template?.background.attr === pattern}
+                    isChosen={quote?.background.attr === pattern}
                 />
             ))
 
@@ -44,7 +46,7 @@ export const BackgroundOptions = ({ setTemplate, template, options }) => {
                     key={drawing}
                     imgSrc={drawing}
                     onSetOption={() => setBgc('img', drawing)}
-                    isChosen={template?.background.attr === drawing}
+                    isChosen={quote?.background.attr === drawing}
                 />
             ))
 
@@ -54,7 +56,7 @@ export const BackgroundOptions = ({ setTemplate, template, options }) => {
                     key={photo}
                     imgSrc={photo}
                     onSetOption={() => setBgc('img', photo)}
-                    isChosen={template?.background.attr === photo}
+                    isChosen={quote?.background.attr === photo}
                 />
             ))
     }

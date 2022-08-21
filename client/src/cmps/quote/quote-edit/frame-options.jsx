@@ -2,20 +2,21 @@ import React from 'react'
 import { frames } from '../../../consts/imgs.consts'
 import { OptionPreview } from './option-preview'
 
-export const FrameOptions = ({ template, setTemplate }) => {
+export const FrameOptions = ({ quote, onUpdateQuote }) => {
 
     const setFrame = (frame) => {
-        setTemplate((prevTemplate) => ({
-            ...prevTemplate,
+        const quoteToUpdate = {
+            ...quote,
             frame
-        }))
+        }
+        onUpdateQuote(quoteToUpdate)
     }
 
     return (
         <>
             <div className="no-frame-option" onClick={() => setFrame()}>
                 ללא
-                {!template.frame && <div className="chosen-sub-option"></div>}
+                {!quote.frame && <div className="chosen-sub-option"></div>}
             </div>
             {
                 frames.map((frame, idx) => (
@@ -24,7 +25,7 @@ export const FrameOptions = ({ template, setTemplate }) => {
                         className="frame-option"
                         onSetOption={() => setFrame(frame)}
                         imgSrc={frame}
-                        isChosen={template.frame === frame}
+                        isChosen={quote.frame === frame}
                     />
                 ))
             }

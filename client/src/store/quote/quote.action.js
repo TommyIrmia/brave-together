@@ -1,11 +1,30 @@
 import { quoteService } from '../../services/api/quote.service'
+
+import { storageService } from '../../services/storage.service'
+
 import { quoteActions } from '../../consts/store.consts'
 const { SET_QUOTES, SET_QUOTES_PAGE, TOGGLE_SHARING } = quoteActions
 
-export function selectQuote(quoteId) {
+
+export function selectQuoteToEdit({ quoteId, txt }) {
     return async (dispatch) => {
-        const quote = await quoteService.getById(quoteId)
-        // const quote = await storageService.get('quote',quoteId)
+        try {
+            const quote = quoteId ? await quoteService.getById(quoteId) : quoteService.getEmptyQuote(txt)
+            console.log('quote', quote)
+            storageService.saveQuoteToStorage(quote)
+            dispatch({
+                type: 'SET_QUOTE',
+                quote
+            })
+        } catch (err) {
+            console.log('err from select quote', err)
+        }
+    }
+}
+
+export function updateQuoteToEdit(quote) {
+    return (dispatch) => {
+        storageService.saveQuoteToStorage(quote)
         dispatch({
             type: 'SET_QUOTE',
             quote

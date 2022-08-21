@@ -57,7 +57,7 @@ const txtSizes = [
 
 
 
-const options = [
+const defaultToolbarOptions = [
     {
         type: 'text',
         subTypes: [
@@ -94,6 +94,6 @@ export {
     colors,
     fonts,
     txtSizes,
-    options,
+    defaultToolbarOptions ,
     navLinks
 }

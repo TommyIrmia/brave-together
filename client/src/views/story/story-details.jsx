@@ -3,15 +3,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { loadStoryById } from '../../store/story/story.action'
-
-import defaultImg from '../../assets/images/default.png'
-import vectorTop1 from '../../assets/images/vectortop1.png'
-import vectorTop2 from '../../assets/images/vectortop2.png'
-import vectorBottom from '../../assets/images/vectorbottom.png'
-import pen from '../../assets/images/pen.png'
-import calendar from '../../assets/images/calendar.png'
+import { selectQuoteToEdit } from '../../store/quote/quote.action';
 
 import { SelectedQuotes } from '../../cmps/quote/selected-quotes';
+
+import { storyDetailsImgs } from '../../consts/imgs.consts'
+const { defaultImg, vectorTop1, vectorTop2, vectorBottom, pen, calendar } = storyDetailsImgs
+
 
 export const StoryDetails = () => {
     const { story, isLoading } = useSelector((globalState) => globalState.storyModule)
@@ -31,7 +29,8 @@ export const StoryDetails = () => {
 
     const onQuoteTxt = () => {
         if (!selectedTxt) return
-        navigate('/quote/edit', { state: { txt: selectedTxt } })
+        dispatch(selectQuoteToEdit({ txt: selectedTxt }))
+        navigate('/quote/edit')
     }
 
     const chooseText = (ev) => {

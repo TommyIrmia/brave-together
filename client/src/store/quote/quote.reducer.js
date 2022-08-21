@@ -1,6 +1,10 @@
+import { storageService } from "../../services/storage.service"
+
+console.log('storageService.getQuoteFromStorage()', storageService.getQuoteFromStorage())
+
 const initialState = {
-    quote: null,
-    quotes: [],
+    quote: storageService.getQuoteFromStorage() || null,
+    quotes: []
     totalQuotesCount: null,
     isSharing: false,
     filterBy: {
@@ -8,33 +12,28 @@ const initialState = {
         page: 1,
         quotesPerPage: 3
     }
+
 }
 export function quoteReducer(state = initialState, action) {
-    var newState = state;
+    var quotes
     switch (action.type) {
         case 'SET_QUOTE':
-            newState = { ...state, quote: action.quote }
-            break;
+            return { ...state, quote: action.quote }
         case 'SET_QUOTES':
-            newState = { ...state, quotes: action.quotesInfo.quotesToDisplay, totalQuotesCount: action.quotesInfo.totalQuotesCount }
-            break;
+            return { ...state, quotes: action.quotes }
         case 'SET_QUOTES_PAGE':
-            newState = { ...state, filterBy: { ...state.filterBy, page: action.page } }
-            break;
+            return { ...state, filterBy: { ...state.filterBy, page: action.page } }
         case 'TOGGLE_SHARING':
-            newState = { ...state, isSharing: !state.isSharing }
-            break;
+            return { ...state, isSharing: !state.isSharing }
         case 'ADD_QUOTE':
-            newState = { ...state, quotes: [...state.quotes, action.quote] }
-            break;
+            return { ...state, quotes: [...state.quotes, action.quote] }
         case 'UPDATE_QUOTE':
-            newState = { ...state, quotes: state.quotes.map(quote => quote._id === action.quote.id ? action.quote : quote) }
-            break;
+            quotes = state.quotes.map(quote => quote._id === action.quote.id ? action.quote : quote)
+            return { ...state, quotes }
         case 'REMOVE_QUOTE':
-            newState = { ...state, quotes: state.quotes.filter(quote => quote._id !== action.quoteId) }
-            break;
+            quotes = state.quotes.filter(quote => quote._id !== action.quoteId)
+            return { ...state, quotes }
         default:
+            return state
     }
-    return newState;
-
 }

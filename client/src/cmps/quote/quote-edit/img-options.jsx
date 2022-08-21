@@ -5,7 +5,7 @@ import { stillImgs, natureImgs } from '../../../consts/imgs.consts'
 
 import { OptionPreview } from './option-preview'
 
-export const ImgOptions = ({ options, setTemplate, template }) => {
+export const ImgOptions = ({ options, onUpdateQuote, quote }) => {
 
     const onToggleImg = (src) => {
         if (isImgChosen(src)) removeImg(src)
@@ -14,20 +14,21 @@ export const ImgOptions = ({ options, setTemplate, template }) => {
 
     const addImg = (src) => {
         const img = canvasService.getImg(src)
-        setTemplate((prevTemplate) =>
-        ({
-            ...prevTemplate,
-            imgs: [...prevTemplate.imgs, img]
-        }))
+        const quoteToUpdate = {
+            ...quote,
+            imgs: [...quote.imgs, img]
+        }
+        onUpdateQuote(quoteToUpdate)
     }
 
     const removeImg = (imgSrc) => {
-        const imgs = template.imgs.filter(i => i.src !== imgSrc)
-        setTemplate((prevTemplate) => ({ ...prevTemplate, imgs }))
+        const imgs = quote.imgs.filter(i => i.src !== imgSrc)
+        const quoteToUpdate = { ...quote, imgs }
+        onUpdateQuote(quoteToUpdate)
     }
 
     const isImgChosen = (src) => {
-        return template.imgs.find((i) => i.src === src)
+        return quote.imgs.find((i) => i.src === src)
     }
 
     // const DynamicCmp = () => {

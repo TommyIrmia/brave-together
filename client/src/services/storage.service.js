@@ -2,13 +2,13 @@ const TEMPLATE_STORAGE_KEY = 'template'
 const LINES_STORAGE_KEY = 'lines'
 
 export const storageService = {
-    saveTempToStorage,
+    saveQuoteToStorage,
     saveLinesToStorage,
     getLinesFromStorage,
-    getTempFromStorage
+    getQuoteFromStorage
 }
 
-function saveTempToStorage(template) {
+function saveQuoteToStorage(template) {
     localStorage[TEMPLATE_STORAGE_KEY] = JSON.stringify(template)
 }
 
@@ -20,6 +20,6 @@ function getLinesFromStorage() {
     return JSON.parse(localStorage.getItem(LINES_STORAGE_KEY)) || []
 }
 
-function getTempFromStorage() {
+function getQuoteFromStorage() {
     return JSON.parse(localStorage.getItem(TEMPLATE_STORAGE_KEY))
 }

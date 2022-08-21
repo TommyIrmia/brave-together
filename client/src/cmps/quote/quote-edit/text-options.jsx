@@ -6,19 +6,19 @@ import { colors, fonts, txtSizes } from '../../../consts/consts'
 import { OptionPreview } from './option-preview'
 import { ChosenSubOption } from './chosen-sub-option'
 
-export const TextOptions = ({ options, setTemplate, template }) => {
+export const TextOptions = ({ options, onUpdateQuote, quote }) => {
 
     const setFontStyle = (type, attr) => {
         const pos = canvasService.getTxtPos()
-        setTemplate((prevTemplate) =>
-        ({
-            ...prevTemplate,
+        const quoteToUpdate = {
+            ...quote,
             txt: {
-                ...prevTemplate.txt,
+                ...quote.txt,
                 [type]: attr,
                 pos
             }
-        }))
+        }
+        onUpdateQuote(quoteToUpdate)
     }
 
 
@@ -29,7 +29,7 @@ export const TextOptions = ({ options, setTemplate, template }) => {
                 <div key={font} onClick={() => setFontStyle('fontFamily', font)}
                     className="text-option" style={{ fontFamily: font }}>
                     <span>T</span>
-                    <ChosenSubOption isChosen={template?.txt.fontFamily === font} />
+                    <ChosenSubOption isChosen={quote?.txt.fontFamily === font} />
                     <span>T</span>
                 </div>
             ))
@@ -40,7 +40,7 @@ export const TextOptions = ({ options, setTemplate, template }) => {
                     key={color}
                     onSetOption={() => setFontStyle('fontColor', color)}
                     style={{ backgroundColor: color }}
-                    isChosen={template?.txt.fontColor === color}
+                    isChosen={quote?.txt.fontColor === color}
                 />
             ))
 
@@ -51,7 +51,7 @@ export const TextOptions = ({ options, setTemplate, template }) => {
                     className="txt-size"
                     onSetOption={() => setFontStyle('fontSize', size + 7)}
                     style={{ fontSize: (size + 3) + 'px' }}
-                    isChosen={+template?.txt.fontSize === +size + 7}
+                    isChosen={+quote?.txt.fontSize === +size + 7}
                 >
                     אבג
                 </OptionPreview>
