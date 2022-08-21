@@ -2,15 +2,14 @@ import { useEffect, useRef } from "react"
 
 export const useEffectUpdate = (cb, dependencies) => {
 
-    const isMount = useRef(false)
+    const isMounted = useRef(false)
 
     useEffect(() => {
-        if (!isMount.current) {
-            isMount.current = true
+        if (!isMounted.current) {
+            isMounted.current = true;
             return
         }
         cb()
     }, dependencies)
-
 
 }

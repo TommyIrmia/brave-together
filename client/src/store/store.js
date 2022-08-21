@@ -8,13 +8,12 @@ import thunk from 'redux-thunk'
 import { userReducer } from './user/user.reducer.js'
 import { storyReducer } from './story/story.reducer.js'
 import { quoteReducer } from './quote/quote.reducer.js'
-import { collectionReducer } from './collection/collection.reducer.js'
+// import { collectionReducer } from './collection/collection.reducer.js'
 
 const rootReducer = combineReducers({
     userModule: userReducer,
     storyModule: storyReducer,
     quoteModule: quoteReducer,
-    collectionModule: collectionReducer,
 })
 
 // export const store = createStore(rootReducer, applyMiddleware(thunk))

@@ -7,7 +7,7 @@ async function getStories(req, res, next) {
         const stories = await storyService.query(req.query)
         res.send(stories)
     } catch (err) {
-        logger.error('Cannot get storys', err)
+        logger.error('Cannot get stories', err)
         next(errors[err.message])
     }
 }
