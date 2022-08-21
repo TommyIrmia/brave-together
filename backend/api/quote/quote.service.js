@@ -14,9 +14,6 @@ async function query(filterBy = {}) {
         const { page, quotesPerPage } = filterBy
         const firstQuoteIdx = quotesPerPage * (page - 1)
         const quotesToDisplay = quotes.splice(firstQuoteIdx, quotesPerPage)
-        console.log('page', page);
-        console.log('itemsPerPage', quotesPerPage);
-        console.log('firstQuoteIdx', firstQuoteIdx);
         return { quotesToDisplay, totalQuotesCount }
     } catch (err) {
         logger.error('cannot find quotes', err)
@@ -29,6 +26,8 @@ async function getById(quoteId) {
     try {
         const collection = await dbService.getCollection('quote')
         const quote = await collection.findOne({ _id: ObjectId(quoteId) })
+        console.log('quote by id from db');
+        console.log(quote);
         return quote
     } catch (err) {
         logger.error(`cannot find quote with id: ${quoteId}`, err)
