@@ -6,7 +6,7 @@ import { FacebookShareButton, WhatsappShareButton, TwitterShareButton, EmailShar
 import { getUploadManager } from '../../services/aws.service'
 
 export const Share = ({ canvas, isOpen, onClose }) => {
-  const [imgUrl, setImgUrl] = useState('')
+  const [imgUrl, setImgUrl] = useState('https://www.imgacademy.com/themes/custom/imgacademy/images/helpbox-contact.jpg')
   const [isFetching, setIsFetching] = useState(false)
 
   const downloadRef = useRef(null)
@@ -90,7 +90,7 @@ export const Share = ({ canvas, isOpen, onClose }) => {
         </>
         {/* )} */}
       </section>
-      {/* <div className={'screen ' + (isOpen ? `shown` : 'hidden')} onClick={onClose}></div> */}
+      <div className={'screen ' + (isOpen ? `shown` : 'hidden')} onClick={onClose}></div>
     </>
   )
 }

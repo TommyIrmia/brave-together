@@ -4,7 +4,7 @@ console.log('storageService.getQuoteFromStorage()', storageService.getQuoteFromS
 
 const initialState = {
     quote: storageService.getQuoteFromStorage() || null,
-    quotes: []
+    quotes: [],
     totalQuotesCount: null,
     isSharing: false,
     filterBy: {
