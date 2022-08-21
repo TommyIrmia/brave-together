@@ -26,8 +26,6 @@ async function getById(quoteId) {
     try {
         const collection = await dbService.getCollection('quote')
         const quote = await collection.findOne({ _id: ObjectId(quoteId) })
-        console.log('quote by id from db');
-        console.log(quote);
         return quote
     } catch (err) {
         logger.error(`cannot find quote with id: ${quoteId}`, err)
