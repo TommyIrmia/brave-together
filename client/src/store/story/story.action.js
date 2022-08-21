@@ -1,6 +1,6 @@
 import { storyService } from '../../services/api/story.service'
 import { storyActions } from '../../consts/store.consts'
-const { SET_STORY, SET_STORIES, ADD_STORY, UPDATE_STORY, SET_IS_LOADING, REMOVE_STORY } = storyActions
+const { SET_STORY, SET_STORIES, ADD_STORY, UPDATE_STORY, SET_IS_LOADING, REMOVE_STORY, SET_FILTERBY } = storyActions
 
 function getActionLoading(isLoading) {
     return {
@@ -8,6 +8,31 @@ function getActionLoading(isLoading) {
         isLoading
     }
 }
+
+
+export function query(filterBy) {
+    return async (dispatch) => {
+        const stories = await storyService.getStories(filterBy)
+        dispatch({
+            type: SET_STORIES,
+            stories: stories
+        })
+    }
+}
+
+
+export function setFilterBy(key, value) {
+    return async (dispatch, getState) => {
+        let { filterBy } = getState().storyModule
+        const filterToUpdate = { ...filterBy, [key]: value }
+        dispatch({
+            type: SET_FILTERBY,
+            filterBy: filterToUpdate
+        })
+    }
+}
+
+
 
 export function loadStoryById(storyId) {
     return async (dispatch) => {
@@ -24,17 +49,6 @@ export function loadStoryById(storyId) {
         }
     }
 }
-
-export function query() {
-    return async (dispatch) => {
-        const stories = await storyService.getStories()
-        dispatch({
-            type: SET_STORIES,
-            stories: stories
-        })
-    }
-}
-
 
 
 export function addStory(storyToAdd) {

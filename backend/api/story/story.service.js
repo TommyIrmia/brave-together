@@ -66,6 +66,28 @@ async function update(story) {
 
 function _buildCriteria(filterBy) {
     const criteria = {}
+
+    if (filterBy.txt) {
+        var criteriaTxt = { $regex: filterBy.txt, $options: 'i' }
+        criteria.$or = [
+            {
+                heroName: criteriaTxt
+            },
+            {
+                country: criteriaTxt
+            },
+            {
+                title: criteriaTxt
+            }
+        ]
+
+
+    }
+
+    if (filterBy.tags?.length) {
+        criteria.tags = { $all: filterBy.tags }
+    }
+
     if (filterBy.byUserId) criteria.byUserId = filterBy.byUserId
     return criteria
 }

@@ -1,16 +1,19 @@
 import { storyActions } from '../../consts/store.consts'
-const { SET_STORY, SET_STORIES, ADD_STORY, UPDATE_STORY, SET_IS_LOADING, REMOVE_STORY } = storyActions
+const { SET_STORY, SET_STORIES, ADD_STORY, UPDATE_STORY, SET_IS_LOADING, REMOVE_STORY, SET_FILTERBY, SET_FILTERBYTAGS, SET_FILTERBYTXT } = storyActions
 
 const initialState = {
     story: null,
     stories: [],
+    filterBy: { txt: null, tags: [] },
     isLoading: false
+
 }
 
 export function storyReducer(state = initialState, action) {
     var stories
 
     switch (action.type) {
+
         case SET_STORY:
             return { ...state, story: action.story }
         case SET_STORIES:
@@ -25,6 +28,14 @@ export function storyReducer(state = initialState, action) {
             return { ...state, stories }
         case SET_IS_LOADING:
             return { ...state, isLoading: action.isLoading }
+        case SET_FILTERBY:
+            return { ...state, filterBy: action.filterBy }
+        // case SET_FILTERBYTXT:
+        //     return { ...state, filterBy: { ...state.filterBy, txt: action.txt } }
+        // case SET_FILTERBYTAGS:
+        //     return { ...state, filterBy: { ...state.filterBy, tags: action.tags } }
+
+
         default:
             return state
     }
