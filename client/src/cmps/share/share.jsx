@@ -4,31 +4,17 @@ import { FacebookShareButton, WhatsappShareButton, TwitterShareButton, EmailShar
 // import HeaderMetaData from './HeaderMetaData/HeaderMetaData';
 
 import { getUploadManager } from '../../services/aws.service'
+import { useSelector } from 'react-redux'
 
-export const Share = ({ canvas, isOpen, onClose }) => {
-  const [imgUrl, setImgUrl] = useState('https://www.imgacademy.com/themes/custom/imgacademy/images/helpbox-contact.jpg')
+export const Share = ({ isOpen, onClose }) => {
+  const { quote } = useSelector((globalState) => globalState.quoteModule)
+  const [imgUrl, setImgUrl] = useState(quote.imgUrl)
   const [isFetching, setIsFetching] = useState(false)
 
   const downloadRef = useRef(null)
-  const image = canvas?.toDataURL('image/png')
-
-  useEffect(() => {
-    if (!isOpen || !image) return
-    uploadImg()
-  }, [image])
-
-  const uploadImg = async () => {
-    setIsFetching(true)
-    const uploadMngr = await getUploadManager('images', image)
-    uploadMngr.send((err, data) => {
-      let imgUrl = err ? '' : data.Location
-      setImgUrl(imgUrl)
-      setIsFetching(false)
-    })
-  }
 
   const onDownloadImg = () => {
-    downloadRef.current.href = image
+    downloadRef.current.href = imgUrl
   }
 
   return (

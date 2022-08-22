@@ -21,6 +21,7 @@ async function getById(quoteId) {
 }
 
 async function add(quote) {
+  console.log(quote);
   return await httpService.post(`quote`, quote)
 }
 
