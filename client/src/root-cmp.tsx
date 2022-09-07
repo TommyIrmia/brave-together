@@ -1,4 +1,3 @@
-import React from 'react';
 import { Route, Routes } from 'react-router-dom'
 
 // Cmps
@@ -8,7 +7,7 @@ import { AppFooter } from './cmps/app-footer'
 // Main Page + Auth
 import { HomePage } from './views/home-page';
 import { About } from './views/about';
-import { LoginSignup } from './views/auth/LoginSignup';
+import { LoginSignup } from './views/auth/login-signup';
 
 // Story App
 import { StoryApp } from './views/story/story-app';
@@ -21,7 +20,6 @@ import { QuoteEdit } from './views/quote/quote-edit';
 
 // CollectionApp
 import { CollectionApp } from './views/collection/collection-app';
-import { useEffect } from 'react';
 
 export const RootCmp = () => {
 

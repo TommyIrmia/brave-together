@@ -1,5 +1,6 @@
+import React from 'react'
 import { useLocation, useNavigate } from "react-router-dom"
-import { LoginSignup } from "./auth/LoginSignup"
+import { LoginSignup } from "./auth/login-signup"
 
 export function HomePage() {
     const location = useLocation()
