@@ -4,7 +4,7 @@ console.log('storageService.getQuoteFromStorage()', storageService.getQuoteFromS
 
 const initialState = {
     quote: storageService.getQuoteFromStorage() || null,
-    quotes: []
+    quotes: [],
     totalQuotesCount: null,
     isSharing: false,
     filterBy: {
@@ -20,7 +20,7 @@ export function quoteReducer(state = initialState, action) {
         case 'SET_QUOTE':
             return { ...state, quote: action.quote }
         case 'SET_QUOTES':
-            return { ...state, quotes: action.quotes }
+            return { ...state, quotes: action.quotesInfo.quotesToDisplay, totalQuotesCount: action.quotesInfo.totalQuotesCount }
         case 'SET_QUOTES_PAGE':
             return { ...state, filterBy: { ...state.filterBy, page: action.page } }
         case 'TOGGLE_SHARING':

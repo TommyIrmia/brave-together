@@ -14,9 +14,6 @@ async function query(filterBy = {}) {
         const { page, quotesPerPage } = filterBy
         const firstQuoteIdx = quotesPerPage * (page - 1)
         const quotesToDisplay = quotes.splice(firstQuoteIdx, quotesPerPage)
-        console.log('page', page);
-        console.log('itemsPerPage', quotesPerPage);
-        console.log('firstQuoteIdx', firstQuoteIdx);
         return { quotesToDisplay, totalQuotesCount }
     } catch (err) {
         logger.error('cannot find quotes', err)

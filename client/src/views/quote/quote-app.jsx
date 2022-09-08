@@ -4,7 +4,7 @@ import { QuoteList } from '../../cmps/quote/quote-list'
 import { QuoteFilter } from '../../cmps/quote/quote-filter'
 import { Pagination } from '../../cmps/quote/pagination'
 import { Share } from '../../cmps/share/share'
-import { getQuotes, setFilterPage } from '../../store/quote/quote.action'
+import { getQuotes, setFilterPage, toggleSharing } from '../../store/quote/quote.action'
 import { useDispatch, useSelector } from 'react-redux'
 
 export const QuoteApp = () => {
@@ -19,11 +19,15 @@ export const QuoteApp = () => {
     dispatch(setFilterPage(page))
   }
 
+  const onToggleSharing = () => {
+    dispatch(toggleSharing())
+  }
+
   return (
     <div>
       {/* <QuoteFilter quotes={quotes} /> */}
       <QuoteList quotes={quotes} />
-      <Share isOpen={isSharing} />
+      <Share isOpen={isSharing} onClose={onToggleSharing} />
       {quotes && <Pagination numOfItems={totalQuotesCount} itemsPerPage={filterBy.quotesPerPage} setPage={setPage} currentPage={filterBy.page} />}
     </div>
   )

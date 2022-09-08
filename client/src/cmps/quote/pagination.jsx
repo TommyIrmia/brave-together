@@ -10,13 +10,13 @@ export const Pagination = ({ numOfItems, setPage, currentPage, itemsPerPage }) =
 
   const moveToPage = (page, ev) => {
     ev?.preventDefault()
-    if (page < 1 || page > numOfPages || page === currentPage) return
+    if (!page || page < 1 || page > numOfPages || page === currentPage) return
     setPage(page)
   }
 
   const onValueChange = (ev) => {
     const value = ev.target.value
-    setPageToJump(+value)
+    setPageToJump(+value || '')
   }
 
   return (

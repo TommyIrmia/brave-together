@@ -1,9 +1,9 @@
 import AWS from 'aws-sdk';
 
-const bucketName = process.env.REACT_APP_AWS_BUCKET;
-const region = process.env.REACT_APP_AWS_REGION;
-const accessKeyId = process.env.REACT_APP_AWS_ACCESS_KEY_ID
-const secretAccessKey = process.env.REACT_APP_AWS_SECRET_ACCESS_KEY
+const bucketName = process.env.REACT_APP_AWS_BUCKET || 'caexample1'
+const region = process.env.REACT_APP_AWS_REGION || 'us-west-2'
+const accessKeyId = process.env.REACT_APP_AWS_ACCESS_KEY_ID || 'AKIAQCPTAHWARU625DGB'
+const secretAccessKey = process.env.REACT_APP_AWS_SECRET_ACCESS_KEY || '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'
 
 AWS.config.update({
     region,

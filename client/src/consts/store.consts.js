@@ -11,6 +11,9 @@ export const storyActions = {
 }
 export const quoteActions = {
     SET_QUOTES: 'SET_QUOTES',
+    SET_QUOTE: 'SET_QUOTE',
+    UPDATE_QUOTE: 'UPDATE_QUOTE',
+    ADD_QUOTE: 'ADD_QUOTE',
     SET_QUOTES_PAGE: 'SET_QUOTES_PAGE',
     TOGGLE_SHARING: 'TOGGLE_SHARING'
 }
