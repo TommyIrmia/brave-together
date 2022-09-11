@@ -1,6 +1,5 @@
-// import { socketService, SOCKET_EVENT_USER_UPDATED, SOCKET_EMIT_USER_WATCH } from './socket.service'
 import { httpService } from '../http.service'
-
+const STORAGE_KEY_LOGGEDIN = 'loggedinUser';
 
 export const userService = {
   login,
@@ -34,18 +33,27 @@ async function update(user) {
 async function login(userCred) {
   try {
     const user = await httpService.post('auth/login', userCred)
-    if (user) {
-      return user
-    }
+    if (user)  return _saveUserToLocal(user)
   } catch (err) {
-    throw err
+    throw err;
   }
 }
 
 async function signup(userCred) {
-  return await httpService.post('auth/signup', userCred)
+  try { 
+    console.log('userCred:', userCred);
+    await httpService.post('auth/signup', userCred)
+    return _saveUserToLocal(userCred)
+  } catch (err) {
+    throw err;
+  }
 }
 async function logout() {
   return await httpService.post('auth/logout')
 }
 
+function _saveUserToLocal(user) { 
+  const { firstName } = user
+  sessionStorage.setItem(STORAGE_KEY_LOGGEDIN, JSON.stringify(firstName))
+  return user
+}

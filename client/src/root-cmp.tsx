@@ -8,7 +8,7 @@ import { AppFooter } from './cmps/app-footer'
 // Main Page + Auth
 import { HomePage } from './views/home-page'
 import { About } from './views/about'
-import { LoginSignup } from './views/auth/LoginSignup'
+import { LoginSignup } from './views/auth/login-signup'
 
 // Story App
 import { StoryApp } from './views/story/story-app'

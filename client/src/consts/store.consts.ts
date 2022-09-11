@@ -6,7 +6,6 @@ export const storyActions = {
     UPDATE_STORY: 'UPDATE_STORY',
     REMOVE_STORY: 'REMOVE_STORY',
     SET_IS_LOADING: 'SET_IS_LOADING',
-    REMOVE_STORY: 'REMOVE_STORY',
     SET_FILTERBY: 'SET_FILTERBY',
 }
 export const quoteActions = {

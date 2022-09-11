@@ -1,14 +1,17 @@
-// const { createStore, applyMiddleware, combineReducers, compose } = Redux
-// const thunk = ReduxThunk.default
+// declare global {
+//     interface Window {
+//       __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+//     }
+//   }
 
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux'
 import thunk from 'redux-thunk'
 
 
-import { userReducer } from './user/user.reducer.js'
-import { storyReducer } from './story/story.reducer.js'
-import { quoteReducer } from './quote/quote.reducer.js'
-// import { collectionReducer } from './collection/collection.reducer.js'
+import { userReducer } from './user/user.reducer'
+import { storyReducer } from './story/story.reducer'
+import { quoteReducer } from './quote/quote.reducer'
+import { collectionReducer } from './collection/collection.reducer'
 
 const rootReducer = combineReducers({
     userModule: userReducer,

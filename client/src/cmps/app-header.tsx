@@ -4,16 +4,18 @@ import { NavLink } from 'react-router-dom';
 // consts
 import { navLinks } from '../consts/consts';
 
-// images
-import expandedLogo from '../assets/images/expandedLogo.png'
-import logo from '../assets/images/logo.png'
-
 // icons
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { BiUserCircle } from 'react-icons/bi';
 
-export function AppHeader() {
-    const [isMenuOpen, setMenuState] = useState(false)
+// images
+// import {expandedLogo} from '../../src/assets/images/expandedLogo'
+// import logo from '../assets/images/logo.png'
+const expandedLogo = require("../assets/images/expandedLogo.png")
+const logo = require("../assets/images/logo.png")
+
+export function AppHeader() : JSX.Element {
+    const [isMenuOpen, setMenuState] = useState<boolean>(false)
 
     const toggleMenu = () => {
         setMenuState(!isMenuOpen)
