@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux'
 
 export const Share = ({ isOpen, onClose }) => {
   const { quote } = useSelector((globalState) => globalState.quoteModule)
-  const [imgUrl, setImgUrl] = useState(quote.imgUrl)
+  const [imgUrl, setImgUrl] = useState(quote?.imgUrl)
   const [isFetching, setIsFetching] = useState(false)
 
   const downloadRef = useRef(null)

@@ -8,6 +8,11 @@ export const storageService = {
     loadFromStorage,
 };
 
+interface Entity { 
+    _id : string
+    username? :string
+}
+
 function query(entityType, delay = 1) {
     var entities = JSON.parse(localStorage.getItem(entityType)) || [];
     return new Promise((resolve, reject) => {
@@ -17,14 +22,15 @@ function query(entityType, delay = 1) {
     });
 }
 
-function get(entityType, entityId) {
-    return query(entityType).then(entities => entities.find(entity => entity._id === entityId));
+function get(entityType , entityId) {
+    return query(entityType).then((entities : Entity[]) => entities.find((entity) => entity._id === entityId));
+    // return query(entityType).then((entities : Array<Entity>) => entities.find((entity) => entity._id === entityId));
 }
 
-function post(entityType, newEntity) {
+function post(entityType : string, newEntity) {
     newEntity._id = _makeId();
-    return query(entityType).then(entities => {
-        const isExists = entities.find(entity => {
+    return query(entityType).then((entities : Entity[]) => {
+        const isExists = (entities).find(entity => {
             return entity.username === newEntity.username
         })
         if (isExists) {
@@ -38,7 +44,7 @@ function post(entityType, newEntity) {
 }
 
 function put(entityType, updatedEntity) {
-    return query(entityType).then(entities => {
+    return query(entityType).then((entities : Entity[]) => {
         const idx = entities.findIndex(entity => entity._id === updatedEntity._id);
         entities.splice(idx, 1, updatedEntity);
         _save(entityType, entities);
@@ -47,7 +53,7 @@ function put(entityType, updatedEntity) {
 }
 
 function remove(entityType, entityId) {
-    return query(entityType).then(entities => {
+    return query(entityType).then((entities : Entity[]) => {
         const idx = entities.findIndex(entity => entity._id === entityId);
         entities.splice(idx, 1);
         _save(entityType, entities);

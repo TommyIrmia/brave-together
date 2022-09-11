@@ -3,7 +3,7 @@
 const initialState = {
     user: null
 }
-export function userReducer(state = initialState, action) {
+export function userReducer(state = initialState, action : any) {
     var newState = state;
     switch (action.type) {
         case 'SET_USER':

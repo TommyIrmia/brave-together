@@ -116,10 +116,16 @@
             justify-content: space-between;
             align-items: center;
             margin: 8px 0;
+            font-size: rem(14px);
 
             &__remmember-user {
                 display: flex;
                 align-items: center;
+            }
+            
+            &__show-password { 
+                all: unset;
+                cursor: pointer;
             }
         }
 
@@ -209,7 +215,7 @@
     }
 
     @include for-wide-layout {
-        width: 70%;
+        width: 80%;
         padding-bottom: 30px;
     }
 
