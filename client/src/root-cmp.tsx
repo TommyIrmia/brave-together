@@ -16,7 +16,7 @@ import { StoryDetails } from './views/story/story-details'
 import { StoryEdit } from './views/story/story-edit'
 
 // QuoteApp
-import { QuoteApp } from './views/quote/quote-app.jsx'
+import { QuoteApp } from './views/quote/quote-app'
 import { QuoteEdit } from './views/quote/quote-edit'
 
 // CollectionApp

@@ -1,8 +1,9 @@
 import { storageService } from "../../services/storage.service"
+import {QuoteModule} from '../../models/interfaces/IRedux.interface'
 
 console.log('storageService.getQuoteFromStorage()', storageService.getQuoteFromStorage())
 
-const initialState = {
+const initialState : QuoteModule = {
     quote: storageService.getQuoteFromStorage() || null,
     quotes: [],
     totalQuotesCount: null,
