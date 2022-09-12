@@ -14,7 +14,7 @@ export const StoryApp = () => {
     useEffect(() => {
         //TODO: transfer to service
 
-        const filterBy = queryParamsService.getQueryParams(searchParams)
+        const filterBy = queryParamsService.getFilterFromQueryParams(searchParams)
         //
         dispatch(query(filterBy))
     }, [searchParams])
