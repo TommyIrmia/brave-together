@@ -1,12 +1,12 @@
 export const queryParamsService = {
-    getQueryParams,
-    getQueryParamsToFilter
+    getFilterFromQueryParams,
+    getQueryParamsFromFilter
 }
 
 //TODO : change function names!!!
 
 
-function getQueryParams(searchParams) {
+function getFilterFromQueryParams(searchParams) {
     let queryParams = Object.fromEntries(searchParams)
     for (const key in queryParams) {
         if (queryParams[key] === 'null' || !queryParams[key]) {
@@ -19,7 +19,7 @@ function getQueryParams(searchParams) {
     return queryParams
 }
 
-function getQueryParamsToFilter(filterToQuery) {
+function getQueryParamsFromFilter(filterToQuery) {
     for (let key in filterToQuery) {
         if (filterToQuery[key] === 'null' || !filterToQuery[key]) {
             delete filterToQuery[key]

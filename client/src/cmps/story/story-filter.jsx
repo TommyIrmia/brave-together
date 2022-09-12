@@ -18,7 +18,7 @@ export const StoryFilter = ({ setSearchParams }) => {
         //TODO: transfer to service
         let filterToQuery = { ...filterBy }
         filterToQuery.tags = filterToQuery.tags.join(',')
-        const queryParams = queryParamsService.getQueryParamsToFilter(filterToQuery)
+        const queryParams = queryParamsService.getQueryParamsFromFilter(filterToQuery)
         setSearchParams(queryParams)
     }, [filterBy])
 
