@@ -1,6 +1,13 @@
 const initialState = {
     quote: null,
-    quotes: []
+    quotes: [],
+    totalQuotesCount: null,
+    isSharing: false,
+    filterBy: {
+        text: '',
+        page: 1,
+        quotesPerPage: 3
+    }
 }
 export function quoteReducer(state = initialState, action) {
     var newState = state;
@@ -9,7 +16,13 @@ export function quoteReducer(state = initialState, action) {
             newState = { ...state, quote: action.quote }
             break;
         case 'SET_QUOTES':
-            newState = { ...state, quotes: action.quotes }
+            newState = { ...state, quotes: action.quotesInfo.quotesToDisplay, totalQuotesCount: action.quotesInfo.totalQuotesCount }
+            break;
+        case 'SET_QUOTES_PAGE':
+            newState = { ...state, filterBy: { ...state.filterBy, page: action.page } }
+            break;
+        case 'TOGGLE_SHARING':
+            newState = { ...state, isSharing: !state.isSharing }
             break;
         case 'ADD_QUOTE':
             newState = { ...state, quotes: [...state.quotes, action.quote] }
@@ -22,7 +35,6 @@ export function quoteReducer(state = initialState, action) {
             break;
         default:
     }
-
     return newState;
 
 }

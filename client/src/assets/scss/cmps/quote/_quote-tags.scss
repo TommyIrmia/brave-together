@@ -1,0 +1,22 @@
+.quote-tags-container {
+    display: flex;
+    gap: 10px;
+    direction: rtl;
+    margin-bottom: 6px;
+    padding-inline-start: 8px;
+
+    button {
+        width: 70px;
+        height: 32.5px;
+        background-color: #3F3F3F;
+        color: #fff;
+        font-family: Rubik, Arial, Helvetica, sans-serif;
+        font-size: 13px;
+        border: 0;
+        outline: 0;
+        border-radius: 6px;
+        padding: 0;
+        padding-inline: 10px;
+        cursor: pointer;
+    }
+}
