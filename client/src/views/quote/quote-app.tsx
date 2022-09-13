@@ -5,22 +5,21 @@ import { QuoteFilter } from '../../cmps/quote/quote-filter'
 import { Pagination } from '../../cmps/quote/pagination'
 import { Share } from '../../cmps/share/share'
 import { getQuotes, setFilterPage, toggleSharing } from '../../store/quote/quote.action'
-import { useDispatch, useSelector } from 'react-redux'
+import { useAppDispatch, useAppSelector } from '../../models/interfaces/IRedux.interface'
 
 export const QuoteApp = () => {
-  const dispatch = useDispatch()
-  const { quotes, filterBy, totalQuotesCount, isSharing } = useSelector((storeState) => storeState.quoteModule)
+  const dispatch = useAppDispatch()
+  const { quotes, filterBy, totalQuotesCount, isSharing } = useAppSelector((storeState) => storeState.quoteModule)
   useEffect(() => {
-    dispatch(getQuotes(filterBy))
+    dispatch<any>(getQuotes(filterBy))
   }, [filterBy])
 
   const setPage = (page) => {
-    // console.log(page)
-    dispatch(setFilterPage(page))
+    dispatch<any>(setFilterPage(page))
   }
 
   const onToggleSharing = () => {
-    dispatch(toggleSharing())
+    dispatch<any>(toggleSharing())
   }
 
   return (

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 
 export const Pagination = ({ numOfItems, setPage, currentPage, itemsPerPage }) => {
-  const [numOfPages, setNumOfPages] = useState()
-  const [pageToJump, setPageToJump] = useState('')
+  const [numOfPages, setNumOfPages] = useState<number>()
+  const [pageToJump, setPageToJump] = useState<number | string>('')
 
   useEffect(() => {
     setNumOfPages(Math.ceil(numOfItems / itemsPerPage))
@@ -22,13 +22,13 @@ export const Pagination = ({ numOfItems, setPage, currentPage, itemsPerPage }) =
   return (
     <div className="pagination-container">
       <div className="paging-btns-container">
-        <button disabled={currentPage === 0} onClick={() => moveToPage(currentPage - 1)}>{`< הקודם`}</button>
+        <button disabled={currentPage === 0} onClick={() => moveToPage(currentPage - 1, null)}>{`< הקודם`}</button>
         {Array.apply(null, Array(numOfPages)).map((page, idx) => (
-          <button key={idx} className={`btn-number ${currentPage === idx + 1 && 'current-page'}`} onClick={() => moveToPage(idx + 1)}>
+          <button key={idx} className={`btn-number ${currentPage === idx + 1 && 'current-page'}`} onClick={() => moveToPage(idx + 1, null)}>
             {idx + 1}
           </button>
         ))}
-        <button disabled={currentPage === numOfPages} onClick={() => moveToPage(currentPage + 1)}>{`הבא >`}</button>
+        <button disabled={currentPage === numOfPages} onClick={() => moveToPage(currentPage + 1, null)}>{`הבא >`}</button>
         <div className="total-pages-container">
           <p>סך הכל {numOfPages} עמודים</p>
         </div>

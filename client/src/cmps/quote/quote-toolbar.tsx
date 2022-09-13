@@ -4,19 +4,19 @@ import share from '../../assets/images/quote-toolbar/share-ico.svg'
 
 import { toggleSharing, selectQuoteToEdit } from '../../store/quote/quote.action'
 
-import { useDispatch } from 'react-redux'
+import { useAppDispatch } from '../../models/interfaces/IRedux.interface'
 import { useNavigate } from 'react-router-dom'
 
 export const QuoteToolBar = ({ quoteId }) => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
   const onToggleSharing = () => {
-    dispatch(toggleSharing())
+    dispatch<any>(toggleSharing())
   }
 
   const onEditQuote = async () => {
-    await dispatch(selectQuoteToEdit({ quoteId }))
+    await dispatch<any>(selectQuoteToEdit({ quoteId, txt: '' }))
     navigate(`edit/${quoteId}`)
   }
 
